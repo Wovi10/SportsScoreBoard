@@ -1,0 +1,20 @@
+﻿@page "/"
+
+
+<PageTitle>Dashboard</PageTitle>
+
+@* All the sports will be displayed here in a grid. They will be a button with a link to the sport *@
+<MudContainer MaxWidth="MaxWidth.False" Class="vibrant-background">
+    <MudGrid Spacing="6">
+        @for(var i = 0; i < 20; i++)
+        {
+            <MudItem xs="6">
+                <MudNavLink Class="p-3 " Href="/volleyball">
+                    <MudPaper Class="d-flex flex-column align-center justify-center mud-width-full" Width="140px" Height="140px">
+                        <MudIcon Icon="@Icons.Material.Filled.SportsVolleyball" Size="Size.Large" />
+                    </MudPaper>
+                </MudNavLink>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
