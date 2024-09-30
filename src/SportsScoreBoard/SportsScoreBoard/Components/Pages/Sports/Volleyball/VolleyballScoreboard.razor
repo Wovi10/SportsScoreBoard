@@ -14,8 +14,10 @@
                     </MudTextField>
                 </CardHeaderContent>
             </MudCardHeader>
-            <MudCardContent Class="mx-auto mt-4">
-                <MudText Align="Align.Center">@Game.Score.Home</MudText>
+            <MudCardContent Class="mx-auto mt-4 position-relative">
+                <MudText Align="Align.Center" Class="position-absolute top-50 start-50">@Game.Score.Home</MudText>
+                <MudIcon Icon="@Icons.Material.Filled.Circle" Size="Size.Small" 
+                         Class="position-absolute bottom-0 end-0"></MudIcon>
             </MudCardContent>
         </MudCard>
     </MudItem>
