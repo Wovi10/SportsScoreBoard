@@ -11,6 +11,7 @@ public partial class MainLayout
     private MudTheme _theme = new();
     private static bool _isDarkMode;
     private MudThemeProvider _mudThemeProvider;
+    public static string SubpageTitle { get; set; } = string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

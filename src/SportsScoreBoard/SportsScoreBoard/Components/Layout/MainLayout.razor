@@ -4,12 +4,13 @@
 <MudThemeProvider @ref="_mudThemeProvider" @bind-IsDarkMode="_isDarkMode" Theme="MyMudThemeProvider.MyLightTheme"/>
 <MudPopoverProvider />
 
-<MudLayout>
+<MudLayout Class="d-flex flex-column" Style="height: 100vh">
     <MudAppBar Dense="_appBarDense">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
                        OnClick="DrawerToggle"/>
-        <MudText Typo="Typo.h6">
-            <MudNavLink Match="NavLinkMatch.All" Href="/">Scoreboards</MudNavLink>
+        <MudText>
+            <a href="/">Scoreboards</a>
+            <MudText Inline="true">@(string.IsNullOrWhiteSpace(SubpageTitle) ? "" : $"| {SubpageTitle}")</MudText>
         </MudText>
         <MudSpacer/>
         <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Href="/settings"/>
@@ -20,7 +21,7 @@
     <MudDrawer Open="@_drawerOpen" ClipMode="@_navbarClipMode" Breakpoint="@_navbarBreakpoint" Elevation="1" Class="pt-3">
         <NavMenu/>
     </MudDrawer>
-    <MudMainContent Class="mt-8 px-8">
+    <MudMainContent Class="mt-8 px-8 flex-grow-1 overflow-auto" Style="height: 100%">
         @Body
     </MudMainContent>
 </MudLayout>

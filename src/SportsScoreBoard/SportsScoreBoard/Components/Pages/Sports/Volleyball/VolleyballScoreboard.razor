@@ -1,0 +1,37 @@
+﻿@rendermode InteractiveServer
+
+<MudGrid>
+    <MudItem  xs="12">
+        <MudText Typo="Typo.h3" Align="Align.Center">Volleyball</MudText>
+    </MudItem>
+    <MudItem xs="6" @onclick="OnHomeScoredClick">
+        <MudCard Elevation="25" Class="rounded-lg pb-4 pointer-event">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudTextField T="string" Variant="Variant.Text"
+                                  ValueChanged="e => OnHomeNameChanged(e)" 
+                                  Value="@Game.Home.Name">
+                    </MudTextField>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent Class="mx-auto mt-4">
+                <MudText Align="Align.Center">@Game.Score.Home</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" @onclick="OnAwayScoredClick">
+        <MudCard Elevation="25" Class="rounded-lg pb-4 pointer-event">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudTextField T="string" Variant="Variant.Text"
+                                  ValueChanged="e => OnAwayNameChanged(e)"
+                                  Value="@Game.Away.Name">
+                    </MudTextField>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent Class="mx-auto mt-4">
+                <MudText Align="Align.Center">@Game.Score.Away</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>

@@ -1,0 +1,23 @@
+﻿@page "/volleyball"
+@rendermode InteractiveServer
+
+<PageTitle>Volleyball</PageTitle>
+
+<MudContainer Class="d-flex align-items-end flex-column" Style="height: 100%">
+    <MudContainer Class="flex-grow-1">
+        <VolleyballScoreboard 
+            @ref="_volleyballScoreboardSettings"
+            Game="Game"
+            IncrementHome="IncrementHome"
+            IncrementAway="IncrementAway"
+            HomeNameChanged="ChangeHomeName"
+            AwayNameChanged="ChangeAwayName"/>
+    </MudContainer>
+
+    <MudContainer Class="overflow-auto">
+        <VolleyballSettings
+            @ref="_volleyballSettingsComponent"
+            Game="Game"
+            ResetScore="ResetScore"/>
+    </MudContainer>
+</MudContainer>
