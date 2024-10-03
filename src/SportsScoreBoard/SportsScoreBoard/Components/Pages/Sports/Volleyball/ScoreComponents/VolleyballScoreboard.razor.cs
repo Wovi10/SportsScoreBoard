@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SportsScoreBoard.Models.Volleyball;
 
-namespace SportsScoreBoard.Components.Pages.Sports.Volleyball;
+namespace SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents;
 
 public partial class VolleyballScoreboard
 {

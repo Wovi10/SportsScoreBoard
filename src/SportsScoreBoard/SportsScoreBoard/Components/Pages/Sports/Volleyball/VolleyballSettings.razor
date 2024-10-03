@@ -1,30 +1,17 @@
-﻿<MudExpansionPanel Class="flex-end">
+﻿@using SportsScoreBoard.Components.Shared
+<MudExpansionPanel Class="flex-end">
     <TitleContent>
         <MudText>Settings</MudText>
     </TitleContent>
     <ChildContent>
         <MudStack Row="true">
-            <MudButton OnClick="OnResetScoresClick" Color="Color.Primary" Variant="Variant.Filled">
-                Reset scores
-            </MudButton>
-            <MudButton OnClick="OnShowTimerClick" Color="Color.Primary" Variant="Variant.Filled">
-                Show timer
-            </MudButton>
-            <MudButton OnClick="OnShowTimeoutsClick" Color="Color.Primary" Variant="Variant.Filled">
-                Show timeouts
-            </MudButton>
-            <MudButton OnClick="OnShowTeamNamesClick" Color="Color.Primary" Variant="Variant.Filled">
-                Show team names
-            </MudButton>
-            <MudButton OnClick="OnShowSetsClick" Color="Color.Primary" Variant="Variant.Filled">
-                Show sets
-            </MudButton>
-            <MudButton OnClick="OnSHowServeClick" Color="Color.Primary" Variant="Variant.Filled">
-                Show serving team
-            </MudButton>
-            <MudButton OnClick="OnShowPreviousSetsClick" Color="Color.Primary" Variant="Variant.Filled">
-                Show previous sets
-            </MudButton>
+            <SettingsButton OnClick="OnResetScoresClick" Text="Reset scores"/>
+            <SettingsButton OnClick="OnShowServeClick" Text="Show serving team"/>
+            <SettingsButton OnClick="OnShowSetsClick" Text="Show sets"/>
+            <SettingsButton OnClick="OnShowTimeoutsClick" Text="Show timeouts"/>
+            <SettingsButton OnClick="OnShowPreviousSetsClick" Text="Show previous set scores"/>
+            <SettingsButton OnClick="OnShowTeamNamesClick" Text="Show team names"/>
+            <SettingsButton OnClick="OnShowTimerClick" Text="Show timer"/>
         </MudStack>
         <MudStack Class="d-flex align-end" Row="true" Style="max-width: 400px;">
             <MudText>

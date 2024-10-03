@@ -1,4 +1,5 @@
 ﻿@page "/volleyball"
+@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents
 @rendermode InteractiveServer
 
 <PageTitle>Volleyball</PageTitle>
@@ -14,7 +15,7 @@
             AwayNameChanged="ChangeAwayName"/>
     </MudContainer>
 
-    <MudContainer Class="overflow-auto">
+    <MudContainer Class="overflow-auto mb-4">
         <VolleyballSettings
             @ref="_volleyballSettingsComponent"
             Game="Game"

@@ -1,9 +1,9 @@
 ﻿namespace SportsScoreBoard.Models.Volleyball;
 
-public class VolleyballScore:ScoreBase
+public class VolleyballScore : ScoreBase
 {
     private int GameDifference => Math.Abs(Home - Away);
-    
+
     public bool IsGameOver(bool isDecidingGame)
     {
         if (GameDifference < 2)

@@ -2,22 +2,39 @@
 
 public class VolleyballGame : SportsGameBase
 {
-    public VolleyballGame()
+    public new VolleyballTeam Home { get; set; } = new("Home", true);
+    public new VolleyballTeam Away { get; set; } = new("Away", false);
+    public new VolleyballScore Score { get; set; } = new();
+
+    public void IncrementHome()
     {
-        Home = new VolleyballTeam("Home", true);
-        Away = new VolleyballTeam("Away", false);
-        Score = new VolleyballScore();
+        Score.IncrementHome();
+        SetHomeServing();
     }
 
-    public void IncrementHome() 
-        => Score.IncrementHome();
-
-    public void IncrementAway() 
-        => Score.IncrementAway();
+    public void IncrementAway()
+    {
+        Score.IncrementAway();
+        SetAwayServing();
+    }
 
     public void ChangeHomeName(string newValue) 
         => Home.ChangeName(newValue);
     
     public void ChangeAwayName(string newValue)
         => Away.ChangeName(newValue);
+
+    public override void ResetScore() => Score.Reset();
+    
+    private void SetHomeServing()
+    {
+        Home.IsServing = true;
+        Away.IsServing = false;
+    }
+    
+    private void SetAwayServing()
+    {
+        Home.IsServing = false;
+        Away.IsServing = true;
+    }
 }

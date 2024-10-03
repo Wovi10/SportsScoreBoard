@@ -12,17 +12,15 @@ public partial class VolleyballSettings
 
     private static int _bestOf = 3;
     private static int FirstTo => (_bestOf / 2) + 1;
-    public bool Expanded { get; set; } = true;
+    private bool Expanded { get; set; } = true;
 
     private void ToggleExpand()
     {
         Expanded = !Expanded;
     }
 
-    private void OnResetScoresClick(MouseEventArgs obj)
-    {
-        ResetScore();
-    }
+    private void OnResetScoresClick(MouseEventArgs obj) 
+        => ResetScore();
 
     private void OnShowTimerClick(MouseEventArgs obj)
     {
@@ -44,7 +42,7 @@ public partial class VolleyballSettings
         throw new NotImplementedException();
     }
 
-    private void OnSHowServeClick(MouseEventArgs obj)
+    private void OnShowServeClick(MouseEventArgs obj)
     {
         throw new NotImplementedException();
     }

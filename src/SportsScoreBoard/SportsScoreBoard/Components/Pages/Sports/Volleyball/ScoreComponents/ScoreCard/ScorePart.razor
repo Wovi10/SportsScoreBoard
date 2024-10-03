@@ -1,0 +1,7 @@
+﻿<MudContainer @onclick="OnScoredClick">
+    <MudText Align="Align.Center" Class="position-absolute top-50 start-50">@Score</MudText>
+    <MudContainer Class="position-absolute bottom-0 end-0">
+        <MudIcon Icon="@(Team.IsServing ? Icons.Material.Filled.Circle : string.Empty)"
+                 Size="Size.Small"></MudIcon>
+    </MudContainer>
+</MudContainer>

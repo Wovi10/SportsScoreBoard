@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SportsScoreBoard.Components.Layout;
-using SportsScoreBoard.Models;
+using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents;
 using SportsScoreBoard.Models.Volleyball;
 
 namespace SportsScoreBoard.Components.Pages.Sports.Volleyball;
@@ -15,6 +15,7 @@ public partial class VolleyballComponent : ComponentBase
     protected override void OnInitialized()
     {
         MainLayout.SubpageTitle = "Volleyball";
+        Game.Home.IsServing = true;
     }
 
     public void ResetScore()

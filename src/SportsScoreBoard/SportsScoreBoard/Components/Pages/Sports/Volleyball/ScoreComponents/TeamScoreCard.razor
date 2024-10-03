@@ -1,0 +1,26 @@
+﻿@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.ScoreCard
+<MudItem xs="6"> <!-- Only ever two teams -->
+    <MudCard Elevation="25" Class="rounded-lg pb-4 pointer-event">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudTextField T="string" Variant="Variant.Text"
+                              ValueChanged="e => OnTeamNameChange(e)"
+                              Value="@Team.Name">
+                </MudTextField>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent Class="mt-4 position-relative">
+            <MudGrid>
+                <MudItem xs="8" Style="@(Team.IsHome ? "display: none" : "")">
+                    <ScorePart Score="@Score" Team="@Team" IncrementScore="@OnScoredClick"/>
+                </MudItem>
+                <MudItem xs="4">
+                    SETS COME HERE
+                </MudItem>
+                <MudItem xs="8" Style="@(Team.IsHome ? "" : "display: none")">
+                    <ScorePart Score="@Score" Team="@Team" IncrementScore="@OnScoredClick"/>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+</MudItem>
