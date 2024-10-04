@@ -1,0 +1,25 @@
+﻿@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.ScoreCard
+<MudItem xs="6"> <!-- Only ever two teams -->
+    <MudGrid Class="d-flex"
+             Style="@(Team.IsHome ? "flex-direction: row-reverse" : "flex-direction: row")">
+        <MudItem xs="6">
+            <MudTextField T="string" Variant="Variant.Text"
+                          ValueChanged="e => OnTeamNameChange(e)"
+                          Value="@Team.Name"/>
+        </MudItem>
+        <MudItem xs="12">
+            <MudGrid>
+                <MudItem xs="4" Style="@(Team.IsHome && GameSettings.ShowSets ? "" : "display: none")">
+                    <SetsPart SetsWon="Team.SetsWon" IsHome="Team.IsHome" />
+                </MudItem>
+                <MudItem xs="4" Style="@(Team.IsHome && !GameSettings.ShowSets ? "" : "display: none")"></MudItem>
+                <MudItem xs="8">
+                    <ScorePart GameSettings="@GameSettings" Score="@Score" Team="@Team" IncrementScore="OnScoredClick"/>
+                </MudItem>
+                <MudItem xs="4" Style="@(Team.IsHome || !GameSettings.ShowSets ? "display: none" : "")">
+                    <SetsPart SetsWon="Team.SetsWon" />
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+    </MudGrid>
+</MudItem>

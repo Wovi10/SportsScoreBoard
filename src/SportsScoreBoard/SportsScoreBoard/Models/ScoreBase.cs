@@ -2,20 +2,20 @@
 
 public abstract class ScoreBase
 {
-    public int Home { get; set; }
-    public int Away { get; set; }
+    public int HomePoints { get; private set; }
+    public int AwayPoints { get; private set; }
 
-    public bool? Result => Home > Away ? true : Away > Home? false : null;
+    public bool? Result => HomePoints > AwayPoints ? true : AwayPoints > HomePoints? false : null;
     
-    public void IncrementHome() 
-        => Home++;
+    public virtual void IncrementHome() 
+        => HomePoints++;
 
-    public void IncrementAway() 
-        => Away++;
+    public virtual void IncrementAway() 
+        => AwayPoints++;
 
     public void Reset()
     {
-        Home = 0;
-        Away = 0;
+        HomePoints = 0;
+        AwayPoints = 0;
     }
 }

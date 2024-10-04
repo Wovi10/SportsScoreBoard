@@ -2,6 +2,7 @@
 
 public class VolleyballGame : SportsGameBase
 {
+    public VolleyballSettings Settings { get; set; } = new();
     public new VolleyballTeam Home { get; set; } = new("Home", true);
     public new VolleyballTeam Away { get; set; } = new("Away", false);
     public new VolleyballScore Score { get; set; } = new();
@@ -24,7 +25,8 @@ public class VolleyballGame : SportsGameBase
     public void ChangeAwayName(string newValue)
         => Away.ChangeName(newValue);
 
-    public override void ResetScore() => Score.Reset();
+    public override void ResetScore() 
+        => Score.Reset();
     
     private void SetHomeServing()
     {
@@ -37,4 +39,10 @@ public class VolleyballGame : SportsGameBase
         Home.IsServing = false;
         Away.IsServing = true;
     }
+
+    public void ToggleShowServing()
+        => Settings.ToggleShowServing();
+
+    public void ToggleShowSets() 
+        => Settings.ToggleShowSets();
 }

@@ -17,7 +17,8 @@ public partial class MainLayout
     {
         if (firstRender)
         {
-            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            // _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            _isDarkMode = false;
             StateHasChanged();
         }
     }

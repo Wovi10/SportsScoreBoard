@@ -5,9 +5,11 @@ using SportsScoreBoard.Models.Volleyball;
 
 namespace SportsScoreBoard.Components.Pages.Sports.Volleyball;
 
-public partial class VolleyballSettings
+public partial class VolleyballSettingsComponent
 {
     [Parameter] public required Action ResetScore { get; set; }
+    [Parameter] public required Action ToggleShowServing { get; set; }
+    [Parameter] public required Action ToggleShowSets { get; set; }
     [Parameter] public required VolleyballGame Game { get; set; }
 
     private static int _bestOf = 3;
@@ -39,12 +41,12 @@ public partial class VolleyballSettings
 
     private void OnShowSetsClick(MouseEventArgs obj)
     {
-        throw new NotImplementedException();
+        ToggleShowSets();
     }
 
     private void OnShowServeClick(MouseEventArgs obj)
     {
-        throw new NotImplementedException();
+        ToggleShowServing();
     }
 
     private void OnShowPreviousSetsClick(MouseEventArgs obj)

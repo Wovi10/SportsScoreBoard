@@ -3,8 +3,9 @@ using SportsScoreBoard.Models.Volleyball;
 
 namespace SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents;
 
-public partial class TeamScoreCard : ComponentBase
+public partial class TeamScorePart : ComponentBase
 {
+    [Parameter] public required VolleyballSettings GameSettings { get; set; }
     [Parameter] public required VolleyballTeam Team { get; set; }
     [Parameter] public required int Score { get; set; }
     [Parameter] public required Action IncrementScore { get; set; }

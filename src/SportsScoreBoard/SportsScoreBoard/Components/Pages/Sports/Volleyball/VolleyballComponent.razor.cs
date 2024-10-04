@@ -9,7 +9,7 @@ public partial class VolleyballComponent : ComponentBase
 {
     public static VolleyballGame Game { get; set; } = new();
 
-    protected VolleyballSettings _volleyballSettingsComponent;
+    protected VolleyballSettingsComponent _volleyballSettingsComponent;
     protected VolleyballScoreboard _volleyballScoreboardSettings;
 
     protected override void OnInitialized()
@@ -21,6 +21,18 @@ public partial class VolleyballComponent : ComponentBase
     public void ResetScore()
     {
         Game.ResetScore();
+        StateChange();
+    }
+    
+    public void ToggleShowServing()
+    {
+        Game.ToggleShowServing();
+        StateChange();
+    }
+    
+    public void ToggleShowSets()
+    {
+        Game.ToggleShowSets();
         StateChange();
     }
 
