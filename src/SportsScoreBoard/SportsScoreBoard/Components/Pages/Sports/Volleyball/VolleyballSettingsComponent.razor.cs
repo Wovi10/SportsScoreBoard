@@ -7,10 +7,13 @@ namespace SportsScoreBoard.Components.Pages.Sports.Volleyball;
 
 public partial class VolleyballSettingsComponent
 {
+    [Parameter] public required Action ResetGame { get; set; }
     [Parameter] public required Action ResetScore { get; set; }
     [Parameter] public required Action ResetSets { get; set; }
+    [Parameter] public required Action ResetTimeouts { get; set; }
     [Parameter] public required Action ToggleShowServing { get; set; }
     [Parameter] public required Action ToggleShowSets { get; set; }
+    [Parameter] public required Action ToggleShowTimeouts { get; set; }
     [Parameter] public required VolleyballGame Game { get; set; }
 
     private static int _bestOf = 5;
@@ -22,21 +25,25 @@ public partial class VolleyballSettingsComponent
         Expanded = !Expanded;
     }
 
+    private void OnGameResetClick(MouseEventArgs obj) 
+        => ResetGame();
+
     private void OnResetScoresClick(MouseEventArgs obj) 
         => ResetScore();
     
     private void OnResetSetsClick(MouseEventArgs obj) 
         => ResetSets();
 
+    private void OnResetTimeoutsClick(MouseEventArgs obj) 
+        => ResetTimeouts();
+
     private void OnShowTimerClick(MouseEventArgs obj)
     {
         throw new NotImplementedException();
     }
 
-    private void OnShowTimeoutsClick(MouseEventArgs obj)
-    {
-        throw new NotImplementedException();
-    }
+    private void OnShowTimeoutsClick(MouseEventArgs obj) 
+        => ToggleShowTimeouts();
 
     private void OnShowTeamNamesClick(MouseEventArgs obj)
     {

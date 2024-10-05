@@ -1,11 +1,26 @@
-﻿<MudCard @onclick="OnScoredClick">
+﻿<MudCard @onclick="OnScoredClick" Class="m-0 p-0">
     <MudCardContent>
-        <MudContainer>
-            <MudText Align="Align.Center" Class="position-absolute top-50 start-50 pointer-events-none">@Score</MudText>
-            <MudContainer Class="d-flex" Style="@(Team.IsHome ? "flex-direction: row" : "flex-direction: row-reverse")">
-                <MudIcon Icon="@(Team.IsServing && GameSettings.ShowServing ? Icons.Material.Filled.Circle : string.Empty)"
-                         Size="Size.Small"></MudIcon>
-            </MudContainer>
-        </MudContainer>
+        <MudStack>
+            <MudText Typo="Typo.h2"
+                     Align="Align.Center"
+                     Class="top-50 start-50 pointer-events-none">
+                @Score
+            </MudText>
+                @if(Team.IsHome)
+                {
+                    <div class="d-flex flex-row">
+                        <MudIcon Icon="@(Team.IsServing && ShowServing ? Icons.Material.Filled.Circle : string.Empty)"
+                                 Size="Size.Small" 
+                                 Class="d-flex justify-start"/>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex flex-row-reverse">
+                        <MudIcon Icon="@(Team.IsServing && ShowServing ? Icons.Material.Filled.Circle : string.Empty)"
+                                 Size="Size.Small"/>
+                    </div>
+                }
+        </MudStack>
     </MudCardContent>
 </MudCard>

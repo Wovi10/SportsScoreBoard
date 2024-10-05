@@ -1,4 +1,9 @@
-﻿<MudContainer Class="d-flex"
-              Style="@(IsHome ? "flex-direction: row-reverse" : "flex-direction: row")">
-    @SetsWon
-</MudContainer>
+﻿<MudStack Class="mx-5">
+    <MudText Typo="Typo.h3" Class="d-flex" Style="@(Team.IsHome ? "justify-content: flex-end" : "flex-start")">@Sets</MudText>
+    @if (ShowTimeouts)
+    {
+        <TimeoutPart Team="Team"
+                     ShowTimeouts="ShowTimeouts"
+                     TimeoutsClicked="OnTimeoutsClicked"/>
+    }
+</MudStack>

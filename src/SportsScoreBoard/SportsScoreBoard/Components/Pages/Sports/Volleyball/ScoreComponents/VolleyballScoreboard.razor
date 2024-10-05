@@ -1,21 +1,25 @@
 ﻿@rendermode InteractiveServer
 
-<MudGrid>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h3" Align="Align.Center">Volleyball</MudText>
-    </MudItem>
-    <TeamScorePart
-        GameSettings="@Game.Settings"
-        Team="@Game.Home"
-        Score="@Game.Score.HomePoints"
-        Sets = "@Game.Score.HomeSets"
-        IncrementScore="IncrementHome" 
-        ChangeTeamName="HomeNameChanged" />
-    <TeamScorePart
-        GameSettings="@Game.Settings"
-        Team="@Game.Away"
-        Score="@Game.Score.AwayPoints"
-        Sets = "@Game.Score.AwaySets"
-        IncrementScore="IncrementAway"
-        ChangeTeamName="AwayNameChanged" />
-</MudGrid>
+<MudStack Spacing="6">
+    <MudText Typo="Typo.h1" Align="Align.Center">Volleyball</MudText>
+    <MudGrid Class="ma-0 pa-0">
+        <MudItem xs="6" Class="ma-0 pa-0">
+            <TeamScorePart
+                GameSettings="@Game.Settings"
+                Team="@Game.Home"
+                Score="@Game.Score.HomePoints"
+                Sets="@Game.Score.HomeSets"
+                IncrementScore="IncrementHome"
+                ChangeTeamName="HomeNameChanged"/>
+        </MudItem>
+        <MudItem xs="6" Class="ma-0 pa-0">
+            <TeamScorePart
+                GameSettings="@Game.Settings"
+                Team="@Game.Away"
+                Score="@Game.Score.AwayPoints"
+                Sets="@Game.Score.AwaySets"
+                IncrementScore="IncrementAway"
+                ChangeTeamName="AwayNameChanged"/>
+        </MudItem>
+    </MudGrid>
+</MudStack>

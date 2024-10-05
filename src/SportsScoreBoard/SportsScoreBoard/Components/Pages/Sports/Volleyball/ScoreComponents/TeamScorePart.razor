@@ -1,25 +1,41 @@
 ﻿@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.ScoreCard
-<MudItem xs="6"> <!-- Only ever two teams -->
-    <MudGrid Class="d-flex"
+<MudStack Row="true" Wrap="Wrap.Wrap">
+    <MudGrid Class="d-flex ma-0 pa-0"
              Style="@(Team.IsHome ? "flex-direction: row-reverse" : "flex-direction: row")">
-        <MudItem xs="6">
-            <MudTextField T="string" Variant="Variant.Text"
+        <MudItem md="6"
+                 Style="@(Team.IsHome ? "justify-content: flex-end" : "justify-content: flex-start")">
+            <MudTextField T="string"
+                          Variant="Variant.Text"
                           ValueChanged="e => OnTeamNameChange(e)"
                           Value="@Team.Name"/>
         </MudItem>
-        <MudItem xs="12">
-            <MudGrid>
-                <MudItem xs="4" Style="@(Team.IsHome && GameSettings.ShowSets ? "" : "display: none")">
-                    <SetsPart SetsWon="Sets" IsHome="Team.IsHome" />
+            @if (Team.IsHome)
+            {
+                <MudItem xs="12" Class="ms-0 ps-0">
+                    <MudContainer Class="d-flex flex-grow-1 justify-end flex-wrap-reverse mx-0 px-0">
+                        @if (GameSettings.ShowSets)
+                        {
+                            <SetsPart Sets="Sets" Team="Team" ShowTimeouts="GameSettings.ShowTimeouts"/>
+                        }
+                        <div class="flex-grow-1">
+                            <ScorePart ShowServing="GameSettings.ShowServing" Score="@Score" Team="@Team" IncrementScore="OnScoredClick"/>
+                        </div>
+                    </MudContainer>
                 </MudItem>
-                <MudItem xs="4" Style="@(Team.IsHome && !GameSettings.ShowSets ? "" : "display: none")"></MudItem>
-                <MudItem xs="8">
-                    <ScorePart GameSettings="@GameSettings" Score="@Score" Team="@Team" IncrementScore="OnScoredClick"/>
+            }
+            else
+            {
+                <MudItem xs="12" Class="me-0 pe-0">
+                    <MudContainer Class="d-flex flex-grow-1 justify-start flex-wrap mx-0 px-0">
+                        <div class="flex-grow-1">
+                            <ScorePart ShowServing="GameSettings.ShowServing" Score="@Score" Team="@Team" IncrementScore="OnScoredClick"/>
+                        </div>
+                        @if (GameSettings.ShowSets)
+                        {
+                            <SetsPart Sets="Sets" Team="Team" ShowTimeouts="GameSettings.ShowTimeouts"/>
+                        }
+                    </MudContainer>
                 </MudItem>
-                <MudItem xs="4" Style="@(Team.IsHome || !GameSettings.ShowSets ? "display: none" : "")">
-                    <SetsPart SetsWon="Sets" />
-                </MudItem>
-            </MudGrid>
-        </MudItem>
+            }
     </MudGrid>
-</MudItem>
+</MudStack>

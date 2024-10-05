@@ -5,7 +5,7 @@
 <PageTitle>Volleyball</PageTitle>
 
 <MudContainer Class="d-flex align-items-end flex-column" Style="height: 100%">
-    <MudContainer Class="flex-grow-1">
+    <MudContainer Class="flex-grow-1 pa-0 ma-0">
         <VolleyballScoreboard 
             @ref="_volleyballScoreboardSettings"
             Game="Game"
@@ -19,10 +19,13 @@
         <VolleyballSettingsComponent
             @ref="_volleyballSettingsComponent"
             Game="Game"
+            ResetGame="ResetGame"
             ResetScore="ResetScore"
             ResetSets="ResetSets"
+            ResetTimeouts="ResetTimeouts"
             ToggleShowServing="ToggleShowServing"
             ToggleShowSets="ToggleShowSets"
+            ToggleShowTimeouts="ToggleShowTimeouts"
             />
     </MudContainer>
 </MudContainer>

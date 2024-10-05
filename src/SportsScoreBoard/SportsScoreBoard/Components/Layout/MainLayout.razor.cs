@@ -5,7 +5,7 @@ namespace SportsScoreBoard.Components.Layout;
 public partial class MainLayout
 {
     private static bool _drawerOpen = false;
-    private static Breakpoint _navbarBreakpoint = Breakpoint.Lg;
+    private static Breakpoint _navbarBreakpoint = Breakpoint.None;
     private static DrawerClipMode _navbarClipMode = DrawerClipMode.Docked;
     private static bool _appBarDense = false;
     private MudTheme _theme = new();

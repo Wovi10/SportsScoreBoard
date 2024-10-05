@@ -11,6 +11,7 @@
     </MudItem>
     <MudSelect Label="Select breakpoint" T="Breakpoint" Value="@_navbarBreakpoint"
                ValueChanged="OnDrawerBreakPointChanged">
+        <MudSelectItem Value="@Breakpoint.None">None</MudSelectItem>
         <MudSelectItem Value="@Breakpoint.Sm">Small</MudSelectItem>
         <MudSelectItem Value="@Breakpoint.Md">Medium</MudSelectItem>
         <MudSelectItem Value="@Breakpoint.Lg">Large</MudSelectItem>

@@ -26,22 +26,23 @@ public class VolleyballGame : SportsGameBase
     public void ChangeAwayName(string newValue)
         => Away.ChangeName(newValue);
 
-    public override void ResetScore()
-        => Score.ResetPoints();
-
-    public void ResetSets() 
-        => Score.ResetSets();
-
-    private void SetHomeServing()
+    public void Reset()
     {
-        Home.IsServing = true;
-        Away.IsServing = false;
+        ResetScore();
+        ResetSets();
+        ResetServingTeam();
     }
 
-    private void SetAwayServing()
+    public override void ResetScore()
     {
-        Home.IsServing = false;
-        Away.IsServing = true;
+        Score.ResetPoints();
+        ResetServingTeam();
+    }
+
+    public void ResetSets()
+    {
+        Score.ResetSets();
+        ResetServingTeam();
     }
 
     public void ToggleShowServing()
@@ -55,4 +56,31 @@ public class VolleyballGame : SportsGameBase
         BestOf = newBestOf;
         Score.SetBestOf(newBestOf);
     }
+
+    private void ResetServingTeam()
+    {
+        Home.IsServing = false;
+        Away.IsServing = false;
+    }
+
+    public void ResetTimeouts()
+    {
+        Home.ResetTimeouts();
+        Away.ResetTimeouts();
+    }
+
+    private void SetHomeServing()
+    {
+        Home.IsServing = true;
+        Away.IsServing = false;
+    }
+
+    private void SetAwayServing()
+    {
+        Home.IsServing = false;
+        Away.IsServing = true;
+    }
+
+    public void ToggleShowTimeouts() 
+        => Settings.ToggleShowTimeouts();
 }

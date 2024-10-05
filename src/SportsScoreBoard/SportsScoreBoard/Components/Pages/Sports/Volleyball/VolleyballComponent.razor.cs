@@ -18,6 +18,12 @@ public partial class VolleyballComponent : ComponentBase
         Game.Home.IsServing = true;
     }
 
+    private void ResetGame()
+    {
+        Game.Reset();
+        StateChange();
+    }
+
     public void ResetScore()
     {
         Game.ResetScore();
@@ -30,6 +36,12 @@ public partial class VolleyballComponent : ComponentBase
         StateChange();
     }
     
+    public void ResetTimeouts()
+    {
+        Game.ResetTimeouts();
+        StateChange();
+    }
+    
     public void ToggleShowServing()
     {
         Game.ToggleShowServing();
@@ -39,6 +51,12 @@ public partial class VolleyballComponent : ComponentBase
     public void ToggleShowSets()
     {
         Game.ToggleShowSets();
+        StateChange();
+    }
+    
+    public void ToggleShowTimeouts()
+    {
+        Game.ToggleShowTimeouts();
         StateChange();
     }
 
