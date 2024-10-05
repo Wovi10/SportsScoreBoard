@@ -8,6 +8,7 @@ public partial class TeamScorePart : ComponentBase
     [Parameter] public required VolleyballSettings GameSettings { get; set; }
     [Parameter] public required VolleyballTeam Team { get; set; }
     [Parameter] public required int Score { get; set; }
+    [Parameter] public required int Sets { get; set; }
     [Parameter] public required Action IncrementScore { get; set; }
     [Parameter] public required Action<string> ChangeTeamName { get; set; }
     

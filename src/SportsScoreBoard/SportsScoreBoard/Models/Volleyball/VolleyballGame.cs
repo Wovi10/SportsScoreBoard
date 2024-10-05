@@ -6,6 +6,7 @@ public class VolleyballGame : SportsGameBase
     public new VolleyballTeam Home { get; set; } = new("Home", true);
     public new VolleyballTeam Away { get; set; } = new("Away", false);
     public new VolleyballScore Score { get; set; } = new();
+    public int BestOf { get; private set; } = 5;
 
     public void IncrementHome()
     {
@@ -19,21 +20,24 @@ public class VolleyballGame : SportsGameBase
         SetAwayServing();
     }
 
-    public void ChangeHomeName(string newValue) 
+    public void ChangeHomeName(string newValue)
         => Home.ChangeName(newValue);
-    
+
     public void ChangeAwayName(string newValue)
         => Away.ChangeName(newValue);
 
-    public override void ResetScore() 
-        => Score.Reset();
-    
+    public override void ResetScore()
+        => Score.ResetPoints();
+
+    public void ResetSets() 
+        => Score.ResetSets();
+
     private void SetHomeServing()
     {
         Home.IsServing = true;
         Away.IsServing = false;
     }
-    
+
     private void SetAwayServing()
     {
         Home.IsServing = false;
@@ -43,6 +47,12 @@ public class VolleyballGame : SportsGameBase
     public void ToggleShowServing()
         => Settings.ToggleShowServing();
 
-    public void ToggleShowSets() 
+    public void ToggleShowSets()
         => Settings.ToggleShowSets();
+
+    public void BestOfChanged(int newBestOf)
+    {
+        BestOf = newBestOf;
+        Score.SetBestOf(newBestOf);
+    }
 }

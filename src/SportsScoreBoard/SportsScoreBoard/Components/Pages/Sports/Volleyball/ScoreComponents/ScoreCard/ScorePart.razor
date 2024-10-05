@@ -1,7 +1,7 @@
 ﻿<MudCard @onclick="OnScoredClick">
     <MudCardContent>
         <MudContainer>
-            <MudText Align="Align.Center" Class="position-absolute top-50 start-50">@Score</MudText>
+            <MudText Align="Align.Center" Class="position-absolute top-50 start-50 pointer-events-none">@Score</MudText>
             <MudContainer Class="d-flex" Style="@(Team.IsHome ? "flex-direction: row" : "flex-direction: row-reverse")">
                 <MudIcon Icon="@(Team.IsServing && GameSettings.ShowServing ? Icons.Material.Filled.Circle : string.Empty)"
                          Size="Size.Small"></MudIcon>

@@ -24,6 +24,12 @@ public partial class VolleyballComponent : ComponentBase
         StateChange();
     }
     
+    public void ResetSets()
+    {
+        Game.ResetSets();
+        StateChange();
+    }
+    
     public void ToggleShowServing()
     {
         Game.ToggleShowServing();

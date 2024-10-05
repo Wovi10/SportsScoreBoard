@@ -13,7 +13,7 @@ public abstract class ScoreBase
     public virtual void IncrementAway() 
         => AwayPoints++;
 
-    public void Reset()
+    public void ResetPoints()
     {
         HomePoints = 0;
         AwayPoints = 0;

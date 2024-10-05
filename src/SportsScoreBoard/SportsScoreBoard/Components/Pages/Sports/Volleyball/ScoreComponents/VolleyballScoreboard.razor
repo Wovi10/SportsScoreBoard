@@ -8,12 +8,14 @@
         GameSettings="@Game.Settings"
         Team="@Game.Home"
         Score="@Game.Score.HomePoints"
+        Sets = "@Game.Score.HomeSets"
         IncrementScore="IncrementHome" 
         ChangeTeamName="HomeNameChanged" />
     <TeamScorePart
         GameSettings="@Game.Settings"
         Team="@Game.Away"
         Score="@Game.Score.AwayPoints"
+        Sets = "@Game.Score.AwaySets"
         IncrementScore="IncrementAway"
         ChangeTeamName="AwayNameChanged" />
 </MudGrid>

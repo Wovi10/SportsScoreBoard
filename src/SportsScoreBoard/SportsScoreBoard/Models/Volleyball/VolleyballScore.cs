@@ -4,31 +4,32 @@ public class VolleyballScore : ScoreBase
 {
     public int HomeSets { get; set; }
     public int AwaySets { get; set; }
-    public int SetsPlayed => HomeSets + AwaySets;
-    public bool IsDecidingGame => SetsPlayed == 4;
-    public int RequiredPoints { get; set; } = 25;
+    private int SetsPlayed => HomeSets + AwaySets;
+    private bool IsDecidingGame => SetsPlayed == _bestOf - 1;
+    private int RequiredPoints => IsDecidingGame ? 15 : 25;
     private int GameDifference => Math.Abs(HomePoints - AwayPoints);
+    private static int _bestOf = 5;
 
-    public bool IsGameOver(bool isDecidingGame)
+    public bool IsGameOver()
     {
         if (GameDifference < 2)
             return false;
 
-        var numberToWin = isDecidingGame ? 15 : 25;
-
-        return HomePoints >= numberToWin || AwayPoints >= numberToWin;
+        return HomePoints >= RequiredPoints || AwayPoints >= RequiredPoints;
     }
 
     public override void IncrementHome()
     {
+        base.IncrementHome();
         if (GameDifference < 2 || HomePoints <= AwayPoints || HomePoints < RequiredPoints)
             return;
 
         IncrementHomeSet();
     }
-    
+
     public override void IncrementAway()
     {
+        base.IncrementAway();
         if (GameDifference < 2 || AwayPoints <= HomePoints || AwayPoints < RequiredPoints)
             return;
 
@@ -38,18 +39,21 @@ public class VolleyballScore : ScoreBase
     private void IncrementHomeSet()
     {
         HomeSets++;
-        if (IsDecidingGame) 
-            RequiredPoints = 15;
-
-        Reset();
+        ResetPoints();
     }
-    
+
     private void IncrementAwaySet()
     {
         AwaySets++;
-        if (IsDecidingGame) 
-            RequiredPoints = 15;
+        ResetPoints();
+    }
 
-        Reset();
+    public void SetBestOf(int newBestOf) 
+        => _bestOf = newBestOf;
+
+    public void ResetSets()
+    {
+        HomeSets = 0;
+        AwaySets = 0;
     }
 }

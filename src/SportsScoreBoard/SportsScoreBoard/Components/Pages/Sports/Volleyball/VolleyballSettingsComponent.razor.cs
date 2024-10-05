@@ -8,12 +8,13 @@ namespace SportsScoreBoard.Components.Pages.Sports.Volleyball;
 public partial class VolleyballSettingsComponent
 {
     [Parameter] public required Action ResetScore { get; set; }
+    [Parameter] public required Action ResetSets { get; set; }
     [Parameter] public required Action ToggleShowServing { get; set; }
     [Parameter] public required Action ToggleShowSets { get; set; }
     [Parameter] public required VolleyballGame Game { get; set; }
 
-    private static int _bestOf = 3;
-    private static int FirstTo => (_bestOf / 2) + 1;
+    private static int _bestOf = 5;
+    private static int FirstTo => _bestOf / 2 + 1;
     private bool Expanded { get; set; } = true;
 
     private void ToggleExpand()
@@ -23,6 +24,9 @@ public partial class VolleyballSettingsComponent
 
     private void OnResetScoresClick(MouseEventArgs obj) 
         => ResetScore();
+    
+    private void OnResetSetsClick(MouseEventArgs obj) 
+        => ResetSets();
 
     private void OnShowTimerClick(MouseEventArgs obj)
     {
@@ -52,6 +56,12 @@ public partial class VolleyballSettingsComponent
     private void OnShowPreviousSetsClick(MouseEventArgs obj)
     {
         throw new NotImplementedException();
+    }
+    
+    private void OnBestOfValueChanged(int newBestOf)
+    {
+        Game.BestOfChanged(newBestOf);
+        _bestOf = newBestOf;
     }
 
     public void RefreshMe()
