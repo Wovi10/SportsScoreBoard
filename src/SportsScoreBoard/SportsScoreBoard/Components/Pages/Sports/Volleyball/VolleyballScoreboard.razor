@@ -1,0 +1,52 @@
+﻿@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.ScoreCard
+@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.AwayComponents
+@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.HomeComponents
+@using SportsScoreBoard.Models.Volleyball
+@rendermode InteractiveServer
+
+<MudStack Spacing="6">
+    <MudText Typo="Typo.h1" Align="Align.Center">Volleyball</MudText>
+    <MudGrid Class="ma-0 pa-0">
+        <MudItem xs="6" Class="ma-0 pa-0">
+            <HomeScorePart
+                GameSettings="@Game.Settings"
+                Team="@Game.Home"
+                Score="@Game.Score.HomePoints"
+                Sets="@Game.Score.HomeSets"
+                IncrementScore="IncrementHome"
+                DecrementScore="DecrementHome"
+                ChangeTeamName="HomeNameChanged"/>
+        </MudItem>
+        <MudItem xs="6" Class="ma-0 pa-0">
+            <AwayScorePart
+                GameSettings="@Game.Settings"
+                Team="@Game.Away"
+                Score="@Game.Score.AwayPoints"
+                Sets="@Game.Score.AwaySets"
+                IncrementScore="IncrementAway"
+                DecrementScore="DecrementAway"
+                ChangeTeamName="AwayNameChanged"
+            />
+        </MudItem>
+        @if(Game.Settings.ShowPreviousSets && Game.Score.SetScores.Count > 0)
+        {
+            <MudItem xs="12" Class="ma-0 pa-0">
+                <PreviousSetScores SetScores="@Game.Score.SetScores"/>
+            </MudItem>
+        }
+    </MudGrid>
+</MudStack>
+
+@code
+{
+    [Parameter] public required VolleyballGame Game { get; set; }
+    [Parameter] public required Action IncrementHome { get; set; }
+    [Parameter] public required Action IncrementAway { get; set; }
+    [Parameter] public required Action DecrementAway { get; set; }
+    [Parameter] public required Action DecrementHome { get; set; }
+    [Parameter] public required Action<string> HomeNameChanged { get; set; }
+    [Parameter] public required Action<string> AwayNameChanged { get; set; }
+
+    public void RefreshMe()
+        => StateHasChanged();
+}

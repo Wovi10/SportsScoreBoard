@@ -1,0 +1,41 @@
+﻿@using SportsScoreBoard.Components.Shared
+<MudStack Row="true" Class="mb-3">
+    <SettingsButton OnClick="OnShowServeClick" Text="Show serving team"/>
+    <SettingsButton OnClick="OnShowSetsClick" Text="Show sets"/>
+    <SettingsButton OnClick="OnShowTimeoutsClick" Text="Show timeouts"/>
+    <SettingsButton OnClick="OnShowPreviousSetsClick" Text="Show previous set scores"/>
+    <SettingsButton OnClick="OnShowManualScoresClick" Text="Enable manual scoring"/>
+    <SettingsButton OnClick="OnShowTeamNamesClick" Text="Show team names"/>
+    <SettingsButton OnClick="OnShowTimerClick" Text="Show timer" Disabled="true"/>
+</MudStack>
+
+@code {
+    [Parameter] public required Action ToggleShowServing { get; set; }
+    [Parameter] public required Action ToggleShowSets { get; set; }
+    [Parameter] public required Action ToggleShowTimeouts { get; set; }
+    [Parameter] public required Action ToggleShowPreviousSets { get; set; }
+    [Parameter] public required Action ToggleManualScoring { get; set; }
+    [Parameter] public required Action ToggleShowTeamNames { get; set; }
+    [Parameter] public required Action ToggleShowTimer { get; set; }
+
+    private void OnShowServeClick(MouseEventArgs obj) 
+        => ToggleShowServing.Invoke();
+
+    private void OnShowSetsClick(MouseEventArgs obj) 
+        => ToggleShowSets.Invoke();
+
+    private void OnShowTimeoutsClick(MouseEventArgs obj) 
+        => ToggleShowTimeouts.Invoke();
+
+    private void OnShowPreviousSetsClick(MouseEventArgs obj) 
+        => ToggleShowPreviousSets.Invoke();
+
+    private void OnShowManualScoresClick(MouseEventArgs obj) 
+        => ToggleManualScoring();
+
+    private void OnShowTeamNamesClick(MouseEventArgs obj) 
+        => ToggleShowTeamNames.Invoke();
+
+    private void OnShowTimerClick(MouseEventArgs obj) 
+        => ToggleShowTimer.Invoke();
+}

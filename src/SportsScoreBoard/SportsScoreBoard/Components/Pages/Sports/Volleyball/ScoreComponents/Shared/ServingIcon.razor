@@ -1,0 +1,19 @@
+﻿@if (IsHome)
+{
+    <div class="d-flex flex-row">
+        <MudIcon Icon="@(IsVisible ? Icons.Material.Filled.Circle : string.Empty)" Size="Size.Small"/>
+    </div>
+}
+else
+{
+    <div class="d-flex flex-row-reverse">
+        <MudIcon Icon="@(IsVisible ? Icons.Material.Filled.Circle : string.Empty)" Size="Size.Small"/>
+    </div>
+}
+
+
+@code
+{
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public bool IsHome { get; set; }
+}

@@ -20,6 +20,12 @@ public class VolleyballGame : SportsGameBase
         SetAwayServing();
     }
 
+    public void DecrementAway() 
+        => Score.DecrementAway();
+    
+    public void DecrementHome() 
+        => Score.DecrementHome();
+
     public void ChangeHomeName(string newValue)
         => Home.ChangeName(newValue);
 
@@ -83,4 +89,14 @@ public class VolleyballGame : SportsGameBase
 
     public void ToggleShowTimeouts() 
         => Settings.ToggleShowTimeouts();
+
+    public void ToggleManualScoring() 
+        => Settings.ToggleManualScoring();
+
+    public void ToggleShowPreviousSets() 
+        
+        => Settings.ToggleShowPreviousSets();
+
+    public void ToggleShowTeamNames() 
+        => Settings.ToggleShowTeamNames();
 }

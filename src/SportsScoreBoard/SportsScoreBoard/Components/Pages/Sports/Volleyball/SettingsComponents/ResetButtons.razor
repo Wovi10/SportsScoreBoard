@@ -1,0 +1,25 @@
+﻿@using SportsScoreBoard.Components.Shared
+<MudStack Row="true" Class="mb-3">
+    <SettingsButton OnClick="OnGameResetClick" Text="Reset game"/>
+    <SettingsButton OnClick="OnResetScoresClick" Text="Reset scores"/>
+    <SettingsButton OnClick="OnResetSetsClick" Text="Reset sets"/>
+    <SettingsButton OnClick="OnResetTimeoutsClick" Text="Reset timeouts"/>
+</MudStack>
+
+@code{
+
+    [Parameter] public required Action ResetGame { get; set; }
+    [Parameter] public required Action ResetScore { get; set; }
+    [Parameter] public required Action ResetSets { get; set; }
+    [Parameter] public required Action ResetTimeouts { get; set; }
+
+    private void OnGameResetClick(MouseEventArgs obj) 
+        => ResetGame.Invoke();
+    private void OnResetScoresClick(MouseEventArgs obj) 
+        => ResetScore.Invoke();
+    private void OnResetSetsClick(MouseEventArgs obj) 
+        => ResetSets.Invoke();
+    private void OnResetTimeoutsClick(MouseEventArgs obj) 
+        => ResetTimeouts.Invoke();
+
+}

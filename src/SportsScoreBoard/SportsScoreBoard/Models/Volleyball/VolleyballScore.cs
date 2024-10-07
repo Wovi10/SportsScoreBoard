@@ -2,8 +2,9 @@
 
 public class VolleyballScore : ScoreBase
 {
-    public int HomeSets { get; set; }
-    public int AwaySets { get; set; }
+    public int HomeSets { get; private set; }
+    public int AwaySets { get; private set; }
+    public List<SetScore> SetScores { get; } = new();
     private int SetsPlayed => HomeSets + AwaySets;
     private bool IsDecidingGame => SetsPlayed == _bestOf - 1;
     private int RequiredPoints => IsDecidingGame ? 15 : 25;
@@ -38,12 +39,14 @@ public class VolleyballScore : ScoreBase
 
     private void IncrementHomeSet()
     {
+        SaveSetScore();
         HomeSets++;
         ResetPoints();
     }
 
     private void IncrementAwaySet()
     {
+        SaveSetScore();
         AwaySets++;
         ResetPoints();
     }
@@ -55,5 +58,9 @@ public class VolleyballScore : ScoreBase
     {
         HomeSets = 0;
         AwaySets = 0;
+        SetScores.Clear();
     }
+    
+    private void SaveSetScore() 
+        => SetScores.Add(new SetScore(HomePoints,AwayPoints));
 }

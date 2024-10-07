@@ -10,8 +10,24 @@ public abstract class ScoreBase
     public virtual void IncrementHome() 
         => HomePoints++;
 
+    public void DecrementHome()
+    {
+        if (HomePoints == 0)
+            return;
+
+        HomePoints--;
+    }
+
     public virtual void IncrementAway() 
         => AwayPoints++;
+
+    public void DecrementAway()
+    {
+        if (AwayPoints == 0)
+            return;
+
+        AwayPoints--;
+    }
 
     public void ResetPoints()
     {

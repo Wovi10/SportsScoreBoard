@@ -65,10 +65,22 @@ public partial class VolleyballComponent : ComponentBase
         Game.IncrementHome();
         StateChange();
     }
+    
+    private void DecrementHome()
+    {
+        Game.DecrementHome();
+        StateChange();
+    }
 
     public void IncrementAway()
     {
         Game.IncrementAway();
+        StateChange();
+    }
+
+    private void DecrementAway()
+    {
+        Game.DecrementAway();
         StateChange();
     }
     
@@ -89,5 +101,34 @@ public partial class VolleyballComponent : ComponentBase
         StateHasChanged();
         _volleyballScoreboardSettings.RefreshMe();
         _volleyballSettingsComponent.RefreshMe();
+    }
+
+    private void ToggleManualScoring()
+    {
+        Game.ToggleManualScoring();
+        StateChange();
+    }
+
+    private void ToggleShowPreviousSets()
+    {
+        Game.ToggleShowPreviousSets();
+        StateChange();
+    }
+
+    private void ToggleShowTeamNames()
+    {
+        Game.ToggleShowTeamNames();
+        StateChange();
+    }
+    
+    private void ToggleShowTimer()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void BestOfValueChanged(int newValue)
+    {
+        Game.BestOfChanged(newValue);
+        StateChange();
     }
 }

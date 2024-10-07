@@ -1,9 +1,20 @@
-﻿<MudStack Class="mx-5">
+﻿@using SportsScoreBoard.Models.Volleyball
+<MudStack Class="mx-5">
     <MudText Typo="Typo.h3" Class="d-flex" Style="@(Team.IsHome ? "justify-content: flex-end" : "flex-start")">@Sets</MudText>
-    @if (ShowTimeouts)
+    @if (Settings.ShowTimeouts)
     {
         <TimeoutPart Team="Team"
-                     ShowTimeouts="ShowTimeouts"
+                     ShowTimeouts="Settings.ShowTimeouts"
                      TimeoutsClicked="OnTimeoutsClicked"/>
     }
 </MudStack>
+
+@code
+{
+    [Parameter] public required int Sets { get; set; }
+    [Parameter] public required VolleyballTeam Team { get; set; }
+    [Parameter] public required VolleyballSettings Settings { get; set; }
+    
+    private void OnTimeoutsClicked() 
+        => Team.TimeoutsClicked();
+}

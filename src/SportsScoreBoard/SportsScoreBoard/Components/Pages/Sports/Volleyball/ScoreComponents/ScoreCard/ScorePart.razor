@@ -1,26 +1,31 @@
-﻿<MudCard @onclick="OnScoredClick" Class="m-0 p-0">
-    <MudCardContent>
-        <MudStack>
-            <MudText Typo="Typo.h2"
-                     Align="Align.Center"
-                     Class="top-50 start-50 pointer-events-none">
-                @Score
-            </MudText>
-                @if(Team.IsHome)
-                {
-                    <div class="d-flex flex-row">
-                        <MudIcon Icon="@(Team.IsServing && ShowServing ? Icons.Material.Filled.Circle : string.Empty)"
-                                 Size="Size.Small" 
-                                 Class="d-flex justify-start"/>
-                    </div>
-                }
-                else
-                {
-                    <div class="d-flex flex-row-reverse">
-                        <MudIcon Icon="@(Team.IsServing && ShowServing ? Icons.Material.Filled.Circle : string.Empty)"
-                                 Size="Size.Small"/>
-                    </div>
-                }
-        </MudStack>
-    </MudCardContent>
-</MudCard>
+﻿@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.Shared
+@using SportsScoreBoard.Models.Volleyball
+<div>
+    <MudCard @onclick="OnScoredClick" Class="m-0 p-0">
+        <MudCardContent>
+            <MudStack>
+                <ScoreText Score="Score"></ScoreText>
+                <ServingIcon IsHome="Team.IsHome" IsVisible="Team.IsServing && Settings.ShowServing"/>
+            </MudStack>
+        </MudCardContent>
+    </MudCard>
+    @if (Settings.ManualScoringEnabled)
+    {
+        <ManualScoring Score="Score" IncrementScore="OnScoredClick" DecrementScore="OnDecrementScoreClick" 
+                       IsHome="Team.IsHome"/>
+    }
+</div>
+
+@code{
+    [Parameter] public required Action IncrementScore { get; set; }
+    [Parameter] public required Action DecrementScore { get; set; }
+    [Parameter] public required VolleyballTeam Team { get; set; }
+    [Parameter] public required VolleyballSettings Settings { get; set; }
+    [Parameter] public required int Score { get; set; }
+    
+    private void OnScoredClick()
+        => IncrementScore.Invoke();
+    
+    private void OnDecrementScoreClick()
+        => DecrementScore.Invoke();
+}

@@ -1,0 +1,18 @@
+﻿<div class="d-flex" style="@(IsHome ? "justify-content: flex-end" : "justify-content: flex-start")">
+    <MudIconButton Icon="@Icons.Material.Filled.RemoveCircle" OnClick="OnDecrementScoreClick" Disabled="@(Score <= 0)"/>
+    <MudIconButton Icon="@Icons.Material.Filled.AddCircle" OnClick="OnScoredClick"/>
+</div>
+
+@code
+{
+    [Parameter] public required bool IsHome { get; set; }
+    [Parameter] public required int Score { get; set; }
+    [Parameter] public required Action IncrementScore { get; set; }
+    [Parameter] public required Action DecrementScore { get; set; }
+    
+    private void OnScoredClick()
+        => IncrementScore.Invoke();
+    
+    private void OnDecrementScoreClick()
+        => DecrementScore.Invoke();
+}

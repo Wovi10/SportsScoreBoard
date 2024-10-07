@@ -1,0 +1,11 @@
+﻿@using SportsScoreBoard.Models.Volleyball
+<MudTextField T="string" Variant="Variant.Text" ValueChanged="OnTeamNameChange" Value="@Team.Name"/>
+              
+@code
+{
+  [Parameter] public required VolleyballTeam Team { get; set; }
+  [Parameter] public required Action<string> ChangeTeamName { get; set; }
+
+  public void OnTeamNameChange(string name) 
+      => ChangeTeamName.Invoke(name);
+}
