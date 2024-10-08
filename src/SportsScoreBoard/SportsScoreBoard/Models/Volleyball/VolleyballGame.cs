@@ -1,4 +1,6 @@
-﻿namespace SportsScoreBoard.Models.Volleyball;
+﻿using MudBlazor.Utilities;
+
+namespace SportsScoreBoard.Models.Volleyball;
 
 public class VolleyballGame : SportsGameBase
 {
@@ -99,4 +101,10 @@ public class VolleyballGame : SportsGameBase
 
     public void ToggleShowTeamNames() 
         => Settings.ToggleShowTeamNames();
+
+    public void ResetColors()
+    {
+        Home.Colors.ResetColors();
+        Away.Colors.ResetColors();
+    }
 }

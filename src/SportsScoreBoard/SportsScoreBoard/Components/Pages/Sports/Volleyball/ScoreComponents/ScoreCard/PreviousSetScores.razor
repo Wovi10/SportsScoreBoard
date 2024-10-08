@@ -1,13 +1,17 @@
 ﻿@using SportsScoreBoard.Models.Volleyball
-<MudStack Row="true" Class="mx-5 justify-center" Wrap="Wrap.Wrap" AlignItems="AlignItems.Center">
-    @foreach(var setScore in SetScores)
-    {
-        <MudPaper Class="px-3 py-2">
-            <MudText Typo="Typo.h3" Align="Align.Center">@setScore</MudText>
-        </MudPaper>
-    }
-</MudStack>
+@if (Settings.ShowPreviousSets && SetScores?.Count > 0)
+{
+    <MudStack Row="true" Class="mx-5 justify-center" Wrap="Wrap.Wrap" AlignItems="AlignItems.Center">
+        @foreach(var setScore in SetScores)
+        {
+            <MudPaper Class="px-3 py-2">
+                <MudText Typo="Typo.h3" Align="Align.Center">@setScore</MudText>
+            </MudPaper>
+        }
+    </MudStack>
+}
 
 @code{
-    [Parameter] public required List<SetScore> SetScores { get; set; }
+    [Parameter] public required List<SetScore>? SetScores { get; set; }
+    [Parameter] public required VolleyballSettings Settings { get; set; }
 }

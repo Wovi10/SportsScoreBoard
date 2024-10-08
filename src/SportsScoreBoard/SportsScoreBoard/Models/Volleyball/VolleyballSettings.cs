@@ -5,7 +5,7 @@ public class VolleyballSettings
     public bool ShowServing { get; private set; } = true;
     public bool ShowSets { get; private set; } = true;
     public bool ShowTimeouts { get; private set; } = true;
-    public bool ManualScoringEnabled { get; private set; } = true;
+    public bool ShowManualScoring { get; private set; } = true;
     public bool ShowPreviousSets { get; private set; } = true;
     public bool ShowTeamNames { get; private set; } = true;
 
@@ -19,7 +19,7 @@ public class VolleyballSettings
         => ShowTimeouts = !ShowTimeouts;
 
     public void ToggleManualScoring() 
-        => ManualScoringEnabled = !ManualScoringEnabled;
+        => ShowManualScoring = !ShowManualScoring;
     
     public void ToggleShowPreviousSets()
         => ShowPreviousSets = !ShowPreviousSets;

@@ -2,30 +2,42 @@
 @using SportsScoreBoard.Models.Volleyball
 <div>
     <MudCard @onclick="OnScoredClick" Class="m-0 p-0">
-        <MudCardContent>
+        <MudCardContent Style="@BackgroundStyle">
             <MudStack>
-                <ScoreText Score="Score"></ScoreText>
-                <ServingIcon IsHome="Team.IsHome" IsVisible="Team.IsServing && Settings.ShowServing"/>
+                <ScoreText Score="Score"
+                           ColorStyle="@ForegroundColorStyle"/>
+                <ServingIcon IsHome="Team.IsHome"
+                             IsVisible="Team.IsServing && Settings.ShowServing"
+                             ColorStyle="@ForegroundColorStyle"/>
             </MudStack>
         </MudCardContent>
     </MudCard>
-    @if (Settings.ManualScoringEnabled)
+    @if (Settings.ShowManualScoring)
     {
-        <ManualScoring Score="Score" IncrementScore="OnScoredClick" DecrementScore="OnDecrementScoreClick" 
+        <ManualScoring Score="Score"
+                       IncrementScore="OnScoredClick"
+                       DecrementScore="OnDecrementScoreClick"
                        IsHome="Team.IsHome"/>
     }
 </div>
 
 @code{
+
     [Parameter] public required Action IncrementScore { get; set; }
     [Parameter] public required Action DecrementScore { get; set; }
     [Parameter] public required VolleyballTeam Team { get; set; }
     [Parameter] public required VolleyballSettings Settings { get; set; }
     [Parameter] public required int Score { get; set; }
-    
+
+    private bool BackgroundColorIsSet => Team.Colors.Background is not null;
+    private string BackgroundStyle => BackgroundColorIsSet ? $"background-color: {Team.Colors.Background}" : string.Empty;
+    private bool ForegroundColorIsSet => Team.Colors.Foreground is not null;
+    private string ForegroundColorStyle => ForegroundColorIsSet ? $"color: {Team.Colors.Foreground}" : string.Empty;
+
     private void OnScoredClick()
         => IncrementScore.Invoke();
     
     private void OnDecrementScoreClick()
         => DecrementScore.Invoke();
+
 }

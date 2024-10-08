@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor.Utilities;
 using SportsScoreBoard.Components.Layout;
 using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents;
 using SportsScoreBoard.Models.Volleyball;
@@ -120,15 +121,40 @@ public partial class VolleyballComponent : ComponentBase
         Game.ToggleShowTeamNames();
         StateChange();
     }
-    
-    private void ToggleShowTimer()
-    {
-        throw new NotImplementedException();
-    }
 
     private void BestOfValueChanged(int newValue)
     {
         Game.BestOfChanged(newValue);
+        StateChange();
+    }
+
+    private void OnHomeColorChanged(MudColor mudColor)
+    {
+        Game.Home.Colors.ChangeBackgroundColor(mudColor);
+        StateChange();
+    }
+
+    private void OnAwayColorChanged(MudColor mudColor)
+    {
+        Game.Away.Colors.ChangeBackgroundColor(mudColor);
+        StateChange();
+    }
+
+    private void OnHomeTextColorChanged(MudColor mudColor)
+    {
+        Game.Home.Colors.ChangeForegroundColor(mudColor);
+        StateChange();
+    }
+
+    private void OnAwayTextColorChanged(MudColor mudColor)
+    {
+        Game.Away.Colors.ChangeForegroundColor(mudColor);
+        StateChange();
+    }
+
+    private void ResetColors()
+    {
+        Game.ResetColors();
         StateChange();
     }
 }

@@ -1,0 +1,43 @@
+﻿@using MudBlazor.Utilities
+<MudColorPicker @ref="_colorPicker"
+                ShowToolbar="true"
+                PickerVariant="PickerVariant.Dialog"
+                ColorPickerView="ColorPickerView.GridCompact"
+                ColorPickerMode="ColorPickerMode.RGB"
+                PickerOpened="OnPickerOpened"
+                PickerClosed="OnPickerClosed"
+                ShowAlpha="false"
+                ShowInputs="false"
+                ShowSliders="false"
+                ShowPreview="true"
+                Rounded="true"
+                Style="@(ShowBackgroundColor ? $"background-color: {_colorValue}" : "")"
+                Label="@FieldLabel"
+                bind-Value="@Colour"
+                ValueChanged="OnColorChanged"/>
+
+@code {
+    [Parameter] public required Action<MudColor> ColourChanged { get; set; }
+    [Parameter] public required string FieldLabel { get; set; }
+    [Parameter] public MudColor? Colour { get; set; }
+
+    private MudColorPicker? _colorPicker;
+    private string? _colorValue;
+    private bool _pickerOpened = false;
+    private bool ShowBackgroundColor => !_pickerOpened && !string.IsNullOrWhiteSpace(_colorValue);
+
+    private void OnColorChanged(MudColor mudColor)
+    {
+        _colorValue = mudColor.Value;
+        ColourChanged(mudColor);
+    }
+
+    private void OnPickerOpened()
+        => _pickerOpened = true;
+
+    private void OnPickerClosed()
+        => _pickerOpened = false;
+
+    private async Task RefreshMe()
+        => await _colorPicker.ResetAsync();
+}

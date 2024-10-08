@@ -28,12 +28,9 @@
                 ChangeTeamName="AwayNameChanged"
             />
         </MudItem>
-        @if(Game.Settings.ShowPreviousSets && Game.Score.SetScores.Count > 0)
-        {
-            <MudItem xs="12" Class="ma-0 pa-0">
-                <PreviousSetScores SetScores="@Game.Score.SetScores"/>
-            </MudItem>
-        }
+        <MudItem xs="12" Class="ma-0 pa-0">
+            <PreviousSetScores Settings="Game.Settings" SetScores="Game.Score.SetScores"/>
+        </MudItem>
     </MudGrid>
 </MudStack>
 

@@ -1,0 +1,47 @@
+﻿@using MudBlazor.Utilities
+@using SportsScoreBoard.Models.Volleyball
+@using SportsScoreBoard.Components.Shared
+@using SportsScoreBoard.Models
+<MudStack Row="true" Wrap="Wrap.Wrap" Class="mb-3">
+    <ColorPicker FieldLabel="Home background"
+                 ColourChanged="OnHomeColorChanged"
+                 Colour="HomeColors.Background"/>
+    <ColorPicker FieldLabel="Home text"
+                 ColourChanged="OnHomeTextColorChanged"
+                 Colour="HomeColors.Foreground"/>
+    <ColorPicker FieldLabel="Away background"
+                 ColourChanged="OnAwayColorChanged"
+                 Colour="AwayColors.Background"/>
+    <ColorPicker FieldLabel="Away text"
+                 ColourChanged="OnAwayTextColorChanged"
+                 Colour="AwayColors.Foreground"/>
+    <SettingsButton OnClick="OnResetColorsClick" Text="Reset colours" />
+</MudStack>
+
+@code {
+    [Parameter] public required VolleyballGame Game { get; set; }
+    [Parameter] public required Action ResetColors { get; set; }
+    [Parameter] public required Action<MudColor> HomeColorChanged { get; set; }
+    [Parameter] public required Action<MudColor> AwayColorChanged { get; set; }
+    [Parameter] public required Action<MudColor> HomeTextColorChanged { get; set; }
+    [Parameter] public required Action<MudColor> AwayTextColorChanged { get; set; }
+
+    private ColorPair HomeColors => Game.Home.Colors;
+    private ColorPair AwayColors => Game.Away.Colors;
+
+    private void OnHomeColorChanged(MudColor mudColor)
+        => HomeColorChanged(mudColor);
+
+    private void OnAwayColorChanged(MudColor mudColor)
+        => AwayColorChanged(mudColor);
+
+    private void OnHomeTextColorChanged(MudColor mudColor)
+        => HomeTextColorChanged(mudColor);
+
+    private void OnAwayTextColorChanged(MudColor mudColor)
+        => AwayTextColorChanged(mudColor);
+
+    private void OnResetColorsClick(MouseEventArgs obj)
+        => ResetColors();
+
+}
