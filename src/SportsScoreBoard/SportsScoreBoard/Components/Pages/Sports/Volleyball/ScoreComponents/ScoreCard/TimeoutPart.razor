@@ -26,10 +26,10 @@
 {
     [Parameter] public required VolleyballTeam Team { get; set; }
     [Parameter] public required bool ShowTimeouts { get; set; }
-    [Parameter] public required Action TimeoutsClicked { get; set; }
+    [Parameter] public required EventCallback TimeoutsClicked { get; set; }
 
     private int _timeoutCount = 0;
 
-    private void OnTimeoutsClicked() 
-        => TimeoutsClicked();
+    private async Task OnTimeoutsClicked()
+        => await TimeoutsClicked.InvokeAsync();
 }

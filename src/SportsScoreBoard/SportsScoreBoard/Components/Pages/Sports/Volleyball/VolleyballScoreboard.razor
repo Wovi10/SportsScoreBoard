@@ -37,12 +37,12 @@
 @code
 {
     [Parameter] public required VolleyballGame Game { get; set; }
-    [Parameter] public required Action IncrementHome { get; set; }
-    [Parameter] public required Action IncrementAway { get; set; }
-    [Parameter] public required Action DecrementAway { get; set; }
-    [Parameter] public required Action DecrementHome { get; set; }
-    [Parameter] public required Action<string> HomeNameChanged { get; set; }
-    [Parameter] public required Action<string> AwayNameChanged { get; set; }
+    [Parameter] public required EventCallback IncrementHome { get; set; }
+    [Parameter] public required EventCallback IncrementAway { get; set; }
+    [Parameter] public required EventCallback DecrementAway { get; set; }
+    [Parameter] public required EventCallback DecrementHome { get; set; }
+    [Parameter] public required EventCallback<string> HomeNameChanged { get; set; }
+    [Parameter] public required EventCallback<string> AwayNameChanged { get; set; }
 
     public void RefreshMe()
         => StateHasChanged();

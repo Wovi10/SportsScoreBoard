@@ -17,7 +17,7 @@
                 ValueChanged="OnColorChanged"/>
 
 @code {
-    [Parameter] public required Action<MudColor> ColourChanged { get; set; }
+    [Parameter] public required EventCallback<MudColor> ColourChanged { get; set; }
     [Parameter] public required string FieldLabel { get; set; }
     [Parameter] public MudColor? Colour { get; set; }
 
@@ -26,10 +26,10 @@
     private bool _pickerOpened = false;
     private bool ShowBackgroundColor => !_pickerOpened && !string.IsNullOrWhiteSpace(_colorValue);
 
-    private void OnColorChanged(MudColor mudColor)
+    private async Task OnColorChanged(MudColor mudColor)
     {
         _colorValue = mudColor.Value;
-        ColourChanged(mudColor);
+        await ColourChanged.InvokeAsync(mudColor);
     }
 
     private void OnPickerOpened()
@@ -39,5 +39,5 @@
         => _pickerOpened = false;
 
     private async Task RefreshMe()
-        => await _colorPicker.ResetAsync();
+        => await _colorPicker!.ResetAsync();
 }

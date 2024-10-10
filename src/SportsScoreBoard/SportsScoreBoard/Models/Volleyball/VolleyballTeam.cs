@@ -1,4 +1,6 @@
-﻿namespace SportsScoreBoard.Models.Volleyball;
+﻿using MudBlazor.Utilities;
+
+namespace SportsScoreBoard.Models.Volleyball;
 
 public class VolleyballTeam(string name, bool isHome) : TeamBase(name, isHome)
 {
@@ -13,5 +15,18 @@ public class VolleyballTeam(string name, bool isHome) : TeamBase(name, isHome)
         Timeouts++;
         if (Timeouts > 2) 
             Timeouts = 0;
+    }
+
+    public void ChangeColor(ComponentColor component, MudColor mudColor)
+    {
+        switch (component)
+        {
+            case ComponentColor.Background:
+                Colors.ChangeBackgroundColor(mudColor);
+                break;
+            case ComponentColor.Foreground:
+                Colors.ChangeForegroundColor(mudColor);
+                break;
+        }
     }
 }

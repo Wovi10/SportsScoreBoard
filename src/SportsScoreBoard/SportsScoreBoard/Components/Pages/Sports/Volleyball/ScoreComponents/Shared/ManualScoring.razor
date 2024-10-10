@@ -7,12 +7,12 @@
 {
     [Parameter] public required bool IsHome { get; set; }
     [Parameter] public required int Score { get; set; }
-    [Parameter] public required Action IncrementScore { get; set; }
-    [Parameter] public required Action DecrementScore { get; set; }
+    [Parameter] public required EventCallback IncrementScore { get; set; }
+    [Parameter] public required EventCallback DecrementScore { get; set; }
     
-    private void OnScoredClick()
-        => IncrementScore.Invoke();
+    private async Task OnScoredClick()
+        => await IncrementScore.InvokeAsync();
     
-    private void OnDecrementScoreClick()
-        => DecrementScore.Invoke();
+    private async Task OnDecrementScoreClick()
+        => await DecrementScore.InvokeAsync();
 }

@@ -15,7 +15,7 @@
             DecrementAway="DecrementAway"
             HomeNameChanged="ChangeHomeName"
             AwayNameChanged="ChangeAwayName"
-            />
+        />
     </MudContainer>
 
     <MudContainer Class="overflow-auto mb-4">
@@ -34,10 +34,13 @@
             ToggleShowPreviousSets="ToggleShowPreviousSets"
             ToggleShowTeamNames="ToggleShowTeamNames"
             BestOfValueChanged="BestOfValueChanged"
-            HomeColorChanged="OnHomeColorChanged"
-            AwayColorChanged="OnAwayColorChanged"
-            HomeTextColorChanged="OnHomeTextColorChanged"
-            AwayTextColorChanged="OnAwayTextColorChanged"
-            />
+            HomeColorChanged="OnHomeBackgroundChanged"
+            AwayColorChanged="OnAwayBackgroundChanged"
+            HomeTextColorChanged="OnHomeForegroundChanged"
+            AwayTextColorChanged="OnAwayForegroundChanged"
+        />
     </MudContainer>
 </MudContainer>
+
+<TeamWonDialog @ref="_teamWonDialog" Team="_teamThatWon" ResetGame="ResetGame" />
+

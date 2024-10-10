@@ -24,32 +24,32 @@
 @code {
 
     [Parameter] public required VolleyballSettings Settings { get; set; }
-    [Parameter] public required Action ToggleShowServing { get; set; }
-    [Parameter] public required Action ToggleShowSets { get; set; }
-    [Parameter] public required Action ToggleShowTimeouts { get; set; }
-    [Parameter] public required Action ToggleShowPreviousSets { get; set; }
-    [Parameter] public required Action ToggleManualScoring { get; set; }
-    [Parameter] public required Action ToggleShowTeamNames { get; set; }
-    [Parameter] public required Action ToggleShowTimer { get; set; }
+    [Parameter] public required EventCallback ToggleShowServing { get; set; }
+    [Parameter] public required EventCallback ToggleShowSets { get; set; }
+    [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }
+    [Parameter] public required EventCallback ToggleShowPreviousSets { get; set; }
+    [Parameter] public required EventCallback ToggleManualScoring { get; set; }
+    [Parameter] public required EventCallback ToggleShowTeamNames { get; set; }
+    [Parameter] public required EventCallback ToggleShowTimer { get; set; }
 
-    private void OnShowServeClick(MouseEventArgs obj) 
-        => ToggleShowServing.Invoke();
+    private async Task OnShowServeClick(MouseEventArgs obj)
+        => await ToggleShowServing.InvokeAsync();
 
-    private void OnShowSetsClick(MouseEventArgs obj) 
-        => ToggleShowSets.Invoke();
+    private async Task OnShowSetsClick(MouseEventArgs obj)
+        => await ToggleShowSets.InvokeAsync();
 
-    private void OnShowTimeoutsClick(MouseEventArgs obj) 
-        => ToggleShowTimeouts.Invoke();
+    private async Task OnShowTimeoutsClick(MouseEventArgs obj)
+        => await ToggleShowTimeouts.InvokeAsync();
 
-    private void OnShowPreviousSetsClick(MouseEventArgs obj) 
-        => ToggleShowPreviousSets.Invoke();
+    private async Task OnShowPreviousSetsClick(MouseEventArgs obj)
+        => await ToggleShowPreviousSets.InvokeAsync();
 
-    private void OnShowManualScoresClick(MouseEventArgs obj) 
-        => ToggleManualScoring();
+    private async Task OnShowManualScoresClick(MouseEventArgs obj)
+        => await ToggleManualScoring.InvokeAsync();
 
-    private void OnShowTeamNamesClick(MouseEventArgs obj) 
-        => ToggleShowTeamNames.Invoke();
+    private async Task OnShowTeamNamesClick(MouseEventArgs obj)
+        => await ToggleShowTeamNames.InvokeAsync();
 
-    private void OnShowTimerClick(MouseEventArgs obj) 
-        => ToggleShowTimer.Invoke();
+    private async Task OnShowTimerClick(MouseEventArgs obj)
+        => await ToggleShowTimer.InvokeAsync();
 }

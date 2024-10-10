@@ -18,4 +18,17 @@ public class ColorPair
         Background = null;
         Foreground = null;
     }
+
+    public void ChangeColor(ComponentColor component, MudColor mudColor)
+    {
+        switch (component)
+        {
+            case ComponentColor.Background:
+                ChangeBackgroundColor(mudColor);
+                break;
+            case ComponentColor.Foreground:
+                ChangeForegroundColor(mudColor);
+                break;
+        }
+    }
 }

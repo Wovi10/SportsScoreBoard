@@ -20,28 +20,28 @@
 
 @code {
     [Parameter] public required VolleyballGame Game { get; set; }
-    [Parameter] public required Action ResetColors { get; set; }
-    [Parameter] public required Action<MudColor> HomeColorChanged { get; set; }
-    [Parameter] public required Action<MudColor> AwayColorChanged { get; set; }
-    [Parameter] public required Action<MudColor> HomeTextColorChanged { get; set; }
-    [Parameter] public required Action<MudColor> AwayTextColorChanged { get; set; }
+    [Parameter] public required EventCallback ResetColors { get; set; }
+    [Parameter] public required EventCallback<MudColor> HomeColorChanged { get; set; }
+    [Parameter] public required EventCallback<MudColor> AwayColorChanged { get; set; }
+    [Parameter] public required EventCallback<MudColor> HomeTextColorChanged { get; set; }
+    [Parameter] public required EventCallback<MudColor> AwayTextColorChanged { get; set; }
 
     private ColorPair HomeColors => Game.Home.Colors;
     private ColorPair AwayColors => Game.Away.Colors;
 
-    private void OnHomeColorChanged(MudColor mudColor)
-        => HomeColorChanged(mudColor);
+    private async Task OnHomeColorChanged(MudColor mudColor)
+        => await HomeColorChanged.InvokeAsync(mudColor);
 
-    private void OnAwayColorChanged(MudColor mudColor)
-        => AwayColorChanged(mudColor);
+    private async Task OnAwayColorChanged(MudColor mudColor)
+        => await AwayColorChanged.InvokeAsync(mudColor);
 
-    private void OnHomeTextColorChanged(MudColor mudColor)
-        => HomeTextColorChanged(mudColor);
+    private async Task OnHomeTextColorChanged(MudColor mudColor)
+        => await HomeTextColorChanged.InvokeAsync(mudColor);
 
-    private void OnAwayTextColorChanged(MudColor mudColor)
-        => AwayTextColorChanged(mudColor);
+    private async Task OnAwayTextColorChanged(MudColor mudColor)
+        => await AwayTextColorChanged.InvokeAsync(mudColor);
 
-    private void OnResetColorsClick(MouseEventArgs obj)
-        => ResetColors();
+    private async Task OnResetColorsClick(MouseEventArgs obj)
+        => await ResetColors.InvokeAsync();
 
 }

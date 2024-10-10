@@ -9,16 +9,7 @@ public partial class AwayScorePart : ComponentBase
     [Parameter] public required VolleyballTeam Team { get; set; }
     [Parameter] public required int Score { get; set; }
     [Parameter] public required int Sets { get; set; }
-    [Parameter] public required Action IncrementScore { get; set; }
-    [Parameter] public required Action DecrementScore { get; set; }
-    [Parameter] public required Action<string> ChangeTeamName { get; set; }
-    
-    private void OnScoredClick()
-        => IncrementScore.Invoke();
-    
-    private void OnDecrementScoreClick() 
-        => DecrementScore.Invoke();
-    
-    public void OnTeamNameChange(string name) 
-        => ChangeTeamName.Invoke(name);
+    [Parameter] public required EventCallback IncrementScore { get; set; }
+    [Parameter] public required EventCallback DecrementScore { get; set; }
+    [Parameter] public required EventCallback<string> ChangeTeamName { get; set; }
 }

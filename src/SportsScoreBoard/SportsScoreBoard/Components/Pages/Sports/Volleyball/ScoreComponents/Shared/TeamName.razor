@@ -4,8 +4,8 @@
 @code
 {
   [Parameter] public required VolleyballTeam Team { get; set; }
-  [Parameter] public required Action<string> ChangeTeamName { get; set; }
+  [Parameter] public required EventCallback<string> ChangeTeamName { get; set; }
 
-  public void OnTeamNameChange(string name) 
-      => ChangeTeamName.Invoke(name);
+  public async Task OnTeamNameChange(string name)
+      => await ChangeTeamName.InvokeAsync(name);
 }

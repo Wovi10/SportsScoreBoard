@@ -9,30 +9,63 @@ public class VolleyballGame : SportsGameBase
     public new VolleyballTeam Away { get; set; } = new("Away", false);
     public new VolleyballScore Score { get; set; } = new();
     public int BestOf { get; private set; } = 5;
+    private bool _gameHasFinished;
 
     public void IncrementHome()
     {
+        if (_gameHasFinished)
+            return;
+
         Score.IncrementHome();
         SetHomeServing();
+
+        if (Score.HomeWon is not null)
+            _gameHasFinished = true;
     }
 
     public void IncrementAway()
     {
+        if (_gameHasFinished)
+            return;
+
         Score.IncrementAway();
         SetAwayServing();
+
+        if (Score.HomeWon is not null)
+            _gameHasFinished = true;
     }
 
-    public void DecrementAway() 
-        => Score.DecrementAway();
-    
-    public void DecrementHome() 
-        => Score.DecrementHome();
+    public void DecrementAway()
+    {
+        if (_gameHasFinished)
+            return;
+
+        Score.DecrementAway();
+    }
+
+    public void DecrementHome()
+    {
+        if (_gameHasFinished)
+            return;
+
+        Score.DecrementHome();
+    }
 
     public void ChangeHomeName(string newValue)
-        => Home.ChangeName(newValue);
+    {
+        if (_gameHasFinished)
+            return;
+
+        Home.ChangeName(newValue);
+    }
 
     public void ChangeAwayName(string newValue)
-        => Away.ChangeName(newValue);
+    {
+        if (_gameHasFinished)
+            return;
+
+        Away.ChangeName(newValue);
+    }
 
     public void Reset()
     {
@@ -62,7 +95,8 @@ public class VolleyballGame : SportsGameBase
     public void BestOfChanged(int newBestOf)
     {
         BestOf = newBestOf;
-        Score.SetBestOf(newBestOf);
+        VolleyballScore.SetBestOf(newBestOf);
+        Score.SetIncremented();
     }
 
     private void ResetServingTeam()
@@ -79,12 +113,18 @@ public class VolleyballGame : SportsGameBase
 
     private void SetHomeServing()
     {
+        if (_gameHasFinished)
+            return;
+
         Home.IsServing = true;
         Away.IsServing = false;
     }
 
     private void SetAwayServing()
     {
+        if (_gameHasFinished)
+            return;
+
         Home.IsServing = false;
         Away.IsServing = true;
     }
@@ -106,5 +146,18 @@ public class VolleyballGame : SportsGameBase
     {
         Home.Colors.ResetColors();
         Away.Colors.ResetColors();
+    }
+
+    public void ChangeColor(Team team, ComponentColor background, MudColor mudColor)
+    {
+        switch (team)
+        {
+            case Team.Home:
+                Home.ChangeColor(background, mudColor);
+                break;
+            case Team.Away:
+                Away.ChangeColor(background, mudColor);
+                break;
+        }
     }
 }

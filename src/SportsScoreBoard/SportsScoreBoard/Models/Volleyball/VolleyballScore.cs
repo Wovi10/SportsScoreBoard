@@ -5,11 +5,14 @@ public class VolleyballScore : ScoreBase
     public int HomeSets { get; private set; }
     public int AwaySets { get; private set; }
     public List<SetScore> SetScores { get; } = new();
+    public bool? HomeWon { get; private set; }
     private int SetsPlayed => HomeSets + AwaySets;
     private bool IsDecidingGame => SetsPlayed == _bestOf - 1;
     private int RequiredPoints => IsDecidingGame ? 15 : 25;
-    private int GameDifference => Math.Abs(HomePoints - AwayPoints);
     private static int _bestOf = 5;
+    private static int _minSetsToBePlayed => _bestOf / 2 + 1;
+    private int GameDifference => Math.Abs(HomePoints - AwayPoints);
+
 
     public bool IsGameOver()
     {
@@ -42,6 +45,8 @@ public class VolleyballScore : ScoreBase
         SaveSetScore();
         HomeSets++;
         ResetPoints();
+
+        SetIncremented();
     }
 
     private void IncrementAwaySet()
@@ -51,7 +56,7 @@ public class VolleyballScore : ScoreBase
         ResetPoints();
     }
 
-    public void SetBestOf(int newBestOf) 
+    public static void SetBestOf(int newBestOf)
         => _bestOf = newBestOf;
 
     public void ResetSets()
@@ -63,4 +68,25 @@ public class VolleyballScore : ScoreBase
     
     private void SaveSetScore() 
         => SetScores.Add(new SetScore(HomePoints,AwayPoints));
+
+
+    public void SetIncremented()
+    {
+        if (SetsPlayed < _minSetsToBePlayed)
+            return;
+
+        if (HomeSets == _minSetsToBePlayed)
+        {
+            HomeWon = true;
+            return;
+        }
+
+        if (AwaySets == _minSetsToBePlayed)
+        {
+            HomeWon = false;
+            return;
+        }
+
+        HomeWon = null;
+    }
 }

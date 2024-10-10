@@ -13,11 +13,11 @@
 
 @code {
     
-    [Parameter] public required Action<int> BestOfValueChanged { get; set; }
+    [Parameter] public required EventCallback<int> BestOfValueChanged { get; set; }
     [Parameter] public required VolleyballGame Game { get; set; }
 
     private int FirstTo => Game.BestOf / 2 + 1;
 
-    private void OnBestOfValueChanged(int newBestOf) 
-        => BestOfValueChanged.Invoke(newBestOf);
+    private async Task OnBestOfValueChanged(int newBestOf)
+        => await BestOfValueChanged.InvokeAsync(newBestOf);
 }

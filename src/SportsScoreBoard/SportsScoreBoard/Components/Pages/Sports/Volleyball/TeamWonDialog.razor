@@ -1,0 +1,30 @@
+﻿@using SportsScoreBoard.Models.Volleyball
+<MudDialog @ref="_thisModal">
+    <TitleContent>
+        <MudText Typo="Typo.h1">@Team.Name has won!</MudText>
+    </TitleContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="OnResetGameClick">Reset game</MudButton>
+        <MudButton OnClick="HideAsync">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [Parameter] public required VolleyballTeam Team { get; set; }
+    [Parameter] public required EventCallback ResetGame { get; set; }
+
+    private MudDialog _thisModal = default!;
+
+    public async Task ShowAsync()
+        => await _thisModal.ShowAsync();
+
+    public async Task HideAsync()
+        => await _thisModal.CloseAsync();
+
+    private async Task OnResetGameClick()
+    {
+        await ResetGame.InvokeAsync();
+        await HideAsync();
+    }
+
+}
