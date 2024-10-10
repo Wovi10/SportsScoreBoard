@@ -13,7 +13,6 @@ public class VolleyballScore : ScoreBase
     private static int _minSetsToBePlayed => _bestOf / 2 + 1;
     private int GameDifference => Math.Abs(HomePoints - AwayPoints);
 
-
     public bool IsGameOver()
     {
         if (GameDifference < 2)
@@ -22,18 +21,18 @@ public class VolleyballScore : ScoreBase
         return HomePoints >= RequiredPoints || AwayPoints >= RequiredPoints;
     }
 
-    public override void IncrementHome()
+    public override void IncrementHome(int amount = 1)
     {
-        base.IncrementHome();
+        base.IncrementHome(amount);
         if (GameDifference < 2 || HomePoints <= AwayPoints || HomePoints < RequiredPoints)
             return;
 
         IncrementHomeSet();
     }
 
-    public override void IncrementAway()
+    public override void IncrementAway(int amount = 1)
     {
-        base.IncrementAway();
+        base.IncrementAway(amount);
         if (GameDifference < 2 || AwayPoints <= HomePoints || AwayPoints < RequiredPoints)
             return;
 

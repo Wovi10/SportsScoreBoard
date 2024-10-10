@@ -4,7 +4,7 @@ namespace SportsScoreBoard.Models;
 
 public static class MyMudThemeProvider
 {
-    public static MudTheme MyLightTheme => new()
+    public static MudTheme MyCustomTheme => new()
         {
             LayoutProperties = new LayoutProperties
             {

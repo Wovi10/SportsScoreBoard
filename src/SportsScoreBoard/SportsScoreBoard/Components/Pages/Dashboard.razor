@@ -1,23 +1,8 @@
 ﻿@page "/"
+@using SportsScoreBoard.Components.Layout
 @inject NavigationManager NavManager
 
 <PageTitle>Dashboard</PageTitle>
-
-@* All the sports will be displayed here in a grid. They will be a button with a link to the sport *@
-@* <MudContainer MaxWidth="MaxWidth.False" Class="vibrant-background"> *@
-@*     <MudGrid Spacing="6"> *@
-@*         @for(var i = 0; i < 20; i++) *@
-@*         { *@
-@*             <MudItem xs="6"> *@
-@*                 <MudNavLink Class="p-3 " Href="/volleyball"> *@
-@*                     <MudPaper Class="d-flex flex-column align-center justify-center mud-width-full" Width="140px" Height="140px"> *@
-@*                         <MudIcon Icon="@Icons.Material.Filled.SportsVolleyball" Size="Size.Large" /> *@
-@*                     </MudPaper> *@
-@*                 </MudNavLink> *@
-@*             </MudItem> *@
-@*         } *@
-@*     </MudGrid> *@
-@* </MudContainer> *@
 
 <MudContainer Class="mt-16">
     <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Sports</MudText>
@@ -29,7 +14,7 @@
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h5" Align="Align.Center"><MudIcon Icon="@icon" Size="Size
-                            .Large"/></MudText>
+                                                                                      .Large"/></MudText>
                         </CardHeaderContent>
                     </MudCardHeader>
                     <MudCardContent Class="mx-auto mt-4">
@@ -40,3 +25,22 @@
         }
     </MudGrid>
 </MudContainer>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        MainLayout.SubpageTitle = "";
+    }
+
+    private static readonly IDictionary<Models.Sports, string> AllSportsDictionary = new Dictionary<Models.Sports, string>
+    {
+        { Models.Sports.Volleyball, Icons.Material.Filled.SportsVolleyball },
+        { Models.Sports.Handball, Icons.Material.Filled.SportsHandball }
+    };
+    private Task GoTo(Models.Sports sport)
+    {
+        NavManager.NavigateTo($"/{sport}");
+        return Task.CompletedTask;
+    }
+}

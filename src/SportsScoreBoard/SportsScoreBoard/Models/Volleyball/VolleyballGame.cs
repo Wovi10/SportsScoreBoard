@@ -9,7 +9,6 @@ public class VolleyballGame : SportsGameBase
     public new VolleyballTeam Away { get; set; } = new("Away", false);
     public new VolleyballScore Score { get; set; } = new();
     public int BestOf { get; private set; } = 5;
-    public bool GameHasFinished { get; private set; }
 
     public void IncrementHome()
     {

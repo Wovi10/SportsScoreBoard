@@ -1,0 +1,39 @@
+﻿<MudStack Row="true" Wrap="Wrap.Wrap">
+    <MudGrid Class="d-flex ma-0 pa-0"
+             Style="@(Team.IsHome ? "flex-direction: row-reverse" : "flex-direction: row")">
+        @if (GameSettings.ShowTeamNames)
+        {
+        <MudItem md="6" Style="justify-content: flex-end" Class="mx-0 px-0 me-2">
+            <TeamName Team="Team"
+                      ChangeTeamName="ChangeTeamName"/>
+        </MudItem>
+        }
+        <MudItem xs="12" Class="mx-0 px-0 me-2">
+            <MudContainer Class="d-flex flex-grow-1 justify-end flex-wrap-reverse mx-0 px-0">
+                <div class="flex-grow-1">
+                    <ScorePart Settings="GameSettings"
+                               Score="@Score"
+                               Team="@Team"
+                               IncrementScore="IncrementScore"
+                               DecrementScore="DecrementScore"/>
+                </div>
+                @if (GameSettings.ShowSets)
+                {
+                <SetsPart Sets="Sets"
+                          Team="Team"
+                          Settings="GameSettings"/>
+                }
+            </MudContainer>
+        </MudItem>
+    </MudGrid>
+</MudStack>
+
+@code
+{
+    // [Parameter] public required VolleyballSettings GameSettings { get; set; }
+    [Parameter] public required HandballTeam Team { get; set; }
+    [Parameter] public required int Score { get; set; }
+    [Parameter] public required EventCallback IncrementScore { get; set; }
+    [Parameter] public required EventCallback DecrementScore { get; set; }
+    [Parameter] public required EventCallback<string> ChangeTeamName { get; set; }
+}

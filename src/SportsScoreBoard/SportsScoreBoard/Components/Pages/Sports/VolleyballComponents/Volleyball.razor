@@ -6,7 +6,7 @@
 <MudContainer Class="d-flex align-items-end flex-column" Style="height: 100%">
     <MudContainer Class="flex-grow-1 pa-0 ma-0">
         <VolleyballScoreboard
-            @ref="_volleyballScoreboardSettings"
+            @ref="_volleyballScoreboard"
             Game="Game"
             IncrementHome="IncrementHome"
             DecrementHome="DecrementHome"
@@ -19,7 +19,7 @@
 
     <MudContainer Class="overflow-auto mb-4">
         <VolleyballSettingsComponent
-            @ref="_volleyballSettingsComponent"
+            @ref="_volleyballSettings"
             Game="Game"
             ResetGame="ResetGame"
             ResetScore="ResetScore"

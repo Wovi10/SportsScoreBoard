@@ -2,5 +2,6 @@
 
 public enum Sports
 {
-    Volleyball
+    Volleyball,
+    Handball
 }

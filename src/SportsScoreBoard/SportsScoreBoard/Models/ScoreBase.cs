@@ -7,8 +7,8 @@ public abstract class ScoreBase
 
     public bool? Result => HomePoints > AwayPoints ? true : AwayPoints > HomePoints? false : null;
     
-    public virtual void IncrementHome() 
-        => HomePoints++;
+    public virtual void IncrementHome(int amount = 1)
+        => HomePoints += amount;
 
     public void DecrementHome()
     {
@@ -18,8 +18,8 @@ public abstract class ScoreBase
         HomePoints--;
     }
 
-    public virtual void IncrementAway() 
-        => AwayPoints++;
+    public virtual void IncrementAway(int amount = 1)
+        => AwayPoints += amount;
 
     public void DecrementAway()
     {

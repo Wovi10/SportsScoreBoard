@@ -2,20 +2,19 @@
 using MudBlazor;
 using MudBlazor.Utilities;
 using SportsScoreBoard.Components.Layout;
-using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents;
 using SportsScoreBoard.Models;
 using SportsScoreBoard.Models.Volleyball;
 
-namespace SportsScoreBoard.Components.Pages.Sports.Volleyball;
+namespace SportsScoreBoard.Components.Pages.Sports.VolleyballComponents;
 
-public partial class VolleyballComponent : ComponentBase
+public partial class Volleyball : ComponentBase
 {
     [Inject] private IDialogService DialogService { get; set; } = default!;
 
-    public static VolleyballGame Game { get; set; } = new();
+    private static VolleyballGame Game { get; } = new();
 
-    private VolleyballSettingsComponent _volleyballSettingsComponent;
-    private VolleyballScoreboard _volleyballScoreboardSettings;
+    private VolleyballSettingsComponent _volleyballSettings;
+    private VolleyballScoreboard _volleyballScoreboard;
 
     private TeamWonDialog _teamWonDialog = default!;
     private VolleyballTeam _teamThatWon;
@@ -96,8 +95,8 @@ public partial class VolleyballComponent : ComponentBase
     private void StateChange()
     {
         StateHasChanged();
-        _volleyballScoreboardSettings.RefreshMe();
-        _volleyballSettingsComponent.RefreshMe();
+        _volleyballScoreboard.RefreshMe();
+        _volleyballSettings.RefreshMe();
     }
 
     private static void ToggleManualScoring()

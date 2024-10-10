@@ -1,5 +1,6 @@
-﻿@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.ScoreCard
-@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents.Shared
+﻿@using SportsScoreBoard.Components.Pages.Sports.VolleyballComponents.ScoreComponents.ScoreCard
+@using SportsScoreBoard.Components.Pages.Sports.VolleyballComponents.ScoreComponents.Shared
+@using SportsScoreBoard.Models.Volleyball
 <MudStack Row="true" Wrap="Wrap.Wrap">
     <MudGrid Class="d-flex ma-0 pa-0"
              Style="@(Team.IsHome ? "flex-direction: row-reverse" : "flex-direction: row")">
@@ -29,3 +30,14 @@
         </MudItem>
     </MudGrid>
 </MudStack>
+
+@code
+{
+    [Parameter] public required VolleyballSettings GameSettings { get; set; }
+    [Parameter] public required VolleyballTeam Team { get; set; }
+    [Parameter] public required int Score { get; set; }
+    [Parameter] public required int Sets { get; set; }
+    [Parameter] public required EventCallback IncrementScore { get; set; }
+    [Parameter] public required EventCallback DecrementScore { get; set; }
+    [Parameter] public required EventCallback<string> ChangeTeamName { get; set; }
+}
