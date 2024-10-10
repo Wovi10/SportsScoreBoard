@@ -1,12 +1,11 @@
 ﻿@page "/volleyball"
-@using SportsScoreBoard.Components.Pages.Sports.Volleyball.ScoreComponents
 @rendermode InteractiveServer
 
 <PageTitle>Volleyball</PageTitle>
 
 <MudContainer Class="d-flex align-items-end flex-column" Style="height: 100%">
     <MudContainer Class="flex-grow-1 pa-0 ma-0">
-        <VolleyballScoreboard 
+        <VolleyballScoreboard
             @ref="_volleyballScoreboardSettings"
             Game="Game"
             IncrementHome="IncrementHome"

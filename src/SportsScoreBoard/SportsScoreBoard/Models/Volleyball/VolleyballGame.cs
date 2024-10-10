@@ -9,35 +9,35 @@ public class VolleyballGame : SportsGameBase
     public new VolleyballTeam Away { get; set; } = new("Away", false);
     public new VolleyballScore Score { get; set; } = new();
     public int BestOf { get; private set; } = 5;
-    private bool _gameHasFinished;
+    public bool GameHasFinished { get; private set; }
 
     public void IncrementHome()
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Score.IncrementHome();
         SetHomeServing();
 
         if (Score.HomeWon is not null)
-            _gameHasFinished = true;
+            GameHasFinished = true;
     }
 
     public void IncrementAway()
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Score.IncrementAway();
         SetAwayServing();
 
         if (Score.HomeWon is not null)
-            _gameHasFinished = true;
+            GameHasFinished = true;
     }
 
     public void DecrementAway()
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Score.DecrementAway();
@@ -45,7 +45,7 @@ public class VolleyballGame : SportsGameBase
 
     public void DecrementHome()
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Score.DecrementHome();
@@ -53,7 +53,7 @@ public class VolleyballGame : SportsGameBase
 
     public void ChangeHomeName(string newValue)
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Home.ChangeName(newValue);
@@ -61,7 +61,7 @@ public class VolleyballGame : SportsGameBase
 
     public void ChangeAwayName(string newValue)
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Away.ChangeName(newValue);
@@ -113,7 +113,7 @@ public class VolleyballGame : SportsGameBase
 
     private void SetHomeServing()
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Home.IsServing = true;
@@ -122,7 +122,7 @@ public class VolleyballGame : SportsGameBase
 
     private void SetAwayServing()
     {
-        if (_gameHasFinished)
+        if (GameHasFinished)
             return;
 
         Home.IsServing = false;
