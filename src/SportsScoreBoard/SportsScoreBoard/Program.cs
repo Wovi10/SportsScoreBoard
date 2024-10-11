@@ -1,4 +1,5 @@
 using MudBlazor.Services;
+using Recurop;
 using SportsScoreBoard.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 builder.Services.AddMudServices();
+
+builder.Services.AddRecurop();
 
 var app = builder.Build();
 
