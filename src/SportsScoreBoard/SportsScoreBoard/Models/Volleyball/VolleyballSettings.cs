@@ -2,6 +2,7 @@
 
 public class VolleyballSettings
 {
+    public readonly ResetButtons[] VisibleButtons = {ResetButtons.Game, ResetButtons.Score, ResetButtons.Sets, ResetButtons.Timeouts};
     public bool ShowServing { get; private set; } = true;
     public bool ShowSets { get; private set; } = true;
     public bool ShowTimeouts { get; private set; } = true;

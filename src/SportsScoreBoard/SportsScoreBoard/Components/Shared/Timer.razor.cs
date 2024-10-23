@@ -60,20 +60,18 @@ public partial class Timer : IDisposable
         if (_timerOperation.IsRecurring)
         {
             PauseButtonClicked();
+            return;
         }
+
+        if (_timerOperation.IsPaused)
+            ResumeButtonClicked();
         else
-        {
-            if (_displayTime == TimeSpan.Zero)
-            {
-                StartButtonClicked();
-            }
-            else
-            {
-                ResumeButtonClicked();
-            }
-        }
+            StartButtonClicked();
     }
 
-    private void ResetTimer()
-        => StopButtonClicked();
+    public void ResetTimer()
+    {
+        StopButtonClicked();
+        StateHasChanged();
+    }
 }

@@ -1,13 +1,17 @@
-﻿<MudButton OnClick="HandleClick" Color="@(Active ? Color.Primary : Color.Secondary)" Variant="Variant.Filled"
-           Disabled="Disabled">
-    @Text
-</MudButton>
+﻿@if (Visible)
+{
+    <MudButton OnClick="HandleClick" Color="@(Active ? Color.Primary : Color.Secondary)" Variant="Variant.Filled"
+               Disabled="Disabled">
+        @Text
+    </MudButton>
+}
 
 @code
 {
     [Parameter] public string Text { get; set; } = "";
     [Parameter] public bool Active { get; set; } = true;
     [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public bool Visible { get; set; } = true;
     [Parameter] public required EventCallback<MouseEventArgs> OnClick { get; set; }
 
     private async Task HandleClick(MouseEventArgs e)

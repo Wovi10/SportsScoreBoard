@@ -9,6 +9,14 @@
             @ref="_handballScoreboard"
         />
     </MudContainer>
+
+    <MudContainer Class="overflow-auto mb-4">
+        <HandballSettingsComponent
+            @ref="_handballSettings"
+            Game="Game"
+            ResetTimerClicked="ResetTimerClicked"
+        />
+    </MudContainer>
 </MudContainer>
 
 @code {
