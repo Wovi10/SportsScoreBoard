@@ -1,4 +1,6 @@
-﻿namespace SportsScoreBoard.Models.Handball;
+﻿using SportsScoreBoard.Components.Pages.Sports.HandballComponents;
+
+namespace SportsScoreBoard.Models.Handball;
 
 public class HandballGame : SportsGameBase
 {

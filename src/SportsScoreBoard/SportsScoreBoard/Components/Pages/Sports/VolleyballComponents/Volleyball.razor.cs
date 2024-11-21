@@ -13,7 +13,7 @@ public partial class Volleyball : ComponentBase
 
     private static VolleyballGame Game { get; } = new();
 
-    private VolleyballSettingsComponent _volleyballSettings;
+    private VolleyballSettings _volleyballSettings;
     private VolleyballScoreboard _volleyballScoreboard;
 
     private TeamWonDialog _teamWonDialog = default!;
@@ -114,6 +114,11 @@ public partial class Volleyball : ComponentBase
         Game.ToggleShowTeamNames();
     }
 
+    private static void ToggleShowTimer()
+    {
+        Game.ToggleShowTimer();
+    }
+
     private async Task BestOfValueChanged(int newValue)
     {
         Game.BestOfChanged(newValue);
@@ -149,6 +154,9 @@ public partial class Volleyball : ComponentBase
         Game.ResetColors();
         StateChange();
     }
+
+    private void ResetTimer()
+        => _volleyballScoreboard.ResetTimer();
 
     private async Task CheckTeamWonAsync()
     {

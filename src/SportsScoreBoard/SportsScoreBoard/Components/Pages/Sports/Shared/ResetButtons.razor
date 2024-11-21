@@ -1,0 +1,43 @@
+﻿@using SportsScoreBoard.Components.Shared
+
+<MudStack Row="true" Class="mb-3">
+    <SettingsButton OnClick="OnGameResetClick" Text="Reset game" Visible="GameVisible"/>
+    <SettingsButton OnClick="OnResetScoresClick" Text="Reset scores" Visible="ScoreVisible"/>
+    <SettingsButton OnClick="OnResetSetsClick" Text="Reset sets" Visible="SetsVisible"/>
+    <SettingsButton OnClick="OnResetTimeoutsClick" Text="Reset timeouts" Visible="TimeoutsVisible"/>
+    <SettingsButton OnClick="OnResetTimerClick" Text="Reset timer" Visible="TimeoutsVisible"/>
+</MudStack>
+
+@code{
+    [Parameter] public required Models.ResetButtons[] VisibleButtons { get; set; }
+    [Parameter] public required EventCallback ResetGame { get; set; }
+    [Parameter] public required EventCallback ResetScore { get; set; }
+    [Parameter] public required EventCallback ResetSets { get; set; }
+    [Parameter] public required EventCallback ResetTimeouts { get; set; }
+    [Parameter] public required EventCallback ResetTimer { get; set; }
+
+    private bool IsVisible(Models.ResetButtons button)
+        => VisibleButtons.Contains(button);
+
+    private bool GameVisible => IsVisible(Models.ResetButtons.Game);
+    private bool ScoreVisible => IsVisible(Models.ResetButtons.Score);
+    private bool SetsVisible => IsVisible(Models.ResetButtons.Sets);
+    private bool TimeoutsVisible => IsVisible(Models.ResetButtons.Timeouts);
+    private bool TimerVisible => IsVisible(Models.ResetButtons.Timer);
+
+    private async Task OnGameResetClick(MouseEventArgs obj)
+        => await ResetGame.InvokeAsync();
+
+    private async Task OnResetScoresClick(MouseEventArgs obj)
+        => await ResetScore.InvokeAsync();
+
+    private async Task OnResetSetsClick(MouseEventArgs obj)
+        => await ResetSets.InvokeAsync();
+
+    private async Task OnResetTimeoutsClick(MouseEventArgs obj)
+        => await ResetTimeouts.InvokeAsync();
+
+    private async Task OnResetTimerClick(MouseEventArgs obj)
+        => await ResetTimer.InvokeAsync();
+
+}

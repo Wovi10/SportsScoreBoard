@@ -9,6 +9,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
     <PackageReference Include="MudBlazor" Version="7.8.0" />
+    <PackageReference Include="Recurop" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Pages\Sports\VolleyballComponents\SettingsComponents\" />
   </ItemGroup>
 
 </Project>

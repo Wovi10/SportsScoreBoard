@@ -3,8 +3,8 @@
 
 <PageTitle>Volleyball</PageTitle>
 
-<MudContainer Class="d-flex align-items-end flex-column" Style="height: 100%">
-    <MudContainer Class="flex-grow-1 pa-0 ma-0">
+<MudContainer Class="d-flex flex-column" Style="height:100%">
+    <MudContainer Class="pa-0 ma-0">
         <VolleyballScoreboard
             @ref="_volleyballScoreboard"
             Game="Game"
@@ -17,8 +17,8 @@
         />
     </MudContainer>
 
-    <MudContainer Class="overflow-auto mb-4">
-        <VolleyballSettingsComponent
+    <MudContainer Class="overflow-auto mt-auto mb-4">
+        <VolleyballSettings
             @ref="_volleyballSettings"
             Game="Game"
             ResetGame="ResetGame"
@@ -26,12 +26,14 @@
             ResetSets="ResetSets"
             ResetTimeouts="ResetTimeouts"
             ResetColors="ResetColors"
+            ResetTimer="ResetTimer"
             ToggleShowServing="ToggleShowServing"
             ToggleShowSets="ToggleShowSets"
             ToggleShowTimeouts="ToggleShowTimeouts"
             ToggleManualScoring="ToggleManualScoring"
             ToggleShowPreviousSets="ToggleShowPreviousSets"
             ToggleShowTeamNames="ToggleShowTeamNames"
+            ToggleShowTimer="ToggleShowTimer"
             BestOfValueChanged="BestOfValueChanged"
             HomeColorChanged="OnHomeBackgroundChanged"
             AwayColorChanged="OnAwayBackgroundChanged"

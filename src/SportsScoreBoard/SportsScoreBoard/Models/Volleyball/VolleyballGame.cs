@@ -141,6 +141,9 @@ public class VolleyballGame : SportsGameBase
     public void ToggleShowTeamNames() 
         => Settings.ToggleShowTeamNames();
 
+    public void ToggleShowTimer()
+        => Settings.ToggleShowTimer();
+
     public void ResetColors()
     {
         Home.Colors.ResetColors();

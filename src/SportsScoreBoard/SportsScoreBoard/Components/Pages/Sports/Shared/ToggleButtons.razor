@@ -1,29 +1,42 @@
 ﻿@using SportsScoreBoard.Components.Shared
+@using SportsScoreBoard.Models
 @using SportsScoreBoard.Models.Volleyball
 <MudStack Row="true" Wrap="Wrap.Wrap" Class="mb-3">
     <SettingsButton OnClick="OnShowServeClick"
                     Active="Settings.ShowServing"
-                    Text="Show serving team"/>
+                    Text="Show serving team"
+                    Visible="ServeVisible"
+                    />
     <SettingsButton OnClick="OnShowSetsClick"
                     Active="Settings.ShowSets"
-                    Text="Show sets"/>
+                    Text="Show sets"
+                    Visible="SetsVisible"/>
     <SettingsButton OnClick="OnShowTimeoutsClick"
                     Active="Settings.ShowTimeouts"
-                    Text="Show timeouts"/>
+                    Text="Show timeouts"
+                    Visible="TimeoutsVisible"/>
     <SettingsButton OnClick="OnShowPreviousSetsClick"
                     Active="Settings.ShowPreviousSets"
-                    Text="Show previous set scores"/>
+                    Text="Show previous set scores"
+                    Visible="PreviousSetsVisible"/>
     <SettingsButton OnClick="OnShowManualScoresClick"
                     Active="Settings.ShowManualScoring"
-                    Text="Show manual scoring"/>
+                    Text="Show manual scoring"
+                    Visible="ManualScoreVisible"/>
     <SettingsButton OnClick="OnShowTeamNamesClick"
                     Active="Settings.ShowTeamNames"
-                    Text="Show team names"/>
+                    Text="Show team names"
+                    Visible="TeamNamesVisible"/>
+    <SettingsButton OnClick="OnShowTimerClick"
+                    Active="Settings.ShowTimer"
+                    Text="Show timer"
+                    Visible="TimerVisible"/>
 </MudStack>
 
 @code {
 
-    [Parameter] public required VolleyballSettings Settings { get; set; }
+    [Parameter] public required Models.ToggleButtons[] VisibleButtons { get; set; }
+    [Parameter] public required Settings Settings { get; set; }
     [Parameter] public required EventCallback ToggleShowServing { get; set; }
     [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }
@@ -31,6 +44,17 @@
     [Parameter] public required EventCallback ToggleManualScoring { get; set; }
     [Parameter] public required EventCallback ToggleShowTeamNames { get; set; }
     [Parameter] public required EventCallback ToggleShowTimer { get; set; }
+
+    private bool IsVisible(Models.ToggleButtons button)
+        => VisibleButtons.Contains(button);
+
+    private bool ServeVisible => IsVisible(Models.ToggleButtons.Serving);
+    private bool SetsVisible => IsVisible(Models.ToggleButtons.Sets);
+    private bool TimeoutsVisible => IsVisible(Models.ToggleButtons.Timeouts);
+    private bool PreviousSetsVisible => IsVisible(Models.ToggleButtons.PreviousSets);
+    private bool ManualScoreVisible => IsVisible(Models.ToggleButtons.ManualScoring);
+    private bool TeamNamesVisible => IsVisible(Models.ToggleButtons.TeamNames);
+    private bool TimerVisible => IsVisible(Models.ToggleButtons.Timer);
 
     private async Task OnShowServeClick(MouseEventArgs obj)
         => await ToggleShowServing.InvokeAsync();
