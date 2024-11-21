@@ -2,9 +2,10 @@
 
 public class HandballGame : SportsGameBase
 {
-    public HandballTeam Home { get; set; } = new("Home", true);
-    public HandballTeam Away { get; set; } = new("Away", false);
-    public HandballScore Score { get; private set; } = new();
+    public HandballTeam Home { get; } = new("Home", true);
+    public HandballTeam Away { get; } = new("Away", false);
+    public HandballScore Score { get; } = new();
+    public HandballSettings Settings { get; } = new();
 
     public override void ResetScore()
         => Score.ResetPoints();
@@ -20,4 +21,20 @@ public class HandballGame : SportsGameBase
 
     public void DecrementAway()
         => Score.DecrementAway();
+
+    public void ChangeHomeName(string newValue)
+    {
+        if (GameHasFinished)
+            return;
+
+        Home.ChangeName(newValue);
+    }
+
+    public void ChangeAwayName(string newValue)
+    {
+        if (GameHasFinished)
+            return;
+
+        Away.ChangeName(newValue);
+    }
 }

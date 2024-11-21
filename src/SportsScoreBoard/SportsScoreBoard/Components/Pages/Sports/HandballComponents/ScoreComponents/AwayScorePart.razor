@@ -1,8 +1,10 @@
 ﻿@using SportsScoreBoard.Models.Handball
+@using SportsScoreBoard.Components.Pages.Sports.Shared
+@using SportsScoreBoard.Components.Pages.Sports.HandballComponents.ScoreComponents.ScoreCard
 <MudStack Row="true" Wrap="Wrap.Wrap">
     <MudGrid Class="d-flex ma-0 pa-0"
              Style="@(Team.IsHome ? "flex-direction: row-reverse" : "flex-direction: row")">
-        @if (true)
+        @if (GameSettings.ShowTeamNames)
         {
             <MudItem md="6" Style="justify-content: flex-end" Class="mx-0 px-0 me-2">
                 <TeamName Team="Team"
@@ -25,7 +27,7 @@
 
 @code
 {
-    // [Parameter] public required VolleyballSettings GameSettings { get; set; }
+    [Parameter] public required HandballSettings GameSettings { get; set; }
     [Parameter] public required HandballTeam Team { get; set; }
     [Parameter] public required int Score { get; set; }
     [Parameter] public required EventCallback IncrementScore { get; set; }
