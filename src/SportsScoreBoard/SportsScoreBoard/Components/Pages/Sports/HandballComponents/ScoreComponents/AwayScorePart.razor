@@ -23,9 +23,11 @@
                 </div>
                 @if (Settings.ShowTimeouts)
                 {
-                    <TimeoutPart Team="Team"
-                             ShowTimeouts="Settings.ShowTimeouts"
-                             TimeoutsClicked="OnTimeoutsClicked"/>
+                    <MudStack Class="mx-5">
+                        <TimeoutPart Team="Team"
+                                 ShowTimeouts="Settings.ShowTimeouts"
+                                 TimeoutsClicked="OnTimeoutsClicked"/>
+                    </MudStack>
                 }
             </MudContainer>
         </MudItem>
