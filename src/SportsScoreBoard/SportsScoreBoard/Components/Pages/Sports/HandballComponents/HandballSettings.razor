@@ -7,12 +7,29 @@
     </TitleContent>
     <ChildContent>
         <ResetButtons  VisibleButtons="Game.Settings.VisibleButtons"
+                       ResetGame="ResetGameClicked"
+                       ResetScore="ResetScoreClicked"
+                       ResetTimeouts="ResetTimeoutsClicked"
                        ResetTimer="ResetTimerClicked"/>
+
+        <ToggleButtons VisibleButtons="Game.Settings.VisibleToggleButtons"
+                       ToggleShowTimeouts="ToggleShowTimeouts"
+                       ToggleShowTeamNames="ToggleShowTeamNames"
+                       ToggleManualScoring="ToggleManualScoring"
+                       ToggleShowTimer="ToggleShowTimer"
+                       Settings="Game.Settings"/>
     </ChildContent>
 </MudExpansionPanel>
 
 @code
 {
-    [Parameter] public required EventCallback ResetTimerClicked { get; set; }
     [Parameter] public required HandballGame Game { get; set; }
+    [Parameter] public required EventCallback ResetTimerClicked { get; set; }
+    [Parameter] public required EventCallback ResetScoreClicked { get; set; }
+    [Parameter] public required EventCallback ResetTimeoutsClicked { get; set; }
+    [Parameter] public required EventCallback ResetGameClicked { get; set; }
+    [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }
+    [Parameter] public required EventCallback ToggleShowTeamNames { get; set; }
+    [Parameter] public required EventCallback ToggleManualScoring { get; set; }
+    [Parameter] public required EventCallback ToggleShowTimer { get; set; }
 }

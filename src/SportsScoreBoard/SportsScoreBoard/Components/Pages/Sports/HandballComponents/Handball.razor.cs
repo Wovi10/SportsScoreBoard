@@ -13,8 +13,32 @@ public partial class Handball : ComponentBase
     protected override void OnInitialized()
         => MainLayout.SubpageTitle = "Handball";
 
+    private void ResetGameClicked()
+    {
+        Game.ResetGame();
+        _handballScoreboard.ResetTimer();
+    }
+
+    private void ResetScoreClicked()
+        => Game.ResetScore();
+
+    private void ResetTimeoutsClicked()
+        => Game.ResetTimeouts();
+
     private void ResetTimerClicked()
         => _handballScoreboard.ResetTimer();
+
+    private static void ToggleShowTimeouts()
+        => Game.ToggleShowTimeouts();
+
+    private static void ToggleShowTeamNames()
+        => Game.ToggleShowTeamNames();
+
+    private static void ToggleManualScoring()
+        => Game.ToggleManualScoring();
+
+    private static void ToggleShowTimer()
+        => Game.ToggleShowTimer();
 
     public static void ChangeHomeName(string newValue)
         => Game.ChangeHomeName(newValue);

@@ -39,4 +39,29 @@ public class HandballGame : SportsGameBase
 
         Away.ChangeName(newValue);
     }
+
+    public void ResetGame()
+    {
+        ResetScore();
+        ResetTimeouts();
+        GameHasFinished = false;
+    }
+
+    public void ResetTimeouts()
+    {
+        Home.ResetTimeouts();
+        Away.ResetTimeouts();
+    }
+
+    public void ToggleShowTimeouts()
+        => Settings.ToggleShowTimeouts();
+
+    public void ToggleShowTeamNames()
+        => Settings.ToggleShowTeamNames();
+
+    public void ToggleManualScoring()
+        => Settings.ToggleManualScoring();
+
+    public void ToggleShowTimer()
+        => Settings.ToggleShowTimer();
 }
