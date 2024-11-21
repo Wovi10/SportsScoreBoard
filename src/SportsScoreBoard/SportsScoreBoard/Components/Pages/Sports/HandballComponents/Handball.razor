@@ -7,6 +7,13 @@
     <MudContainer Class="flex-grow-1 pa-0 ma-0">
         <HandballScoreboard
             @ref="_handballScoreboard"
+            Game="@Game"
+            IncrementHome="IncrementHome"
+            DecrementHome="DecrementHome"
+            IncrementAway="IncrementAway"
+            DecrementAway="DecrementAway"
+            HomeNameChanged="ChangeHomeName"
+            AwayNameChanged="ChangeAwayName"
         />
     </MudContainer>
 
@@ -18,7 +25,3 @@
         />
     </MudContainer>
 </MudContainer>
-
-@code {
-    
-}

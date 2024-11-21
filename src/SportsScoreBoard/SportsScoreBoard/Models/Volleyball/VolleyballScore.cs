@@ -7,52 +7,36 @@ public class VolleyballScore : ScoreBase
     public List<SetScore> SetScores { get; } = new();
     public bool? HomeWon { get; private set; }
     private int SetsPlayed => HomeSets + AwaySets;
-    private bool IsDecidingGame => SetsPlayed == _bestOf - 1;
-    private int RequiredPoints => IsDecidingGame ? 15 : 25;
+    private bool IsDecidingSet => SetsPlayed == _bestOf - 1;
+    private int RequiredPoints => IsDecidingSet ? 15 : 25;
     private static int _bestOf = 5;
-    private static int _minSetsToBePlayed => _bestOf / 2 + 1;
+    private static int MinSetsToBePlayed => _bestOf / 2 + 1;
     private int GameDifference => Math.Abs(HomePoints - AwayPoints);
+    private const int MinPointsDifference = 2;
 
-    public bool IsGameOver()
+    public override void Increment(Team team, int amount = 1)
     {
-        if (GameDifference < 2)
-            return false;
-
-        return HomePoints >= RequiredPoints || AwayPoints >= RequiredPoints;
-    }
-
-    public override void IncrementHome(int amount = 1)
-    {
-        base.IncrementHome(amount);
-        if (GameDifference < 2 || HomePoints <= AwayPoints || HomePoints < RequiredPoints)
+        base.Increment(team, amount);
+        if (!SetCanIncrease())
             return;
 
-        IncrementHomeSet();
+        IncrementSet(team);
     }
 
-    public override void IncrementAway(int amount = 1)
-    {
-        base.IncrementAway(amount);
-        if (GameDifference < 2 || AwayPoints <= HomePoints || AwayPoints < RequiredPoints)
-            return;
+    private bool SetCanIncrease()
+        => GameDifference >= MinPointsDifference && (HomePoints >= RequiredPoints || AwayPoints >= RequiredPoints);
 
-        IncrementAwaySet();
-    }
-
-    private void IncrementHomeSet()
+    private void IncrementSet(Team team)
     {
         SaveSetScore();
-        HomeSets++;
+
+        if (team == Team.Home)
+            HomeSets++;
+        else
+            AwaySets++;
         ResetPoints();
 
         SetIncremented();
-    }
-
-    private void IncrementAwaySet()
-    {
-        SaveSetScore();
-        AwaySets++;
-        ResetPoints();
     }
 
     public static void SetBestOf(int newBestOf)
@@ -64,23 +48,22 @@ public class VolleyballScore : ScoreBase
         AwaySets = 0;
         SetScores.Clear();
     }
-    
+
     private void SaveSetScore() 
         => SetScores.Add(new SetScore(HomePoints,AwayPoints));
 
-
     public void SetIncremented()
     {
-        if (SetsPlayed < _minSetsToBePlayed)
+        if (SetsPlayed < MinSetsToBePlayed)
             return;
 
-        if (HomeSets == _minSetsToBePlayed)
+        if (HomeSets == MinSetsToBePlayed)
         {
             HomeWon = true;
             return;
         }
 
-        if (AwaySets == _minSetsToBePlayed)
+        if (AwaySets == MinSetsToBePlayed)
         {
             HomeWon = false;
             return;

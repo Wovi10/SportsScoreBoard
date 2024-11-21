@@ -1,4 +1,7 @@
-﻿@using SportsScoreBoard.Components.Shared
+@using SportsScoreBoard.Components.Shared
+
+@using SportsScoreBoard.Models.Handball
+@using SportsScoreBoard.Components.Pages.Sports.HandballComponents.ScoreComponents
 
 <MudStack Spacing="6">
     <MudText Typo="Typo.h1" Align="Align.Center">Handball</MudText>
@@ -7,4 +10,36 @@
             <Timer @ref="_handballTimer" />
         </MudItem>
     </MudGrid>
+    <MudGrid Class="ma-0 pa-0">
+        <MudItem xs="6" Class="ma-0 pa-0">
+            <HomeScorePart
+                GameSettings="@Game.Settings"
+                Team="@Game.Home"
+                Score="@Game.Score.HomePoints"
+                IncrementScore="IncrementHome"
+                DecrementScore="DecrementHome"
+                ChangeTeamName="HomeNameChanged"/>
+        </MudItem>
+        <MudItem xs="6" Class="ma-0 pa-0">
+            <AwayScorePart
+                GameSettings="@Game.Settings"
+                Team="@Game.Away"
+                Score="@Game.Score.AwayPoints"
+                IncrementScore="IncrementAway"
+                DecrementScore="DecrementAway"
+                ChangeTeamName="AwayNameChanged"/>
+        </MudItem>
+    </MudGrid>
 </MudStack>
+
+
+@code
+{
+    [Parameter] public required HandballGame Game { get; set; }
+    [Parameter] public required EventCallback<string> HomeNameChanged { get; set; }
+    [Parameter] public required EventCallback<string> AwayNameChanged { get; set; }
+    [Parameter] public required EventCallback IncrementHome { get; set; }
+    [Parameter] public required EventCallback DecrementHome { get; set; }
+    [Parameter] public required EventCallback IncrementAway { get; set; }
+    [Parameter] public required EventCallback DecrementAway { get; set; }
+}
