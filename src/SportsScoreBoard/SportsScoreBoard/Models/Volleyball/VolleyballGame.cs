@@ -15,7 +15,7 @@ public class VolleyballGame : SportsGameBase
         if (GameHasFinished)
             return;
 
-        Score.IncrementHome();
+        Score.Increment(Team.Home);
         SetHomeServing();
 
         if (Score.HomeWon is not null)
@@ -27,7 +27,7 @@ public class VolleyballGame : SportsGameBase
         if (GameHasFinished)
             return;
 
-        Score.IncrementAway();
+        Score.Increment(Team.Away);
         SetAwayServing();
 
         if (Score.HomeWon is not null)

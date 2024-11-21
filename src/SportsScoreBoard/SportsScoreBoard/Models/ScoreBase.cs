@@ -6,27 +6,29 @@ public abstract class ScoreBase
     public int AwayPoints { get; private set; }
 
     public bool? Result => HomePoints > AwayPoints ? true : AwayPoints > HomePoints? false : null;
-    
-    public virtual void IncrementHome(int amount = 1)
-        => HomePoints += amount;
 
-    public void DecrementHome()
+    public virtual void Increment(Team team, int amount = 1)
+    {
+        if (team == Team.Home)
+            HomePoints += amount;
+        else
+            AwayPoints += amount;
+    }
+
+    public void DecrementHome(int amount = 1)
     {
         if (HomePoints == 0)
             return;
 
-        HomePoints--;
+        Increment(Team.Home, amount * -1);
     }
 
-    public virtual void IncrementAway(int amount = 1)
-        => AwayPoints += amount;
-
-    public void DecrementAway()
+    public void DecrementAway(int amount = 1)
     {
         if (AwayPoints == 0)
             return;
 
-        AwayPoints--;
+        Increment(Team.Away, amount * -1);
     }
 
     public void ResetPoints()

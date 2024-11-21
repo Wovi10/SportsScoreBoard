@@ -10,10 +10,10 @@ public class HandballGame : SportsGameBase
         => Score.ResetPoints();
 
     public void IncrementHome()
-        => Score.IncrementHome();
+        => Score.Increment(Team.Home);
 
     public void IncrementAway()
-        => Score.IncrementAway();
+        => Score.Increment(Team.Away);
 
     public void DecrementHome()
         => Score.DecrementHome();
