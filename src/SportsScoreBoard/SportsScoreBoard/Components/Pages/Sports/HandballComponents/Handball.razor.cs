@@ -7,7 +7,7 @@ namespace SportsScoreBoard.Components.Pages.Sports.HandballComponents;
 public partial class Handball : ComponentBase
 {
     private HandballScoreboard _handballScoreboard;
-    private HandballSettingsComponent _handballSettings;
+    private HandballSettings _handballSettings;
     private static HandballGame Game { get; } = new();
 
     protected override void OnInitialized()

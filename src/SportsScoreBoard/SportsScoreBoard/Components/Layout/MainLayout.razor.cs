@@ -11,6 +11,6 @@ public partial class MainLayout
     private MudThemeProvider _mudThemeProvider;
     public static string SubpageTitle { get; set; } = string.Empty;
     
-    private void ToggleDrawer()
-        => _drawerOpen = !_drawerOpen;
+    private void OpenDrawer()
+        => _drawerOpen = true;
 }

@@ -3,8 +3,8 @@
 
 <PageTitle>Handball</PageTitle>
 
-<MudContainer Class="d-flex align-items-end flex-column" Style="height: 100%">
-    <MudContainer Class="flex-grow-1 pa-0 ma-0">
+<MudContainer Class="d-flex flex-column" Style="height:100%">
+    <MudContainer Class="pa-0 ma-0">
         <HandballScoreboard
             @ref="_handballScoreboard"
             Game="@Game"
@@ -17,8 +17,8 @@
         />
     </MudContainer>
 
-    <MudContainer Class="overflow-auto mb-4">
-        <HandballSettingsComponent
+    <MudContainer Class="overflow-auto mt-auto mb-4">
+        <HandballSettings
             @ref="_handballSettings"
             Game="Game"
             ResetTimerClicked="ResetTimerClicked"
