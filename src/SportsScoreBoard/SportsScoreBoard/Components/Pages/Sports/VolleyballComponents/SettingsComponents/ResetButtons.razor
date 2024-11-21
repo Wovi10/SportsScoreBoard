@@ -23,7 +23,7 @@
     private bool ScoreVisible => IsVisible(Models.ResetButtons.Score);
     private bool SetsVisible => IsVisible(Models.ResetButtons.Sets);
     private bool TimeoutsVisible => IsVisible(Models.ResetButtons.Timeouts);
-    private bool TimerVisible => IsVisible(Models.ResetButtons.Timeouts);
+    private bool TimerVisible => IsVisible(Models.ResetButtons.Timer);
 
     private async Task OnGameResetClick(MouseEventArgs obj)
         => await ResetGame.InvokeAsync();

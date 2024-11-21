@@ -13,13 +13,15 @@
                        AwayTextColorChanged="AwayTextColorChanged"
                        ResetColors="ResetColors"/>
 
-        <ResetButtons VisibleButtons="Game.Settings.VisibleButtons"
+        <ResetButtons VisibleButtons="Game.Settings.VisibleResetButtons"
                       ResetGame="ResetGame"
                       ResetScore="ResetScore"
                       ResetSets="ResetSets"
-                      ResetTimeouts="ResetTimeouts"/>
+                      ResetTimeouts="ResetTimeouts"
+                      ResetTimer="ResetTimer"/>
 
-        <ToggleButtons ToggleShowServing="ToggleShowServing"
+        <ToggleButtons VisibleButtons="Game.Settings.VisibleToggleButtons"
+                       ToggleShowServing="ToggleShowServing"
                        ToggleShowSets="ToggleShowSets"
                        ToggleShowTimeouts="ToggleShowTimeouts"
                        ToggleShowPreviousSets="ToggleShowPreviousSets"
@@ -40,6 +42,7 @@
     [Parameter] public required EventCallback ResetSets { get; set; }
     [Parameter] public required EventCallback ResetTimeouts { get; set; }
     [Parameter] public required EventCallback ResetColors { get; set; }
+    [Parameter] public required EventCallback ResetTimer { get; set; }
     [Parameter] public required EventCallback ToggleShowServing { get; set; }
     [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }

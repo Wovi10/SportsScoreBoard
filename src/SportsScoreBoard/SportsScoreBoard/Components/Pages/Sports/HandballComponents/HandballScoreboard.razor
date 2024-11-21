@@ -7,7 +7,8 @@
     <MudText Typo="Typo.h1" Align="Align.Center">Handball</MudText>
     <MudGrid Class="mx-0 px-0">
         <MudItem xs="12" Class="ma-0 pa-0">
-            <Timer @ref="_handballTimer" />
+            <Timer @ref="_handballTimer"
+                   Settings="@Game.Settings" />
         </MudItem>
     </MudGrid>
     <MudGrid Class="ma-0 pa-0">
@@ -42,4 +43,8 @@
     [Parameter] public required EventCallback DecrementHome { get; set; }
     [Parameter] public required EventCallback IncrementAway { get; set; }
     [Parameter] public required EventCallback DecrementAway { get; set; }
+    private Timer _handballTimer;
+
+    public void ResetTimer()
+        => _handballTimer.ResetTimer();
 }
