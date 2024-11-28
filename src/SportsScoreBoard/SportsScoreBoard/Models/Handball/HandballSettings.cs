@@ -1,13 +1,15 @@
-﻿namespace SportsScoreBoard.Models.Handball;
+﻿using SportsScoreBoard.Models.Enums;
 
-public class HandballSettingsBase: SettingsBase
+namespace SportsScoreBoard.Models.Handball;
+
+public class HandballSettings: SettingsBase
 {
     public override ResetButtons[] VisibleResetButtons { get; } =
-        {ResetButtons.Game, ResetButtons.Score, ResetButtons.Timeouts, ResetButtons.Timer};
+        {ResetButtons.Game, ResetButtons.Score, ResetButtons.Timeouts, ResetButtons.Timer, ResetButtons.Names};
     public override ToggleButtons[] VisibleToggleButtons { get; } =
         {ToggleButtons.TeamNames, ToggleButtons.Timer, ToggleButtons.Timeouts};
 
-    public HandballSettingsBase()
+    public HandballSettings()
     {
         ToggleShowTimeouts();
         ToggleShowManualScoring();

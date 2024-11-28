@@ -1,9 +1,24 @@
 ﻿@if (IsVisible)
 {
-    <div class="d-flex" style="@(IsHome ? "justify-content: flex-end" : "justify-content: flex-start")">
-        <MudIconButton Icon="@Icons.Material.Filled.RemoveCircle" OnClick="OnDecrementScoreClick" Disabled="@(Score <= 0)"/>
-        <MudIconButton Icon="@Icons.Material.Filled.AddCircle" OnClick="OnScoredClick"/>
-    </div>
+    <MudStack Class="my-2">
+        @foreach(var amount in IncrementAmounts)
+        {
+            <MudContainer Class="d-flex" Style="@(IsHome ? "justify-content: flex-end" : "justify-content: flex-start")">
+                <MudButton OnClick="() => DecrementScore.InvokeAsync(amount)"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Disabled="Score < amount"
+                           Class="mx-1">
+                    -@amount
+                </MudButton>
+                <MudButton OnClick="() => IncrementScore.InvokeAsync(amount)"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary">
+                    +@amount
+                </MudButton>
+            </MudContainer>
+        }
+    </MudStack>
 }
 
 @code
@@ -11,12 +26,13 @@
     [Parameter] public required bool IsVisible { get; set; }
     [Parameter] public required bool IsHome { get; set; }
     [Parameter] public required int Score { get; set; }
-    [Parameter] public required EventCallback IncrementScore { get; set; }
-    [Parameter] public required EventCallback DecrementScore { get; set; }
+    [Parameter] public required int[] IncrementAmounts { get; set; }
+    [Parameter] public required EventCallback<int> IncrementScore { get; set; }
+    [Parameter] public required EventCallback<int> DecrementScore { get; set; }
     
-    private async Task OnScoredClick()
-        => await IncrementScore.InvokeAsync();
+    private async Task OnScoredClick(int amount)
+        => await IncrementScore.InvokeAsync(amount);
     
-    private async Task OnDecrementScoreClick()
-        => await DecrementScore.InvokeAsync();
+    private async Task OnDecrementScoreClick(int amount)
+        => await DecrementScore.InvokeAsync(amount);
 }

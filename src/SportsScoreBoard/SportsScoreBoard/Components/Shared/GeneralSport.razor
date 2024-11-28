@@ -23,6 +23,7 @@
             ResetTimeouts="ResetTimeouts"
             ResetTimer="ResetTimer"
             ResetColorsClicked="ResetColors"
+            ResetNames="ResetNames"
             ToggleShowServing="ToggleShowServing"
             ToggleShowSets="ToggleShowSets"
             ToggleShowTimeouts="ToggleShowTimeouts"
@@ -53,23 +54,23 @@
     private TeamBase _teamThatWon;
     private TeamWonDialog _teamWonDialog = default!;
 
-    public async Task IncrementHome()
+    public async Task IncrementHome(int amount)
     {
-        Game.IncrementHome();
+        Game.IncrementHome(amount);
         await CheckTeamWonAsync();
     }
 
-    private void DecrementHome()
-        => Game.DecrementHome();
+    private void DecrementHome(int amount)
+        => Game.DecrementHome(amount);
 
-    public async Task IncrementAway()
+    public async Task IncrementAway(int amount)
     {
-        Game.IncrementAway();
+        Game.IncrementAway(amount);
         await CheckTeamWonAsync();
     }
 
-    private void DecrementAway()
-        => Game.DecrementAway();
+    private void DecrementAway(int amount)
+        => Game.DecrementAway(amount);
 
     public void ChangeHomeName(string name)
         => Game.ChangeHomeName(name);
@@ -102,6 +103,15 @@
 
     public void ResetTimeouts()
         => Game.ResetTimeouts();
+
+    private void ResetColors()
+        => Game.ResetColors();
+
+    private void ResetTimer()
+        => _scoreBoardComponent.ResetTimer();
+
+    private void ResetNames()
+        => Game.ResetNames();
 
     public void ToggleShowServing()
         => Game.ToggleShowServing();
@@ -153,12 +163,6 @@
         Game.ChangeColor(Team.Away, ComponentColor.Foreground, mudColor);
         StateChange();
     }
-
-    private void ResetColors()
-        => Game.ResetColors();
-
-    private void ResetTimer()
-        => _scoreBoardComponent.ResetTimer();
 
     private void StateChange()
     {
