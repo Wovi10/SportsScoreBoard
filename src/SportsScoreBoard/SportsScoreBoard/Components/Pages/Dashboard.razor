@@ -1,22 +1,26 @@
 ﻿@page "/"
 @using SportsScoreBoard.Components.Layout
+@using SportsScoreBoard.Models.StaticValues
 @inject NavigationManager NavManager
 
 <MudContainer Class="mt-16">
     <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Sports</MudText>
     <MudGrid Class="mt-8">
-        @foreach (var (sport, icon) in AllSportsDictionary)
+        @foreach (var sportInfo in StaticValues.AllSports)
         {
             <MudItem xs="12" sm="6" md="4">
-                <MudCard Elevation="25" Class="rounded-lg pb-4 pointer-event" @onclick="() => GoTo(sport)" Style="cursor: pointer">
+                <MudCard Elevation="25" Class="rounded-lg pb-4 pointer-event" @onclick="() => GoTo(sportInfo.Route)" Style="cursor: pointer">
                     <MudCardHeader>
                         <CardHeaderContent>
-                            <MudText Typo="Typo.h5" Align="Align.Center"><MudIcon Icon="@icon" Size="Size
-                                                                                      .Large"/></MudText>
+                            <MudText Typo="Typo.h5"
+                                     Align="Align.Center">
+                                <MudIcon Icon="@sportInfo.Icon"
+                                         Size="Size.Large"/>
+                            </MudText>
                         </CardHeaderContent>
                     </MudCardHeader>
                     <MudCardContent Class="mx-auto mt-4">
-                        <MudText Align="Align.Center">@sport</MudText>
+                        <MudText Align="Align.Center">@sportInfo.Sport</MudText>
                     </MudCardContent>
                 </MudCard>
             </MudItem>
@@ -27,18 +31,11 @@
 @code
 {
     protected override void OnInitialized()
-    {
-        MainLayout.SubpageTitle = "";
-    }
+        => MainLayout.SubpageTitle = "";
 
-    private static readonly IDictionary<Models.Sports, string> AllSportsDictionary = new Dictionary<Models.Sports, string>
+    private Task GoTo(string route)
     {
-        { Models.Sports.Volleyball, Icons.Material.Filled.SportsVolleyball },
-        { Models.Sports.Handball, Icons.Material.Filled.SportsHandball }
-    };
-    private Task GoTo(Models.Sports sport)
-    {
-        NavManager.NavigateTo($"/{sport}");
+        NavManager.NavigateTo(route);
         return Task.CompletedTask;
     }
 }

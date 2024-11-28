@@ -1,5 +1,10 @@
-﻿<MudNavMenu>
-    <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
-    <MudNavLink Match="NavLinkMatch.All" Href="/volleyball">Volleyball</MudNavLink>
-    <MudNavLink Match="NavLinkMatch.All" Href="/handball">Handball</MudNavLink>
+﻿@using SportsScoreBoard.Models.StaticValues
+<MudNavMenu>
+    <MudNavLink Match="NavLinkMatch.All" Href="/" Class="mt-5">Home</MudNavLink>
+    @foreach (var sportInfo in StaticValues.AllSports)
+    {
+        <MudNavLink Match="NavLinkMatch.All" Href="@sportInfo.Route">
+            <MudText>@sportInfo.Sport</MudText>
+        </MudNavLink>
+    }
 </MudNavMenu>
