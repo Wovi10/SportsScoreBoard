@@ -1,6 +1,4 @@
-﻿using SportsScoreBoard.Models.Volleyball;
-
-namespace SportsScoreBoard.Models;
+﻿namespace SportsScoreBoard.Models;
 
 public class ScoreBase(bool usesSets = false, bool usesBestOf = false)
 {
