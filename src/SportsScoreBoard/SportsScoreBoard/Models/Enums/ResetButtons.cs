@@ -1,4 +1,4 @@
-﻿namespace SportsScoreBoard.Models;
+﻿namespace SportsScoreBoard.Models.Enums;
 
 public enum ResetButtons
 {
@@ -6,5 +6,6 @@ public enum ResetButtons
     Score,
     Sets,
     Timeouts,
-    Timer
+    Timer,
+    Names
 }

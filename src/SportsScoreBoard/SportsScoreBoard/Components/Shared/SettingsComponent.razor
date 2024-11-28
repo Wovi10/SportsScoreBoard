@@ -14,14 +14,15 @@
                        AwayTextColorChanged="AwayTextColorChanged"
                        ResetColorsClicked="ResetColorsClicked"/>
 
-        <ResetButtons VisibleButtons="Game.SettingsBase.VisibleResetButtons"
+        <ResetButtons VisibleButtons="Game.Settings.VisibleResetButtons"
                       ResetGame="ResetGame"
                       ResetScore="ResetScore"
                       ResetSets="ResetSets"
                       ResetTimeouts="ResetTimeouts"
-                      ResetTimer="ResetTimer"/>
+                      ResetTimer="ResetTimer"
+                      ResetNames="ResetNames"/>
 
-        <ToggleButtons VisibleButtons="Game.SettingsBase.VisibleToggleButtons"
+        <ToggleButtons VisibleButtons="Game.Settings.VisibleToggleButtons"
                        ToggleShowServing="ToggleShowServing"
                        ToggleShowSets="ToggleShowSets"
                        ToggleShowTimeouts="ToggleShowTimeouts"
@@ -29,7 +30,7 @@
                        ToggleShowTeamNames="ToggleShowTeamNames"
                        ToggleManualScoring="ToggleManualScoring"
                        ToggleShowTimer="ToggleShowTimer"
-                       SettingsBase="Game.SettingsBase"/>
+                       SettingsBase="Game.Settings"/>
 
         <BestOfSelector IsVisible="Game.Score.UsesBestOf" Game="Game" BestOfValueChanged="BestOfValueChanged"/>
     </ChildContent>
@@ -43,6 +44,7 @@
     [Parameter] public required EventCallback ResetTimeouts { get; set; }
     [Parameter] public required EventCallback ResetTimer { get; set; }
     [Parameter] public required EventCallback ResetColorsClicked { get; set; }
+    [Parameter] public required EventCallback ResetNames { get; set; }
     [Parameter] public required EventCallback ToggleShowServing { get; set; }
     [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }

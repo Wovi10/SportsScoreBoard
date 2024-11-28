@@ -1,4 +1,6 @@
-﻿namespace SportsScoreBoard.Models;
+﻿using SportsScoreBoard.Models.Enums;
+
+namespace SportsScoreBoard.Models;
 
 public abstract class SettingsBase
 {

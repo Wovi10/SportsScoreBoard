@@ -38,6 +38,9 @@ public class ScoreBase(bool usesSets = false, bool usesBestOf = false)
         if (HomePoints == 0)
             return;
 
+        if (HomePoints - amount < 0)
+            amount = HomePoints;
+
         Increment(Team.Home, amount * -1);
     }
 
@@ -45,6 +48,9 @@ public class ScoreBase(bool usesSets = false, bool usesBestOf = false)
     {
         if (AwayPoints == 0)
             return;
+
+        if (AwayPoints - amount < 0)
+            amount = AwayPoints;
 
         Increment(Team.Away, amount * -1);
     }

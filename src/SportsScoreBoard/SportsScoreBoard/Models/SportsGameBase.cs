@@ -7,27 +7,29 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
     public abstract TeamBase Home { get; }
     public abstract TeamBase Away { get; }
     private bool GameHasFinished { get; set; }
-    public virtual SettingsBase SettingsBase { get; }
+    public virtual SettingsBase Settings { get; }
     public ScoreBase Score { get; } = new(usesSets, usesBestOf);
+    public virtual int[] ScoreAmounts { get; } = {1};
+    public virtual int DefaultScoreAmount => 1;
 
-    public void IncrementHome()
+    public void IncrementHome(int amount = 1)
     {
         if (GameHasFinished)
             return;
 
-        Score.Increment(Team.Home);
+        Score.Increment(Team.Home, amount);
         SetHomeServing();
 
         if (Score.HomeWon is not null)
             GameHasFinished = true;
     }
 
-    public void IncrementAway()
+    public void IncrementAway(int amount = 1)
     {
         if (GameHasFinished)
             return;
 
-        Score.Increment(Team.Away);
+        Score.Increment(Team.Away, amount);
         SetAwayServing();
 
         if (Score.HomeWon is not null)
@@ -46,20 +48,20 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
         Away.IsServing = true;
     }
 
-    public void DecrementAway()
+    public void DecrementAway(int amount = 1)
     {
         if (GameHasFinished)
             return;
 
-        Score.DecrementAway();
+        Score.DecrementAway(amount);
     }
 
-    public void DecrementHome()
+    public void DecrementHome(int amount = 1)
     {
         if (GameHasFinished)
             return;
 
-        Score.DecrementHome();
+        Score.DecrementHome(amount);
     }
 
     public void ChangeColor(Team team, ComponentColor background, MudColor mudColor)
@@ -121,13 +123,13 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
         ResetServingTeam();
     }
 
-    public void ResetServingTeam()
+    private void ResetServingTeam()
     {
         Home.IsServing = false;
         Away.IsServing = false;
     }
 
-    private void ResetNames()
+    public void ResetNames()
     {
         Home.ResetName();
         Away.ResetName();
@@ -140,10 +142,10 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
     }
 
     public void ToggleShowServing()
-        => SettingsBase.ToggleShowServing();
+        => Settings.ToggleShowServing();
 
     public void ToggleShowSets()
-        => SettingsBase.ToggleShowSets();
+        => Settings.ToggleShowSets();
 
     public void BestOfChanged(int newBestOf)
     {
@@ -152,18 +154,18 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
     }
 
     public void ToggleShowTimeouts()
-        => SettingsBase.ToggleShowTimeouts();
+        => Settings.ToggleShowTimeouts();
 
     public void ToggleManualScoring()
-        => SettingsBase.ToggleShowManualScoring();
+        => Settings.ToggleShowManualScoring();
 
     public void ToggleShowPreviousSets()
 
-        => SettingsBase.ToggleShowPreviousSets();
+        => Settings.ToggleShowPreviousSets();
 
     public void ToggleShowTeamNames()
-        => SettingsBase.ToggleShowTeamNames();
+        => Settings.ToggleShowTeamNames();
 
     public void ToggleShowTimer()
-        => SettingsBase.ToggleShowTimer();
+        => Settings.ToggleShowTimer();
 }
