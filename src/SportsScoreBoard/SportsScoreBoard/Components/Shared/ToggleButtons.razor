@@ -3,32 +3,32 @@
 @using SportsScoreBoard.Models.Volleyball
 <MudStack Row="true" Wrap="Wrap.Wrap" Class="mb-3">
     <SettingsButton OnClick="OnShowServeClick"
-                    Active="Settings.ShowServing"
+                    Active="SettingsBase.ShowServing"
                     Text="Show serving team"
                     Visible="ServeVisible"
                     />
     <SettingsButton OnClick="OnShowSetsClick"
-                    Active="Settings.ShowSets"
+                    Active="SettingsBase.ShowSets"
                     Text="Show sets"
                     Visible="SetsVisible"/>
     <SettingsButton OnClick="OnShowTimeoutsClick"
-                    Active="Settings.ShowTimeouts"
+                    Active="SettingsBase.ShowTimeouts"
                     Text="Show timeouts"
                     Visible="TimeoutsVisible"/>
     <SettingsButton OnClick="OnShowPreviousSetsClick"
-                    Active="Settings.ShowPreviousSets"
+                    Active="SettingsBase.ShowPreviousSets"
                     Text="Show previous set scores"
                     Visible="PreviousSetsVisible"/>
     <SettingsButton OnClick="OnShowManualScoresClick"
-                    Active="Settings.ShowManualScoring"
+                    Active="SettingsBase.ShowManualScoring"
                     Text="Show manual scoring"
                     Visible="ManualScoreVisible"/>
     <SettingsButton OnClick="OnShowTeamNamesClick"
-                    Active="Settings.ShowTeamNames"
+                    Active="SettingsBase.ShowTeamNames"
                     Text="Show team names"
                     Visible="TeamNamesVisible"/>
     <SettingsButton OnClick="OnShowTimerClick"
-                    Active="Settings.ShowTimer"
+                    Active="SettingsBase.ShowTimer"
                     Text="Show timer"
                     Visible="TimerVisible"/>
 </MudStack>
@@ -36,7 +36,7 @@
 @code {
 
     [Parameter] public required Models.ToggleButtons[] VisibleButtons { get; set; }
-    [Parameter] public required Settings Settings { get; set; }
+    [Parameter] public required SettingsBase SettingsBase { get; set; }
     [Parameter] public required EventCallback ToggleShowServing { get; set; }
     [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }

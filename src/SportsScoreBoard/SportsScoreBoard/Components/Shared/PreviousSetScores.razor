@@ -1,5 +1,6 @@
-﻿@using SportsScoreBoard.Models.Volleyball
-@if (Settings.ShowPreviousSets && SetScores?.Count > 0)
+﻿@using SportsScoreBoard.Models
+
+@if (IsVisible && SetScores.Count > 0)
 {
     <MudStack Row="true" Class="mx-5 justify-center" Wrap="Wrap.Wrap" AlignItems="AlignItems.Center">
         @foreach(var setScore in SetScores)
@@ -11,7 +12,8 @@
     </MudStack>
 }
 
-@code{
-    [Parameter] public required List<SetScore>? SetScores { get; set; }
-    [Parameter] public required VolleyballSettings Settings { get; set; }
+@code {
+    [Parameter] public required bool IsVisible { get; set; }
+    [Parameter] public required SettingsBase SettingsBase { get; set; }
+    [Parameter] public required List<SetScore> SetScores { get; set; }
 }

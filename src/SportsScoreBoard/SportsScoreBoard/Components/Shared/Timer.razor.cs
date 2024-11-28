@@ -6,7 +6,7 @@ namespace SportsScoreBoard.Components.Shared;
 
 public partial class Timer : IDisposable
 {
-    [Parameter] public required Settings Settings { get; set; }
+    [Parameter] public required bool IsVisible { get; set; }
     [Inject] private RecurringOperationsManager Recurop { get; set; }
     private RecurringOperation _timerOperation;
     TimeSpan _displayTime = TimeSpan.Zero;

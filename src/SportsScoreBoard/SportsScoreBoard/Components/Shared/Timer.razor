@@ -1,4 +1,4 @@
-﻿@if (Settings.ShowTimer)
+﻿@if (IsVisible)
 {
     <MudText Typo="Typo.h3" Align="Align.Center" @onclick="OnTimerStateChanged" Style="cursor: pointer">
         <MudIconButton Icon="@(_timerOperation.IsRecurring ? Icons.Material.Filled.Pause : Icons.Material.Filled.PlayArrow)"

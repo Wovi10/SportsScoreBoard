@@ -1,6 +1,6 @@
 ﻿using MudBlazor;
 
-namespace SportsScoreBoard.Models.StaticValues;
+namespace SportsScoreBoard.Models;
 
 public static class StaticValues
 {
@@ -12,4 +12,7 @@ public static class StaticValues
         };
 
     internal record SportInfo(string Sport, string Icon, string Route);
+
+    public static readonly string DefaultHomeName = "Home";
+    public static readonly string DefaultAwayName = "Away";
 }

@@ -1,0 +1,14 @@
+﻿@if (IsVisible)
+{
+    <MudText Typo="Typo.h3"
+             Class="d-flex"
+             Style="@Style">
+        @Sets
+    </MudText>
+}
+
+@code {
+    [Parameter] public required bool IsVisible { get; set; }
+    [Parameter] public required string Style { get; set; }
+    [Parameter] public required int Sets { get; set; }
+}

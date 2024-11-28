@@ -1,6 +1,5 @@
 ﻿@using MudBlazor.Utilities
-@using SportsScoreBoard.Models.Volleyball
-@using SportsScoreBoard.Components.Pages.Sports.Shared
+@using SportsScoreBoard.Models
 
 <MudExpansionPanel Class="flex-end" Expanded="true">
     <TitleContent>
@@ -15,14 +14,14 @@
                        AwayTextColorChanged="AwayTextColorChanged"
                        ResetColorsClicked="ResetColorsClicked"/>
 
-        <ResetButtons VisibleButtons="Game.Settings.VisibleResetButtons"
+        <ResetButtons VisibleButtons="Game.SettingsBase.VisibleResetButtons"
                       ResetGame="ResetGame"
                       ResetScore="ResetScore"
                       ResetSets="ResetSets"
                       ResetTimeouts="ResetTimeouts"
                       ResetTimer="ResetTimer"/>
 
-        <ToggleButtons VisibleButtons="Game.Settings.VisibleToggleButtons"
+        <ToggleButtons VisibleButtons="Game.SettingsBase.VisibleToggleButtons"
                        ToggleShowServing="ToggleShowServing"
                        ToggleShowSets="ToggleShowSets"
                        ToggleShowTimeouts="ToggleShowTimeouts"
@@ -30,15 +29,14 @@
                        ToggleShowTeamNames="ToggleShowTeamNames"
                        ToggleManualScoring="ToggleManualScoring"
                        ToggleShowTimer="ToggleShowTimer"
-                       Settings="Game.Settings"/>
+                       SettingsBase="Game.SettingsBase"/>
 
-        <BestOfSelector Game="Game" BestOfValueChanged="BestOfValueChanged"/>
+        <BestOfSelector IsVisible="Game.Score.UsesBestOf" Game="Game" BestOfValueChanged="BestOfValueChanged"/>
     </ChildContent>
 </MudExpansionPanel>
 
-@code
-{
-    [Parameter] public required VolleyballGame Game { get; set; }
+@code {
+    [Parameter] public required SportsGameBase Game { get; set; }
     [Parameter] public required EventCallback ResetGame { get; set; }
     [Parameter] public required EventCallback ResetScore { get; set; }
     [Parameter] public required EventCallback ResetSets { get; set; }
@@ -48,9 +46,9 @@
     [Parameter] public required EventCallback ToggleShowServing { get; set; }
     [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }
+    [Parameter] public required EventCallback ToggleManualScoring { get; set; }
     [Parameter] public required EventCallback ToggleShowPreviousSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTeamNames { get; set; }
-    [Parameter] public required EventCallback ToggleManualScoring { get; set; }
     [Parameter] public required EventCallback ToggleShowTimer { get; set; }
     [Parameter] public required EventCallback<int> BestOfValueChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> HomeColorChanged { get; set; }
@@ -60,7 +58,7 @@
 
     private Customization _customization;
 
-    public void RefreshMe() 
+    public void RefreshMe()
         => StateHasChanged();
 
     public async Task ResetColors()

@@ -1,41 +1,33 @@
-﻿@using SportsScoreBoard.Models.Handball
-@using SportsScoreBoard.Components.Pages.Sports.Shared
-
+﻿@using SportsScoreBoard.Models
 <div>
-    <MudCard @onclick="OnScoredClick" Class="m-0 p-0">
+    <MudCard @onclick="IncrementScore" Class="m-0 p-0">
         <MudCardContent Style="@BackgroundStyle">
             <MudStack>
                 <ScoreText Score="Score"
                            ColorStyle="@ForegroundColorStyle"/>
+                <ServingIcon IsVisible="SettingsBase.ShowServing && Team.IsServing"
+                             IsHome="Team.IsHome"
+                             ColorStyle="@ForegroundColorStyle"/>
             </MudStack>
         </MudCardContent>
     </MudCard>
-    @if (Settings.ShowManualScoring)
-    {
-        <ManualScoring Score="Score"
-                       IncrementScore="OnScoredClick"
-                       DecrementScore="OnDecrementScoreClick"
-                       IsHome="Team.IsHome"/>
-    }
+    <ManualScoring IsVisible="SettingsBase.ShowManualScoring"
+                   Score="Score"
+                   IncrementScore="IncrementScore"
+                   DecrementScore="DecrementScore"
+                   IsHome="Team.IsHome"/>
 </div>
 
-@code{
+@code {
 
     [Parameter] public required EventCallback IncrementScore { get; set; }
     [Parameter] public required EventCallback DecrementScore { get; set; }
-    [Parameter] public required HandballTeam Team { get; set; }
-    [Parameter] public required HandballSettings Settings { get; set; }
+    [Parameter] public required TeamBase Team { get; set; }
+    [Parameter] public required SettingsBase SettingsBase { get; set; }
     [Parameter] public required int Score { get; set; }
 
     private bool BackgroundColorIsSet => Team.Colors.Background is not null;
     private string BackgroundStyle => BackgroundColorIsSet ? $"background-color: {Team.Colors.Background}" : string.Empty;
     private bool ForegroundColorIsSet => Team.Colors.Foreground is not null;
     private string ForegroundColorStyle => ForegroundColorIsSet ? $"color: {Team.Colors.Foreground}" : string.Empty;
-
-    private async Task OnScoredClick()
-        => await IncrementScore.InvokeAsync();
-
-    private async Task OnDecrementScoreClick()
-        => await DecrementScore.InvokeAsync();
-
 }

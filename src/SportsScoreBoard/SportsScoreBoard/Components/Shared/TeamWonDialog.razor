@@ -1,4 +1,4 @@
-﻿@using SportsScoreBoard.Models.Volleyball
+﻿@using SportsScoreBoard.Models
 <MudDialog @ref="_thisModal">
     <TitleContent>
         <MudText Typo="Typo.h1">@Team.Name has won!</MudText>
@@ -10,7 +10,7 @@
 </MudDialog>
 
 @code {
-    [Parameter] public required VolleyballTeam Team { get; set; }
+    [Parameter] public required TeamBase Team { get; set; }
     [Parameter] public required EventCallback ResetGame { get; set; }
 
     private MudDialog _thisModal = default!;
