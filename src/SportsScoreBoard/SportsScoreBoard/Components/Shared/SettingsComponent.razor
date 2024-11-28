@@ -14,14 +14,14 @@
                        AwayTextColorChanged="AwayTextColorChanged"
                        ResetColorsClicked="ResetColorsClicked"/>
 
-        <ResetButtons VisibleButtons="Game.Settings.VisibleResetButtons"
+        <ResetButtons VisibleButtons="Game.SettingsBase.VisibleResetButtons"
                       ResetGame="ResetGame"
                       ResetScore="ResetScore"
                       ResetSets="ResetSets"
                       ResetTimeouts="ResetTimeouts"
                       ResetTimer="ResetTimer"/>
 
-        <ToggleButtons VisibleButtons="Game.Settings.VisibleToggleButtons"
+        <ToggleButtons VisibleButtons="Game.SettingsBase.VisibleToggleButtons"
                        ToggleShowServing="ToggleShowServing"
                        ToggleShowSets="ToggleShowSets"
                        ToggleShowTimeouts="ToggleShowTimeouts"
@@ -29,7 +29,7 @@
                        ToggleShowTeamNames="ToggleShowTeamNames"
                        ToggleManualScoring="ToggleManualScoring"
                        ToggleShowTimer="ToggleShowTimer"
-                       Settings="Game.Settings"/>
+                       SettingsBase="Game.SettingsBase"/>
 
         <BestOfSelector IsVisible="Game.Score.UsesBestOf" Game="Game" BestOfValueChanged="BestOfValueChanged"/>
     </ChildContent>

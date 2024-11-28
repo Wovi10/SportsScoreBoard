@@ -2,9 +2,7 @@
 
 public class VolleyballGame(): SportsGameBase(usesSets:true, usesBestOf: true)
 {
-    private const string DefaultHomeName = "Home";
-    private const string DefaultAwayName = "Away";
-    public override VolleyballSettings Settings { get; } = new();
-    public override TeamBase Home { get; } = new(DefaultHomeName, true);
-    public override TeamBase Away { get; } = new(DefaultAwayName, false);
+    public override VolleyballSettingsBase SettingsBase { get; } = new();
+    public override TeamBase Home { get; } = new(StaticValues.DefaultHomeName, true);
+    public override TeamBase Away { get; } = new(StaticValues.DefaultAwayName, false);
 }

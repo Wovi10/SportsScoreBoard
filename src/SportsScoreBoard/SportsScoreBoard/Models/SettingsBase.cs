@@ -1,6 +1,6 @@
 ﻿namespace SportsScoreBoard.Models;
 
-public abstract class Settings
+public abstract class SettingsBase
 {
     public abstract ResetButtons[] VisibleResetButtons { get; }
     public abstract ToggleButtons[] VisibleToggleButtons { get; }

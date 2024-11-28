@@ -1,6 +1,6 @@
 ﻿namespace SportsScoreBoard.Models.Volleyball;
 
-public class VolleyballSettings : Settings
+public class VolleyballSettingsBase : SettingsBase
 {
     public override ResetButtons[] VisibleResetButtons { get; } =
         {ResetButtons.Game, ResetButtons.Score, ResetButtons.Sets, ResetButtons.Timeouts};
@@ -8,7 +8,7 @@ public class VolleyballSettings : Settings
     {ToggleButtons.Serving, ToggleButtons.Sets, ToggleButtons.Timeouts, ToggleButtons.ManualScoring,
         ToggleButtons.PreviousSets, ToggleButtons.TeamNames, ToggleButtons.Timer};
 
-    public VolleyballSettings()
+    public VolleyballSettingsBase()
     {
         ToggleShowServing();
         ToggleShowSets();

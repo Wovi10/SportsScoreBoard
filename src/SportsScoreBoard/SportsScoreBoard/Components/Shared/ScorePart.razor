@@ -5,13 +5,13 @@
             <MudStack>
                 <ScoreText Score="Score"
                            ColorStyle="@ForegroundColorStyle"/>
-                <ServingIcon IsVisible="Settings.ShowServing && Team.IsServing"
+                <ServingIcon IsVisible="SettingsBase.ShowServing && Team.IsServing"
                              IsHome="Team.IsHome"
                              ColorStyle="@ForegroundColorStyle"/>
             </MudStack>
         </MudCardContent>
     </MudCard>
-    <ManualScoring IsVisible="Settings.ShowManualScoring"
+    <ManualScoring IsVisible="SettingsBase.ShowManualScoring"
                    Score="Score"
                    IncrementScore="IncrementScore"
                    DecrementScore="DecrementScore"
@@ -23,7 +23,7 @@
     [Parameter] public required EventCallback IncrementScore { get; set; }
     [Parameter] public required EventCallback DecrementScore { get; set; }
     [Parameter] public required TeamBase Team { get; set; }
-    [Parameter] public required Settings Settings { get; set; }
+    [Parameter] public required SettingsBase SettingsBase { get; set; }
     [Parameter] public required int Score { get; set; }
 
     private bool BackgroundColorIsSet => Team.Colors.Background is not null;

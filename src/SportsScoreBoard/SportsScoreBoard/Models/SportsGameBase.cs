@@ -7,7 +7,7 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
     public abstract TeamBase Home { get; }
     public abstract TeamBase Away { get; }
     private bool GameHasFinished { get; set; }
-    public virtual Settings Settings { get; }
+    public virtual SettingsBase SettingsBase { get; }
     public ScoreBase Score { get; } = new(usesSets, usesBestOf);
 
     public void IncrementHome()
@@ -140,10 +140,10 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
     }
 
     public void ToggleShowServing()
-        => Settings.ToggleShowServing();
+        => SettingsBase.ToggleShowServing();
 
     public void ToggleShowSets()
-        => Settings.ToggleShowSets();
+        => SettingsBase.ToggleShowSets();
 
     public void BestOfChanged(int newBestOf)
     {
@@ -152,18 +152,18 @@ public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = fa
     }
 
     public void ToggleShowTimeouts()
-        => Settings.ToggleShowTimeouts();
+        => SettingsBase.ToggleShowTimeouts();
 
     public void ToggleManualScoring()
-        => Settings.ToggleShowManualScoring();
+        => SettingsBase.ToggleShowManualScoring();
 
     public void ToggleShowPreviousSets()
 
-        => Settings.ToggleShowPreviousSets();
+        => SettingsBase.ToggleShowPreviousSets();
 
     public void ToggleShowTeamNames()
-        => Settings.ToggleShowTeamNames();
+        => SettingsBase.ToggleShowTeamNames();
 
     public void ToggleShowTimer()
-        => Settings.ToggleShowTimer();
+        => SettingsBase.ToggleShowTimer();
 }

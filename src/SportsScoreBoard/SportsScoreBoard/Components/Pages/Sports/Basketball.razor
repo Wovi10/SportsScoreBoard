@@ -1,0 +1,10 @@
+﻿@page "/basketball"
+@using SportsScoreBoard.Components.Shared
+@using SportsScoreBoard.Models.Basketball
+
+<GeneralSport Title="Basketball"
+              Game="@Game"/>
+
+@code {
+    private static BasketballGame Game { get; } = new();
+}
