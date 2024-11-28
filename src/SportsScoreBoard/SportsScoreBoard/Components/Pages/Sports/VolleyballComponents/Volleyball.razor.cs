@@ -25,40 +25,30 @@ public partial class Volleyball : ComponentBase
         Game.Home.IsServing = true;
     }
 
-    private static void ResetGame()
+    private async Task ResetGame()
     {
         Game.Reset();
+        _volleyballScoreboard.ResetTimer();
+        await _volleyballSettings.ResetColors();
     }
 
     public static void ResetScore()
-    {
-        Game.ResetScore();
-    }
-    
+        => Game.ResetScore();
+
     public static void ResetSets()
-    {
-        Game.ResetSets();
-    }
-    
+        => Game.ResetSets();
+
     public static void ResetTimeouts()
-    {
-        Game.ResetTimeouts();
-    }
-    
+        => Game.ResetTimeouts();
+
     public static void ToggleShowServing()
-    {
-        Game.ToggleShowServing();
-    }
-    
+        => Game.ToggleShowServing();
+
     public static void ToggleShowSets()
-    {
-        Game.ToggleShowSets();
-    }
-    
+        => Game.ToggleShowSets();
+
     public static void ToggleShowTimeouts()
-    {
-        Game.ToggleShowTimeouts();
-    }
+        => Game.ToggleShowTimeouts();
 
     public async Task IncrementHome()
     {
@@ -67,9 +57,7 @@ public partial class Volleyball : ComponentBase
     }
     
     private static void DecrementHome()
-    {
-        Game.DecrementHome();
-    }
+        => Game.DecrementHome();
 
     public async Task IncrementAway()
     {
@@ -78,19 +66,13 @@ public partial class Volleyball : ComponentBase
     }
 
     private static void DecrementAway()
-    {
-        Game.DecrementAway();
-    }
-    
+        => Game.DecrementAway();
+
     public static void ChangeHomeName(string name)
-    {
-        Game.ChangeHomeName(name);
-    }
-    
+        => Game.ChangeHomeName(name);
+
     public static void ChangeAwayName(string name)
-    {
-        Game.ChangeAwayName(name);
-    }
+        => Game.ChangeAwayName(name);
 
     private void StateChange()
     {
@@ -100,24 +82,16 @@ public partial class Volleyball : ComponentBase
     }
 
     private static void ToggleManualScoring()
-    {
-        Game.ToggleManualScoring();
-    }
+        => Game.ToggleManualScoring();
 
     private static void ToggleShowPreviousSets()
-    {
-        Game.ToggleShowPreviousSets();
-    }
+        => Game.ToggleShowPreviousSets();
 
     private static void ToggleShowTeamNames()
-    {
-        Game.ToggleShowTeamNames();
-    }
+        => Game.ToggleShowTeamNames();
 
     private static void ToggleShowTimer()
-    {
-        Game.ToggleShowTimer();
-    }
+        => Game.ToggleShowTimer();
 
     private async Task BestOfValueChanged(int newValue)
     {
@@ -149,11 +123,8 @@ public partial class Volleyball : ComponentBase
         StateChange();
     }
 
-    private void ResetColors()
-    {
-        Game.ResetColors();
-        StateChange();
-    }
+    private static void ResetColors()
+        => Game.ResetColors();
 
     private void ResetTimer()
         => _volleyballScoreboard.ResetTimer();

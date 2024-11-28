@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MudBlazor.Utilities;
 using SportsScoreBoard.Components.Layout;
+using SportsScoreBoard.Models;
 using SportsScoreBoard.Models.Handball;
 
 namespace SportsScoreBoard.Components.Pages.Sports.HandballComponents;
@@ -13,16 +15,17 @@ public partial class Handball : ComponentBase
     protected override void OnInitialized()
         => MainLayout.SubpageTitle = "Handball";
 
-    private void ResetGameClicked()
+    private async Task ResetGameClicked()
     {
         Game.ResetGame();
         _handballScoreboard.ResetTimer();
+        await _handballSettings.ResetColors();
     }
 
-    private void ResetScoreClicked()
+    private static void ResetScoreClicked()
         => Game.ResetScore();
 
-    private void ResetTimeoutsClicked()
+    private static void ResetTimeoutsClicked()
         => Game.ResetTimeouts();
 
     private void ResetTimerClicked()
@@ -57,4 +60,31 @@ public partial class Handball : ComponentBase
 
     public static void DecrementAway()
         => Game.DecrementAway();
+
+    private void OnHomeBackgroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Home, ComponentColor.Background, mudColor);
+        StateHasChanged();
+    }
+
+    private void OnAwayBackgroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Away, ComponentColor.Background, mudColor);
+        StateHasChanged();
+    }
+
+    private void OnHomeForegroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Home, ComponentColor.Foreground, mudColor);
+        StateHasChanged();
+    }
+
+    private void OnAwayForegroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Away, ComponentColor.Foreground, mudColor);
+        StateHasChanged();
+    }
+
+    private void ResetColors()
+        => Game.ResetColors();
 }

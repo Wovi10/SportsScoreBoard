@@ -7,12 +7,13 @@
         <MudText Typo="Typo.h4">Settings</MudText>
     </TitleContent>
     <ChildContent>
-        <Customization Game="Game"
+        <Customization @ref="_customization"
+                       Game="Game"
                        HomeColorChanged="HomeColorChanged"
                        AwayColorChanged="AwayColorChanged"
                        HomeTextColorChanged="HomeTextColorChanged"
                        AwayTextColorChanged="AwayTextColorChanged"
-                       ResetColors="ResetColors"/>
+                       ResetColorsClicked="ResetColorsClicked"/>
 
         <ResetButtons VisibleButtons="Game.Settings.VisibleResetButtons"
                       ResetGame="ResetGame"
@@ -42,8 +43,8 @@
     [Parameter] public required EventCallback ResetScore { get; set; }
     [Parameter] public required EventCallback ResetSets { get; set; }
     [Parameter] public required EventCallback ResetTimeouts { get; set; }
-    [Parameter] public required EventCallback ResetColors { get; set; }
     [Parameter] public required EventCallback ResetTimer { get; set; }
+    [Parameter] public required EventCallback ResetColorsClicked { get; set; }
     [Parameter] public required EventCallback ToggleShowServing { get; set; }
     [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }
@@ -57,6 +58,11 @@
     [Parameter] public required EventCallback<MudColor> HomeTextColorChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> AwayTextColorChanged { get; set; }
 
+    private Customization _customization;
+
     public void RefreshMe() 
         => StateHasChanged();
+
+    public async Task ResetColors()
+        => await _customization.ResetColors();
 }

@@ -1,12 +1,12 @@
-﻿using MudBlazor.Utilities;
-
-namespace SportsScoreBoard.Models.Volleyball;
+﻿namespace SportsScoreBoard.Models.Volleyball;
 
 public class VolleyballGame : SportsGameBase
 {
+    private const string DefaultHomeName = "Home";
+    private const string DefaultAwayName = "Away";
     public VolleyballSettings Settings { get; set; } = new();
-    public new VolleyballTeam Home { get; set; } = new("Home", true);
-    public new VolleyballTeam Away { get; set; } = new("Away", false);
+    public override VolleyballTeam Home { get; } = new(DefaultHomeName, true);
+    public override VolleyballTeam Away { get; } = new(DefaultAwayName, false);
     public new VolleyballScore Score { get; set; } = new();
     public int BestOf { get; private set; } = 5;
 
@@ -71,6 +71,7 @@ public class VolleyballGame : SportsGameBase
         ResetScore();
         ResetSets();
         ResetServingTeam();
+        ResetNames();
     }
 
     public override void ResetScore()
@@ -102,6 +103,12 @@ public class VolleyballGame : SportsGameBase
     {
         Home.IsServing = false;
         Away.IsServing = false;
+    }
+
+    private void ResetNames()
+    {
+        Home.ResetName();
+        Away.ResetName();
     }
 
     public void ResetTimeouts()
@@ -143,23 +150,4 @@ public class VolleyballGame : SportsGameBase
 
     public void ToggleShowTimer()
         => Settings.ToggleShowTimer();
-
-    public void ResetColors()
-    {
-        Home.Colors.ResetColors();
-        Away.Colors.ResetColors();
-    }
-
-    public void ChangeColor(Team team, ComponentColor background, MudColor mudColor)
-    {
-        switch (team)
-        {
-            case Team.Home:
-                Home.ChangeColor(background, mudColor);
-                break;
-            case Team.Away:
-                Away.ChangeColor(background, mudColor);
-                break;
-        }
-    }
 }

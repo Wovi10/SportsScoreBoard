@@ -1,26 +1,37 @@
 ﻿@using MudBlazor.Utilities
-@using SportsScoreBoard.Models.Volleyball
 @using SportsScoreBoard.Components.Shared
 @using SportsScoreBoard.Models
 <MudStack Row="true" Wrap="Wrap.Wrap" Class="mb-3">
-    <ColorPicker FieldLabel="Home background"
-                 ColourChanged="OnHomeColorChanged"
-                 Colour="HomeColors.Background"/>
-    <ColorPicker FieldLabel="Home text"
-                 ColourChanged="OnHomeTextColorChanged"
-                 Colour="HomeColors.Foreground"/>
-    <ColorPicker FieldLabel="Away background"
-                 ColourChanged="OnAwayColorChanged"
-                 Colour="AwayColors.Background"/>
-    <ColorPicker FieldLabel="Away text"
-                 ColourChanged="OnAwayTextColorChanged"
-                 Colour="AwayColors.Foreground"/>
-    <SettingsButton OnClick="OnResetColorsClick" Text="Reset colours" />
+    <ColorPicker @ref="_homeBackgroundPicker"
+                 ColourChanged="HomeColorChanged"
+                 Colour="HomeColors.Background"
+                 FieldLabel="Home background"
+                 ShowBackgroundColor="true"
+                 Rounded="true"/>
+    <ColorPicker @ref="_homeForegroundPicker"
+                 FieldLabel="Home text"
+                 ColourChanged="HomeTextColorChanged"
+                 Colour="HomeColors.Foreground"
+                 ShowBackgroundColor="true"
+                 Rounded="true"/>
+    <ColorPicker @ref="_awayBackgroundPicker"
+                 FieldLabel="Away background"
+                 ColourChanged="AwayColorChanged"
+                 Colour="AwayColors.Background"
+                 ShowBackgroundColor="true"
+                 Rounded="true"/>
+    <ColorPicker @ref="_awayForegroundPicker"
+                 FieldLabel="Away text"
+                 ColourChanged="AwayTextColorChanged"
+                 Colour="AwayColors.Foreground"
+                 ShowBackgroundColor="true"
+                 Rounded="true"/>
+    <SettingsButton OnClick="ResetColors" Text="Reset colours"/>
 </MudStack>
 
 @code {
-    [Parameter] public required VolleyballGame Game { get; set; }
-    [Parameter] public required EventCallback ResetColors { get; set; }
+    [Parameter] public required SportsGameBase Game { get; set; }
+    [Parameter] public required EventCallback ResetColorsClicked { get; set; }
     [Parameter] public required EventCallback<MudColor> HomeColorChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> AwayColorChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> HomeTextColorChanged { get; set; }
@@ -29,19 +40,18 @@
     private ColorPair HomeColors => Game.Home.Colors;
     private ColorPair AwayColors => Game.Away.Colors;
 
-    private async Task OnHomeColorChanged(MudColor mudColor)
-        => await HomeColorChanged.InvokeAsync(mudColor);
+    private ColorPicker _homeBackgroundPicker;
+    private ColorPicker _homeForegroundPicker;
+    private ColorPicker _awayBackgroundPicker;
+    private ColorPicker _awayForegroundPicker;
 
-    private async Task OnAwayColorChanged(MudColor mudColor)
-        => await AwayColorChanged.InvokeAsync(mudColor);
+    public async Task ResetColors()
+    {
+        _homeBackgroundPicker.ResetMe();
+        _homeForegroundPicker.ResetMe();
+        _awayForegroundPicker.ResetMe();
+        _awayBackgroundPicker.ResetMe();
 
-    private async Task OnHomeTextColorChanged(MudColor mudColor)
-        => await HomeTextColorChanged.InvokeAsync(mudColor);
-
-    private async Task OnAwayTextColorChanged(MudColor mudColor)
-        => await AwayTextColorChanged.InvokeAsync(mudColor);
-
-    private async Task OnResetColorsClick(MouseEventArgs obj)
-        => await ResetColors.InvokeAsync();
-
+        await ResetColorsClicked.InvokeAsync();
+    }
 }

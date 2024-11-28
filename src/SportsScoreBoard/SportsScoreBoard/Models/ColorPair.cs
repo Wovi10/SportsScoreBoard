@@ -7,10 +7,10 @@ public class ColorPair
     public MudColor? Background { get; private set; }
     public MudColor? Foreground { get; private set; }
 
-    public void ChangeBackgroundColor(MudColor mudColor)
+    private void ChangeBackgroundColor(MudColor mudColor)
         => Background = mudColor;
 
-    public void ChangeForegroundColor(MudColor mudColor)
+    private void ChangeForegroundColor(MudColor mudColor)
         => Foreground = mudColor;
 
     public void ResetColors()
@@ -29,6 +29,8 @@ public class ColorPair
             case ComponentColor.Foreground:
                 ChangeForegroundColor(mudColor);
                 break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(component), component, null);
         }
     }
 }

@@ -1,16 +1,22 @@
-﻿using SportsScoreBoard.Components.Pages.Sports.HandballComponents;
-
-namespace SportsScoreBoard.Models.Handball;
+﻿namespace SportsScoreBoard.Models.Handball;
 
 public class HandballGame : SportsGameBase
 {
-    public HandballTeam Home { get; } = new("Home", true);
-    public HandballTeam Away { get; } = new("Away", false);
-    public HandballScore Score { get; } = new();
+    private const string DefaultHomeName = "Home";
+    private const string DefaultAwayName = "Away";
     public HandballSettings Settings { get; } = new();
+    public override HandballTeam Home { get; } = new(DefaultHomeName, true);
+    public override HandballTeam Away { get; } = new(DefaultAwayName, false);
+    public HandballScore Score { get; } = new();
 
     public override void ResetScore()
         => Score.ResetPoints();
+
+    private void ResetNames()
+    {
+        Home.ResetName();
+        Away.ResetName();
+    }
 
     public void IncrementHome()
         => Score.Increment(Team.Home);
@@ -44,6 +50,7 @@ public class HandballGame : SportsGameBase
     {
         ResetScore();
         ResetTimeouts();
+        ResetNames();
         GameHasFinished = false;
     }
 

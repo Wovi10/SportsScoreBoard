@@ -1,17 +1,17 @@
 ﻿@using MudBlazor.Utilities
 <MudColorPicker @ref="_colorPicker"
                 ShowToolbar="true"
-                PickerVariant="PickerVariant.Dialog"
-                ColorPickerView="ColorPickerView.GridCompact"
-                ColorPickerMode="ColorPickerMode.RGB"
+                PickerVariant="PickerVariant"
+                ColorPickerView="ColorPickerView"
+                ColorPickerMode="ColorPickerMode"
                 PickerOpened="OnPickerOpened"
                 PickerClosed="OnPickerClosed"
-                ShowAlpha="false"
-                ShowInputs="false"
-                ShowSliders="false"
-                ShowPreview="true"
-                Rounded="true"
-                Style="@(ShowBackgroundColor ? $"background-color: {_colorValue}" : "")"
+                ShowAlpha="ShowAlpha"
+                ShowInputs="ShowInputs"
+                ShowSliders="ShowSliders"
+                ShowPreview="ShowPreview"
+                Rounded="Rounded"
+                Style="@(ShouldShowBackground ? $"background-color: {_colorValue}" : "")"
                 Label="@FieldLabel"
                 bind-Value="@Colour"
                 ValueChanged="OnColorChanged"/>
@@ -19,12 +19,21 @@
 @code {
     [Parameter] public required EventCallback<MudColor> ColourChanged { get; set; }
     [Parameter] public required string FieldLabel { get; set; }
+    [Parameter] public PickerVariant PickerVariant { get; set; } = PickerVariant.Dialog;
+    [Parameter] public ColorPickerView ColorPickerView { get; set; } = ColorPickerView.GridCompact;
+    [Parameter] public ColorPickerMode ColorPickerMode { get; set; } = ColorPickerMode.RGB;
+    [Parameter] public bool ShowAlpha { get; set; }
+    [Parameter] public bool ShowInputs { get; set; }
+    [Parameter] public bool ShowSliders { get; set; }
+    [Parameter] public bool ShowPreview { get; set; }
+    [Parameter] public bool Rounded { get; set; }
+    [Parameter] public bool ShowBackgroundColor { get; set; }
     [Parameter] public MudColor? Colour { get; set; }
 
     private MudColorPicker? _colorPicker;
     private string? _colorValue;
     private bool _pickerOpened = false;
-    private bool ShowBackgroundColor => !_pickerOpened && !string.IsNullOrWhiteSpace(_colorValue);
+    private bool ShouldShowBackground => ShowBackgroundColor && !_pickerOpened && !string.IsNullOrWhiteSpace(_colorValue);
 
     private async Task OnColorChanged(MudColor mudColor)
     {
@@ -38,6 +47,10 @@
     private void OnPickerClosed()
         => _pickerOpened = false;
 
-    private async Task RefreshMe()
-        => await _colorPicker!.ResetAsync();
+    public void ResetMe()
+    {
+        _colorPicker.Text = null;
+        _colorValue = null;
+    }
+
 }
