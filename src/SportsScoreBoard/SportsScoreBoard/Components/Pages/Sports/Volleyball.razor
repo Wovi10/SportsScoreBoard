@@ -1,0 +1,22 @@
+﻿@page "/volleyball"
+
+@using SportsScoreBoard.Components.Layout
+@using SportsScoreBoard.Models.Volleyball
+@using SportsScoreBoard.Components.Shared
+@rendermode InteractiveServer
+
+<GeneralSport Title="Volleyball"
+              Game="@Game"/>
+
+@code
+{
+
+    private static VolleyballGame Game { get; } = new();
+
+    protected override void OnInitialized()
+    {
+        MainLayout.SubpageTitle = "Volleyball";
+        Game.Home.IsServing = true;
+    }
+
+}

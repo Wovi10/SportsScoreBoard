@@ -1,6 +1,5 @@
 ﻿@using MudBlazor.Utilities
-@using SportsScoreBoard.Models.Handball
-@using SportsScoreBoard.Components.Pages.Sports.Shared
+@using SportsScoreBoard.Models
 
 <MudExpansionPanel Class="flex-end" Expanded="true">
     <TitleContent>
@@ -9,45 +8,58 @@
     <ChildContent>
         <Customization @ref="_customization"
                        Game="Game"
-                       ResetColorsClicked="ResetColorsClicked"
                        HomeColorChanged="HomeColorChanged"
                        AwayColorChanged="AwayColorChanged"
                        HomeTextColorChanged="HomeTextColorChanged"
-                       AwayTextColorChanged="AwayTextColorChanged"/>
+                       AwayTextColorChanged="AwayTextColorChanged"
+                       ResetColorsClicked="ResetColorsClicked"/>
 
-        <ResetButtons VisibleButtons="Game.Settings.VisibleButtons"
-                      ResetGame="ResetGameClicked"
-                      ResetScore="ResetScoreClicked"
-                      ResetTimeouts="ResetTimeoutsClicked"
-                      ResetTimer="ResetTimerClicked"/>
+        <ResetButtons VisibleButtons="Game.Settings.VisibleResetButtons"
+                      ResetGame="ResetGame"
+                      ResetScore="ResetScore"
+                      ResetSets="ResetSets"
+                      ResetTimeouts="ResetTimeouts"
+                      ResetTimer="ResetTimer"/>
 
         <ToggleButtons VisibleButtons="Game.Settings.VisibleToggleButtons"
+                       ToggleShowServing="ToggleShowServing"
+                       ToggleShowSets="ToggleShowSets"
                        ToggleShowTimeouts="ToggleShowTimeouts"
+                       ToggleShowPreviousSets="ToggleShowPreviousSets"
                        ToggleShowTeamNames="ToggleShowTeamNames"
                        ToggleManualScoring="ToggleManualScoring"
                        ToggleShowTimer="ToggleShowTimer"
                        Settings="Game.Settings"/>
+
+        <BestOfSelector IsVisible="Game.Score.UsesBestOf" Game="Game" BestOfValueChanged="BestOfValueChanged"/>
     </ChildContent>
 </MudExpansionPanel>
 
-@code
-{
-    [Parameter] public required HandballGame Game { get; set; }
-    [Parameter] public required EventCallback ResetTimerClicked { get; set; }
-    [Parameter] public required EventCallback ResetScoreClicked { get; set; }
-    [Parameter] public required EventCallback ResetTimeoutsClicked { get; set; }
-    [Parameter] public required EventCallback ResetGameClicked { get; set; }
+@code {
+    [Parameter] public required SportsGameBase Game { get; set; }
+    [Parameter] public required EventCallback ResetGame { get; set; }
+    [Parameter] public required EventCallback ResetScore { get; set; }
+    [Parameter] public required EventCallback ResetSets { get; set; }
+    [Parameter] public required EventCallback ResetTimeouts { get; set; }
+    [Parameter] public required EventCallback ResetTimer { get; set; }
     [Parameter] public required EventCallback ResetColorsClicked { get; set; }
+    [Parameter] public required EventCallback ToggleShowServing { get; set; }
+    [Parameter] public required EventCallback ToggleShowSets { get; set; }
     [Parameter] public required EventCallback ToggleShowTimeouts { get; set; }
-    [Parameter] public required EventCallback ToggleShowTeamNames { get; set; }
     [Parameter] public required EventCallback ToggleManualScoring { get; set; }
+    [Parameter] public required EventCallback ToggleShowPreviousSets { get; set; }
+    [Parameter] public required EventCallback ToggleShowTeamNames { get; set; }
     [Parameter] public required EventCallback ToggleShowTimer { get; set; }
+    [Parameter] public required EventCallback<int> BestOfValueChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> HomeColorChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> AwayColorChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> HomeTextColorChanged { get; set; }
     [Parameter] public required EventCallback<MudColor> AwayTextColorChanged { get; set; }
 
     private Customization _customization;
+
+    public void RefreshMe()
+        => StateHasChanged();
 
     public async Task ResetColors()
         => await _customization.ResetColors();

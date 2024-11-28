@@ -1,0 +1,26 @@
+﻿@using SportsScoreBoard.Models
+@if (IsVisible)
+{
+    <MudStack Class="d-flex align-end mb-3" Row="true" Style="max-width: 400px;">
+        <MudText>
+            Best of
+        </MudText>
+        <MudSelect Class="flex-grow-0" T="int" Value="Game.Score.BestOf" ValueChanged="OnBestOfValueChanged">
+            <MudSelectItem T="int" Value="3"/>
+            <MudSelectItem T="int" Value="5"/>
+            <MudSelectItem T="int" Value="7"/>
+        </MudSelect>
+        (First to @FirstTo)
+    </MudStack>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public required EventCallback<int> BestOfValueChanged { get; set; }
+    [Parameter] public required SportsGameBase Game { get; set; }
+
+    private int FirstTo => Game.Score.BestOf / 2 + 1;
+
+    private async Task OnBestOfValueChanged(int newBestOf)
+        => await BestOfValueChanged.InvokeAsync(newBestOf);
+}

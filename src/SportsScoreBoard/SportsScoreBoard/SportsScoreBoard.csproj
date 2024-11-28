@@ -12,4 +12,13 @@
     <PackageReference Include="Recurop" Version="1.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\Pages\Sports\VolleyballComponents\ScoreComponents\AwayScorePart.razor" />
+    <_ContentIncludedByDefault Remove="Components\Pages\Sports\VolleyballComponents\ScoreComponents\HomeScorePart.razor" />
+    <_ContentIncludedByDefault Remove="Components\Pages\Sports\VolleyballComponents\ScoreComponents\ScoreCard\PreviousSetScores.razor" />
+    <_ContentIncludedByDefault Remove="Components\Pages\Sports\VolleyballComponents\ScoreComponents\ScoreCard\ScorePart.razor" />
+    <_ContentIncludedByDefault Remove="Components\Pages\Sports\VolleyballComponents\ScoreComponents\ScoreCard\SetsPart.razor" />
+    <_ContentIncludedByDefault Remove="Components\Pages\Sports\VolleyballComponents\ScoreComponents\ScoreCard\TimeoutPart.razor" />
+  </ItemGroup>
+
 </Project>

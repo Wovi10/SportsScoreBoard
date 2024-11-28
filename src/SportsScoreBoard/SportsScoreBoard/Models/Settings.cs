@@ -1,15 +1,16 @@
 ﻿namespace SportsScoreBoard.Models;
 
-public class Settings(bool showServing = false, bool showSets = false, bool showTimeOuts = false,
-    bool showManualScoring = false, bool showPreviousSets = false, bool showTeamNames = false, bool showTimer = false)
+public abstract class Settings
 {
-    public bool ShowServing { get; private set; } = showServing;
-    public bool ShowSets { get; private set; } = showSets;
-    public bool ShowTimeouts { get; private set; } = showTimeOuts;
-    public bool ShowManualScoring { get; private set; } = showManualScoring;
-    public bool ShowPreviousSets { get; private set; } = showPreviousSets;
-    public bool ShowTeamNames { get; private set; } = showTeamNames;
-    public bool ShowTimer { get; private set; } = showTimer;
+    public abstract ResetButtons[] VisibleResetButtons { get; }
+    public abstract ToggleButtons[] VisibleToggleButtons { get; }
+    public bool ShowServing { get; private set; }
+    public bool ShowSets { get; private set; }
+    public bool ShowTimeouts { get; private set; }
+    public bool ShowManualScoring { get; private set; }
+    public bool ShowPreviousSets { get; private set; }
+    public bool ShowTeamNames { get; private set; }
+    public bool ShowTimer { get; private set; }
 
     public void ToggleShowServing()
         => ShowServing = !ShowServing;
@@ -20,7 +21,7 @@ public class Settings(bool showServing = false, bool showSets = false, bool show
     public void ToggleShowTimeouts()
         => ShowTimeouts = !ShowTimeouts;
 
-    public void ToggleManualScoring()
+    public void ToggleShowManualScoring()
         => ShowManualScoring = !ShowManualScoring;
 
     public void ToggleShowPreviousSets()

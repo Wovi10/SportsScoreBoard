@@ -1,4 +1,4 @@
-﻿namespace SportsScoreBoard.Models.Volleyball;
+﻿namespace SportsScoreBoard.Models;
 
 public record SetScore(int Home, int Away)
 {

@@ -2,13 +2,65 @@
 
 namespace SportsScoreBoard.Models;
 
-public abstract class SportsGameBase
+public abstract class SportsGameBase(bool usesSets = false, bool usesBestOf = false)
 {
-    public virtual TeamBase Home { get; }
-    public virtual TeamBase Away { get; }
-    protected bool GameHasFinished { get; set; }
+    public abstract TeamBase Home { get; }
+    public abstract TeamBase Away { get; }
+    private bool GameHasFinished { get; set; }
+    public virtual Settings Settings { get; }
+    public ScoreBase Score { get; } = new(usesSets, usesBestOf);
 
-    public abstract void ResetScore();
+    public void IncrementHome()
+    {
+        if (GameHasFinished)
+            return;
+
+        Score.Increment(Team.Home);
+        SetHomeServing();
+
+        if (Score.HomeWon is not null)
+            GameHasFinished = true;
+    }
+
+    public void IncrementAway()
+    {
+        if (GameHasFinished)
+            return;
+
+        Score.Increment(Team.Away);
+        SetAwayServing();
+
+        if (Score.HomeWon is not null)
+            GameHasFinished = true;
+    }
+
+    private void SetHomeServing()
+    {
+        Home.IsServing = true;
+        Away.IsServing = false;
+    }
+
+    private void SetAwayServing()
+    {
+        Home.IsServing = false;
+        Away.IsServing = true;
+    }
+
+    public void DecrementAway()
+    {
+        if (GameHasFinished)
+            return;
+
+        Score.DecrementAway();
+    }
+
+    public void DecrementHome()
+    {
+        if (GameHasFinished)
+            return;
+
+        Score.DecrementHome();
+    }
 
     public void ChangeColor(Team team, ComponentColor background, MudColor mudColor)
     {
@@ -30,4 +82,88 @@ public abstract class SportsGameBase
         Home.ResetColors();
         Away.ResetColors();
     }
+
+    public void ChangeHomeName(string newValue)
+    {
+        if (GameHasFinished)
+            return;
+
+        Home.ChangeName(newValue);
+    }
+
+    public void ChangeAwayName(string newValue)
+    {
+        if (GameHasFinished)
+            return;
+
+        Away.ChangeName(newValue);
+    }
+
+    public void Reset()
+    {
+        ResetScore();
+        ResetSets();
+        ResetServingTeam();
+        ResetNames();
+        ResetTimeouts();
+        GameHasFinished = false;
+    }
+
+    public void ResetScore()
+    {
+        Score.ResetPoints();
+        ResetServingTeam();
+    }
+
+    public void ResetSets()
+    {
+        Score.ResetSets();
+        ResetServingTeam();
+    }
+
+    public void ResetServingTeam()
+    {
+        Home.IsServing = false;
+        Away.IsServing = false;
+    }
+
+    private void ResetNames()
+    {
+        Home.ResetName();
+        Away.ResetName();
+    }
+
+    public void ResetTimeouts()
+    {
+        Home.ResetTimeouts();
+        Away.ResetTimeouts();
+    }
+
+    public void ToggleShowServing()
+        => Settings.ToggleShowServing();
+
+    public void ToggleShowSets()
+        => Settings.ToggleShowSets();
+
+    public void BestOfChanged(int newBestOf)
+    {
+        Score.SetBestOf(newBestOf);
+        Score.SetIncremented();
+    }
+
+    public void ToggleShowTimeouts()
+        => Settings.ToggleShowTimeouts();
+
+    public void ToggleManualScoring()
+        => Settings.ToggleShowManualScoring();
+
+    public void ToggleShowPreviousSets()
+
+        => Settings.ToggleShowPreviousSets();
+
+    public void ToggleShowTeamNames()
+        => Settings.ToggleShowTeamNames();
+
+    public void ToggleShowTimer()
+        => Settings.ToggleShowTimer();
 }

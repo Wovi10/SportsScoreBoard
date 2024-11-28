@@ -1,0 +1,170 @@
+﻿@using MudBlazor.Utilities
+@using SportsScoreBoard.Models
+
+<MudContainer Class="d-flex flex-column" Style="height:100%">
+    <MudContainer Class="pa-0 ma-0">
+        <ScoreBoardComponent @ref="_scoreBoardComponent"
+                             Title="@Title"
+                             Game="Game"
+                             IncrementHome="IncrementHome"
+                             DecrementHome="DecrementHome"
+                             IncrementAway="IncrementAway"
+                             DecrementAway="DecrementAway"
+                             HomeNameChanged="ChangeHomeName"
+                             AwayNameChanged="ChangeAwayName"/>
+    </MudContainer>
+    <MudContainer Class="overflow-auto mt-auto mb-4">
+        <SettingsComponent
+            @ref="_settingsComponent"
+            Game="Game"
+            ResetGame="ResetGame"
+            ResetScore="ResetScore"
+            ResetSets="ResetSets"
+            ResetTimeouts="ResetTimeouts"
+            ResetTimer="ResetTimer"
+            ResetColorsClicked="ResetColors"
+            ToggleShowServing="ToggleShowServing"
+            ToggleShowSets="ToggleShowSets"
+            ToggleShowTimeouts="ToggleShowTimeouts"
+            ToggleManualScoring="ToggleManualScoring"
+            ToggleShowPreviousSets="ToggleShowPreviousSets"
+            ToggleShowTeamNames="ToggleShowTeamNames"
+            ToggleShowTimer="ToggleShowTimer"
+            BestOfValueChanged="BestOfValueChanged"
+            HomeColorChanged="OnHomeBackgroundChanged"
+            AwayColorChanged="OnAwayBackgroundChanged"
+            HomeTextColorChanged="OnHomeForegroundChanged"
+            AwayTextColorChanged="OnAwayForegroundChanged"/>
+    </MudContainer>
+</MudContainer>
+
+@if (UseWinningDialog)
+{
+    <TeamWonDialog @ref="_teamWonDialog" Team="_teamThatWon" ResetGame="ResetGame" />
+}
+
+@code {
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public required SportsGameBase Game { get; set; }
+    [Parameter] public bool UseWinningDialog { get; set; }
+
+    private ScoreBoardComponent _scoreBoardComponent;
+    private SettingsComponent _settingsComponent;
+    private TeamBase _teamThatWon;
+    private TeamWonDialog _teamWonDialog = default!;
+
+    public async Task IncrementHome()
+    {
+        Game.IncrementHome();
+        await CheckTeamWonAsync();
+    }
+
+    private void DecrementHome()
+        => Game.DecrementHome();
+
+    public async Task IncrementAway()
+    {
+        Game.IncrementAway();
+        await CheckTeamWonAsync();
+    }
+
+    private void DecrementAway()
+        => Game.DecrementAway();
+
+    public void ChangeHomeName(string name)
+        => Game.ChangeHomeName(name);
+
+    public void ChangeAwayName(string name)
+        => Game.ChangeAwayName(name);
+
+    private async Task CheckTeamWonAsync()
+    {
+        if (Game.Score.HomeWon is null)
+            return;
+
+        _teamThatWon = Game.Score.HomeWon == true ? Game.Home : Game.Away;
+
+        await _teamWonDialog.ShowAsync();
+    }
+
+    private async Task ResetGame()
+    {
+        Game.Reset();
+        _scoreBoardComponent.ResetTimer();
+        await _settingsComponent.ResetColors();
+    }
+
+    public void ResetScore()
+        => Game.ResetScore();
+
+    public void ResetSets()
+        => Game.ResetSets();
+
+    public void ResetTimeouts()
+        => Game.ResetTimeouts();
+
+    public void ToggleShowServing()
+        => Game.ToggleShowServing();
+
+    public void ToggleShowSets()
+        => Game.ToggleShowSets();
+
+    public void ToggleShowTimeouts()
+        => Game.ToggleShowTimeouts();
+
+    private void ToggleManualScoring()
+        => Game.ToggleManualScoring();
+
+    private void ToggleShowPreviousSets()
+        => Game.ToggleShowPreviousSets();
+
+    private void ToggleShowTeamNames()
+        => Game.ToggleShowTeamNames();
+
+    private void ToggleShowTimer()
+        => Game.ToggleShowTimer();
+
+    private async Task BestOfValueChanged(int newValue)
+    {
+        Game.BestOfChanged(newValue);
+        await CheckTeamWonAsync();
+    }
+
+    private void OnHomeBackgroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Home, ComponentColor.Background, mudColor);
+        StateChange();
+    }
+
+    private void OnAwayBackgroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Away, ComponentColor.Background, mudColor);
+        StateChange();
+    }
+
+    private void OnHomeForegroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Home, ComponentColor.Foreground, mudColor);
+        StateChange();
+    }
+
+    private void OnAwayForegroundChanged(MudColor mudColor)
+    {
+        Game.ChangeColor(Team.Away, ComponentColor.Foreground, mudColor);
+        StateChange();
+    }
+
+    private void ResetColors()
+        => Game.ResetColors();
+
+    private void ResetTimer()
+        => _scoreBoardComponent.ResetTimer();
+
+    private void StateChange()
+    {
+        StateHasChanged();
+        _scoreBoardComponent.RefreshMe();
+        _settingsComponent.RefreshMe();
+    }
+
+}

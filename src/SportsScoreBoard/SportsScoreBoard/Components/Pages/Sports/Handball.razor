@@ -1,0 +1,19 @@
+﻿@page "/Handball"
+
+@using SportsScoreBoard.Components.Layout
+@using SportsScoreBoard.Models.Handball
+@using SportsScoreBoard.Components.Shared
+@rendermode InteractiveServer
+
+<GeneralSport Title="Handball"
+              Game="@Game"/>
+
+@code
+{
+
+    private static HandballGame Game { get; } = new();
+
+    protected override void OnInitialized()
+        => MainLayout.SubpageTitle = "Handball";
+
+}

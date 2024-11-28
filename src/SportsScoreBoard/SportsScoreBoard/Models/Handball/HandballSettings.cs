@@ -1,10 +1,17 @@
 ﻿namespace SportsScoreBoard.Models.Handball;
 
-public class HandballSettings()
-    : Settings(showTimeOuts: true, showManualScoring: true, showTeamNames: true, showTimer: true)
+public class HandballSettings: Settings
 {
-    public readonly ResetButtons[] VisibleButtons =
+    public override ResetButtons[] VisibleResetButtons { get; } =
         {ResetButtons.Game, ResetButtons.Score, ResetButtons.Timeouts, ResetButtons.Timer};
+    public override ToggleButtons[] VisibleToggleButtons { get; } =
+        {ToggleButtons.TeamNames, ToggleButtons.Timer, ToggleButtons.Timeouts};
 
-    public readonly ToggleButtons[] VisibleToggleButtons = {ToggleButtons.TeamNames, ToggleButtons.Timer, ToggleButtons.Timeouts};
+    public HandballSettings()
+    {
+        ToggleShowTimeouts();
+        ToggleShowManualScoring();
+        ToggleShowTeamNames();
+        ToggleShowTimer();
+    }
 }
